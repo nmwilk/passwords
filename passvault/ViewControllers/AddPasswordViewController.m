@@ -16,15 +16,19 @@ NSUInteger const kMaxPwdLength = 64;
 NSUInteger const kDefaultPwdLength = 32;
 
 - (void)viewDidLoad {
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-    [self.touchZone addGestureRecognizer:tapGestureRecognizer];
-
     self.passwordLengthSlider.value = [self getSliderValueFromLength:kDefaultPwdLength];
     [self lengthChanged];
+    
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(touchZonePanned:)];
+    [self.touchZone addGestureRecognizer:panGesture];
 }
 
-- (void)tapped:(id)tapped {
-    [self done];
+- (void)touchZonePanned:(UIPanGestureRecognizer*)panned {
+    CGPoint pos = [panned locationInView:self.touchZone];
+
+    CGFloat combined = pos.x * pos.y;
+
+    self.password.text = [NSString stringWithFormat:@"%.0f", combined];
 }
 
 - (IBAction)lengthChanged {
