@@ -5,6 +5,7 @@
 
 #import "AddPasswordViewController.h"
 #import "TouchZone.h"
+#import "PasswordField.h"
 
 
 @implementation AddPasswordViewController {
@@ -12,8 +13,8 @@
 }
 
 NSUInteger const kMinPwdLength = 8;
-NSUInteger const kMaxPwdLength = 64;
-NSUInteger const kDefaultPwdLength = 32;
+NSUInteger const kMaxPwdLength = 32;
+NSUInteger const kDefaultPwdLength = 16;
 
 - (void)viewDidLoad {
     self.passwordLengthSlider.value = [self getSliderValueFromLength:kDefaultPwdLength];
@@ -28,12 +29,14 @@ NSUInteger const kDefaultPwdLength = 32;
 
     CGFloat combined = pos.x * pos.y;
 
-    self.password.text = [NSString stringWithFormat:@"%.0f", combined];
+    [self.password addRandom:combined];
 }
 
 - (IBAction)lengthChanged {
     NSUInteger length = [self getLengthFromSlider];
     self.passwordLengthText.text = [NSNumber numberWithInt:length].stringValue;
+
+    [self.password setLength:length];
 
     if (self.password.text.length > length) {
         self.password.text = [self.password.text substringToIndex:length];
