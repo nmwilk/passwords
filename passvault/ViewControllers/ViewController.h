@@ -10,5 +10,7 @@
 
 @interface ViewController : UIViewController
 
+extern NSMutableDictionary *gDictionary;
+
 @property(nonatomic, strong) IBOutlet UIBarButtonItem *addPasswordBtn;
 @end
