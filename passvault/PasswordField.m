@@ -4,11 +4,13 @@
 //
 
 #import "PasswordField.h"
-#import <CommonCrypto/CommonDigest.h>
+#import "ViewController.h"
+
+int const kMinWordLength = 3;
+int const kMaxWordLength = 9;
 
 @implementation PasswordField {
-    NSMutableString *randomString;
-    NSString *password;
+    NSMutableString *password;
     NSUInteger maxLength;
 }
 
@@ -21,16 +23,32 @@
 }
 
 - (void)addRandom:(CGFloat)random {
+    NSString *randomString = [NSString stringWithFormat:@"%.0f", random];
+    arc4random_addrandom((unsigned char *) [randomString UTF8String], [randomString length]);
 
-    if (randomString == nil) {
-        randomString = [[NSMutableString alloc] initWithFormat:@"%.0f%.0f", random, [NSDate timeIntervalSinceReferenceDate]];
-    } else {
-        [randomString appendFormat:@"%@%.0f", password, random];
+    int desiredLength = password == nil ? maxLength : maxLength - [password length];
+    if (desiredLength >= kMaxWordLength) {
+        desiredLength = kMaxWordLength;
     }
 
-    password = [self sha1:randomString];
+    NSString *word;
+    NSLog(@"Looking for word of length %d", desiredLength);
 
-    self.text = [password substringToIndex:maxLength];
+    NSArray *currentDict = [gDictionary objectForKey:[NSString stringWithFormat:@"%d", desiredLength]];
+    int index = arc4random() % [currentDict count];
+    word = [currentDict objectAtIndex:index];
+
+    if (password == nil) {
+        password = [NSMutableString stringWithFormat:@"%@", word];
+    } else {
+        [password appendString:word];
+    }
+
+    if ([password length] > maxLength) {
+        self.text = [password substringToIndex:maxLength];
+    } else {
+        self.text = password;
+    }
 }
 
 - (void)setLength:(NSUInteger)length {
@@ -38,24 +56,6 @@
     if (password != nil) {
         self.text = [password substringToIndex:maxLength];
     }
-}
-
-
-- (NSString *)sha1:(NSString *)input {
-    const char *cstr = [input cStringUsingEncoding:NSUTF8StringEncoding];
-    NSData *data = [NSData dataWithBytes:cstr length:input.length];
-
-    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
-
-    CC_SHA1(data.bytes, data.length, digest);
-
-    NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
-
-    for (int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++) {
-        [output appendFormat:@"%02x", digest[i]];
-    }
-
-    return output;
 }
 
 @end
