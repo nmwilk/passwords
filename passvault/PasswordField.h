@@ -5,7 +5,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface PasswordField : UITextField
 
 -(void)addRandom:(CGFloat)random;

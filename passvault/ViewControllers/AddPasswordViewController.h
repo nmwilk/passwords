@@ -8,7 +8,7 @@
 @class TouchZone;
 @class PasswordField;
 
-@interface AddPasswordViewController : UIViewController
+@interface AddPasswordViewController : UIViewController<UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet TouchZone* touchZone;
 @property (nonatomic, strong) IBOutlet UITextField* label;

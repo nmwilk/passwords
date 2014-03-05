@@ -19,12 +19,12 @@ NSUInteger const kDefaultPwdLength = 16;
 - (void)viewDidLoad {
     self.passwordLengthSlider.value = [self getSliderValueFromLength:kDefaultPwdLength];
     [self lengthChanged];
-    
+
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(touchZonePanned:)];
     [self.touchZone addGestureRecognizer:panGesture];
 }
 
-- (void)touchZonePanned:(UIPanGestureRecognizer*)panned {
+- (void)touchZonePanned:(UIPanGestureRecognizer *)panned {
     CGPoint pos = [panned locationInView:self.touchZone];
 
     CGFloat combined = pos.x * pos.y;
@@ -48,14 +48,27 @@ NSUInteger const kDefaultPwdLength = 16;
 }
 
 - (float)getSliderValueFromLength:(NSUInteger)length {
-    return ((length - kMinPwdLength) / (float)(kMaxPwdLength - kMinPwdLength));
+    return ((length - kMinPwdLength) / (float) (kMaxPwdLength - kMinPwdLength));
 }
 
--(IBAction)done {
+- (IBAction)done {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(IBAction)cancelled{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    const NSUInteger passwordLength = [self getLengthFromSlider] + (string.length - range.length);
+
+    // don't allow
+    if (passwordLength < kMinPwdLength || passwordLength > kMaxPwdLength) {
+        return NO;
+    }
+
+    self.passwordLengthText.text = [NSNumber numberWithInt:passwordLength].stringValue;
+    self.passwordLengthSlider.value = [self getSliderValueFromLength:passwordLength];
+    return YES;
+}
+
+- (IBAction)cancelled {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end
