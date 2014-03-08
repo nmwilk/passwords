@@ -55,10 +55,6 @@ NSUInteger const kDefaultPwdLength = 16;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    return YES;
-}
-
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     return YES;
 }
