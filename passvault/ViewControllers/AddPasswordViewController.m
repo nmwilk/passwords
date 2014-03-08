@@ -55,7 +55,19 @@ NSUInteger const kDefaultPwdLength = 16;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    return YES;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    return YES;
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (range.length == 0) {
+        return YES;
+    }
+
     const NSUInteger passwordLength = [self getLengthFromSlider] + (string.length - range.length);
 
     // don't allow

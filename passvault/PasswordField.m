@@ -9,6 +9,7 @@
 
 @implementation PasswordField {
     PasswordModel *passwordModel;
+    NSUInteger lastLength;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -20,7 +21,7 @@
     return self;
 }
 
--(void)addRandom:(CGFloat)random {
+- (void)addRandom:(CGFloat)random {
     [passwordModel addRandom:random];
 
     self.text = [passwordModel formPassword];
@@ -28,7 +29,13 @@
 }
 
 - (void)setLength:(NSUInteger)length {
-    [passwordModel setLength:length];
+    if (lastLength != length) {
+        lastLength = length;
+
+        [passwordModel setLength:length];
+
+        self.text = [passwordModel formPassword];
+    }
 }
 
 

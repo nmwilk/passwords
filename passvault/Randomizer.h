@@ -11,4 +11,6 @@
 - (NSString *)getWord:(NSUInteger)length;
 
 - (NSUInteger)getPosition:(NSUInteger)count;
+
+- (CGFloat)getRandom;
 @end
