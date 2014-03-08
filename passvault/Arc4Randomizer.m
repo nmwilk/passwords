@@ -28,5 +28,9 @@
     return arc4random() % availablePositions;
 }
 
+- (CGFloat)getRandom {
+    return ((CGFloat)arc4random()) / 0x100000000;
+}
+
 
 @end

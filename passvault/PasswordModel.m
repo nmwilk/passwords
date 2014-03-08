@@ -6,8 +6,8 @@
 #import "PasswordModel.h"
 #import "Randomizer.h"
 
-int const kMinWordLength = 3;
-int const kMaxWordLength = 6;
+NSInteger const kMinWordLength = 3;
+NSInteger const kMaxWordLength = 7;
 
 @interface PasswordModel ()
 @property(nonatomic, strong) id <Randomizer> randomizer;
@@ -16,14 +16,13 @@ int const kMaxWordLength = 6;
 @implementation PasswordModel {
     NSMutableArray *passwordItems;
     NSUInteger number;
-    NSUInteger passwordLength;
     NSUInteger maxLength;
     CGFloat lastRandom;
     NSUInteger numberPosition;
     NSMutableString *password;
 }
 
--(id)initWithRandomizer:(id<Randomizer>)randomizer {
+- (id)initWithRandomizer:(id <Randomizer>)randomizer {
     self = [super init];
     if (self) {
         self.randomizer = randomizer;
@@ -35,26 +34,15 @@ int const kMaxWordLength = 6;
 - (void)addRandom:(CGFloat)random {
     lastRandom = random;
 
-    if ([passwordItems count] > 0) {
-        [passwordItems removeObjectAtIndex:0];
-    }
+    [passwordItems removeAllObjects];
 
     number = [self.randomizer getNumber:random];
 
-    passwordLength = [self getLength];
+    NSUInteger passwordLength = [self getLength];
     do {
-        NSUInteger desiredLength = maxLength - passwordLength;
-        if (desiredLength >= kMaxWordLength) {
-            desiredLength = kMaxWordLength;
-        }
+        NSUInteger desiredLength = [self calcDesiredWordLength:passwordLength withRandom:[self.randomizer getRandom]];
 
-        const NSUInteger remaining = maxLength - desiredLength;
-        if (remaining > 0 && remaining < kMinWordLength) {
-            desiredLength -= (kMinWordLength - remaining);
-        }
-        
         NSString *word;
-        NSLog(@"Looking for word of length %d", desiredLength);
         word = [self.randomizer getWord:desiredLength];
 
         [passwordItems addObject:word];
@@ -63,6 +51,31 @@ int const kMaxWordLength = 6;
     } while (passwordLength < maxLength);
 
     numberPosition = [self.randomizer getPosition:[passwordItems count] + 1];
+}
+
+- (NSUInteger)calcDesiredWordLength:(NSUInteger)currentFormedLength withRandom:(CGFloat)random {
+
+    // what's remaining?
+    NSUInteger maxWordLength = maxLength - currentFormedLength;
+    if (maxWordLength > kMaxWordLength) {
+        maxWordLength = kMaxWordLength;
+    }
+    NSUInteger desiredLength = (NSUInteger) (kMinWordLength + roundf(random * ((maxWordLength - kMinWordLength) + 1)));
+    if (desiredLength > maxWordLength) {
+        desiredLength = maxWordLength;
+    }
+
+    // if it means there'll be less than the min word length left, reduce/increase the length.
+    const NSInteger remaining = maxLength - (desiredLength + currentFormedLength);
+    if (remaining > 0 && remaining < kMinWordLength) {
+        NSInteger reduced = desiredLength - (kMinWordLength - remaining);
+        if (reduced < kMinWordLength) {
+            desiredLength += remaining;
+        } else {
+            desiredLength -= (kMinWordLength - remaining);
+        }
+    }
+    return desiredLength;
 }
 
 - (NSString *)formPassword {

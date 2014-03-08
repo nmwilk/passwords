@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		287D095F18C9FC3100C1CB23 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338913416EC974A80487B88B /* XCTest.framework */; };
+		287D096018C9FC3100C1CB23 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891B8A26EB611ACFD3C164 /* Foundation.framework */; };
+		287D096118C9FC3100C1CB23 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891AC79E8367BD51D78950 /* UIKit.framework */; };
 		33891055EFBEA217BCDEECE3 /* enable1_7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891698ADC01CB9DF28D6E0 /* enable1_7.txt */; };
 		338912C0F889783FDBE87414 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 33891E1B743D9DEF7869899B /* InfoPlist.strings */; };
 		338912F35E5BBD1C34849851 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891B8A26EB611ACFD3C164 /* Foundation.framework */; };
@@ -27,15 +30,24 @@
 		33891A5911C671CB07084846 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891DA0DE75914D7C97CD08 /* CoreGraphics.framework */; };
 		33891A6B1577A71A14591394 /* enable1_8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891A87BF4B11D79BC257C1 /* enable1_8.txt */; };
 		33891C25EBBCE8C3F160BDD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 338918D12308891EF3DCABEF /* Main.storyboard */; };
+		33891CBB9BA79A13D7848E44 /* PasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891976DADB1401DB3E1D80 /* PasswordModel.m */; };
 		33891D0858E53D0DEF04C43E /* TouchZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891FCA1E77C47B80112B19 /* TouchZone.m */; };
 		33891D95B92ADCCEEFB7D725 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33891519C6743D8D3582A35C /* Images.xcassets */; };
 		33891D9E60E51C0E34F0D5E0 /* enable1_9.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3389176B9859808D17C4242E /* enable1_9.txt */; };
+		33891E105661109E111BA63B /* TestRandomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891A90EF496EF0EC1E662A /* TestRandomizer.m */; };
 		33891E7679B2AF46F115B465 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891B8A26EB611ACFD3C164 /* Foundation.framework */; };
 		33891E7B50A5D0D7EAE05B35 /* enable1_3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3389109F0348BE1E33DD115B /* enable1_3.txt */; };
 		33891EF6AFAC3371ACADFFF9 /* Arc4Randomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891AAF0FED218CDCE5F8B8 /* Arc4Randomizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		287D096B18C9FC3100C1CB23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3389134A3D30B3BCD8664A7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 33891397B7302F72881F1CA0;
+			remoteInfo = passvault;
+		};
 		33891D74160D86AC0F404A01 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3389134A3D30B3BCD8664A7E /* Project object */;
@@ -46,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		287D095E18C9FC3100C1CB23 /* passvault Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "passvault Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3389109F0348BE1E33DD115B /* enable1_3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_3.txt; sourceTree = "<group>"; };
 		338910FFF31AB9B3C9B24848 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3389111AFC0AC3F444B3AAAD /* enable1_4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_4.txt; sourceTree = "<group>"; };
@@ -63,12 +76,14 @@
 		3389176B9859808D17C4242E /* enable1_9.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_9.txt; sourceTree = "<group>"; };
 		3389179AC733A83911C1FB80 /* passvault-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "passvault-Prefix.pch"; sourceTree = "<group>"; };
 		3389181ECB5F30BD53C3938E /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		338918360C3A526D15570257 /* TestRandomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRandomizer.h; sourceTree = "<group>"; };
 		3389185040CC66B2526A56B9 /* passvaultTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "passvaultTests-Info.plist"; sourceTree = "<group>"; };
 		3389185A4F3A4DD093461A1C /* PasswordField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordField.m; sourceTree = "<group>"; };
 		338918F03073450693BCCCB5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		33891976DADB1401DB3E1D80 /* PasswordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordModel.m; sourceTree = "<group>"; };
 		33891999117EA570084BAA76 /* passvault-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "passvault-Info.plist"; sourceTree = "<group>"; };
 		33891A87BF4B11D79BC257C1 /* enable1_8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_8.txt; sourceTree = "<group>"; };
+		33891A90EF496EF0EC1E662A /* TestRandomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRandomizer.m; sourceTree = "<group>"; };
 		33891AA8C64BD3B1E036B887 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		33891AAF0FED218CDCE5F8B8 /* Arc4Randomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Arc4Randomizer.m; sourceTree = "<group>"; };
 		33891AC79E8367BD51D78950 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -86,6 +101,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		287D095B18C9FC3100C1CB23 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				287D095F18C9FC3100C1CB23 /* XCTest.framework in Frameworks */,
+				287D096118C9FC3100C1CB23 /* UIKit.framework in Frameworks */,
+				287D096018C9FC3100C1CB23 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3389154423511C16521EF08A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -114,6 +139,8 @@
 			children = (
 				338916BDA1FF56617C280B06 /* Supporting Files */,
 				3389137651FFB8C6B02F352F /* passvaultTests.m */,
+				33891A90EF496EF0EC1E662A /* TestRandomizer.m */,
+				338918360C3A526D15570257 /* TestRandomizer.h */,
 			);
 			path = passvaultTests;
 			sourceTree = "<group>";
@@ -212,6 +239,7 @@
 			children = (
 				3389173862522ECCA25EBB80 /* passvault.app */,
 				33891B5D5E702FD23780BD43 /* passvaultTests.xctest */,
+				287D095E18C9FC3100C1CB23 /* passvault Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -219,6 +247,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		287D095D18C9FC3100C1CB23 /* passvault Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 287D096F18C9FC3100C1CB23 /* Build configuration list for PBXNativeTarget "passvault Tests" */;
+			buildPhases = (
+				287D095A18C9FC3100C1CB23 /* Sources */,
+				287D095B18C9FC3100C1CB23 /* Frameworks */,
+				287D095C18C9FC3100C1CB23 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				287D096C18C9FC3100C1CB23 /* PBXTargetDependency */,
+			);
+			name = "passvault Tests";
+			productName = "passvault Tests";
+			productReference = 287D095E18C9FC3100C1CB23 /* passvault Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		33891304550FE5BEC5BF29B9 /* passvaultTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 338912C2449029075AA53B2C /* Build configuration list for PBXNativeTarget "passvaultTests" */;
@@ -261,6 +307,11 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = MeasuredSoftware;
+				TargetAttributes = {
+					287D095D18C9FC3100C1CB23 = {
+						TestTargetID = 33891397B7302F72881F1CA0;
+					};
+				};
 			};
 			buildConfigurationList = 33891DBBB616B0C3961453A4 /* Build configuration list for PBXProject "passvault" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -276,11 +327,19 @@
 			targets = (
 				33891397B7302F72881F1CA0 /* passvault */,
 				33891304550FE5BEC5BF29B9 /* passvaultTests */,
+				287D095D18C9FC3100C1CB23 /* passvault Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		287D095C18C9FC3100C1CB23 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3389193C2832603E80474D88 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -309,6 +368,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		287D095A18C9FC3100C1CB23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		33891248F17E4C0BB6D1D106 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -329,12 +395,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				3389135652521D646B3DFC61 /* passvaultTests.m in Sources */,
+				33891E105661109E111BA63B /* TestRandomizer.m in Sources */,
+				33891CBB9BA79A13D7848E44 /* PasswordModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		287D096C18C9FC3100C1CB23 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 33891397B7302F72881F1CA0 /* passvault */;
+			targetProxy = 287D096B18C9FC3100C1CB23 /* PBXContainerItemProxy */;
+		};
 		3389164FEC63937FE9FCD2DC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 33891397B7302F72881F1CA0 /* passvault */;
@@ -370,6 +443,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		287D096D18C9FC3100C1CB23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/passvault.app/passvault";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "passvault Tests/passvault Tests-Prefix.pch";
+				INFOPLIST_FILE = "passvault Tests/passvault Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		287D096E18C9FC3100C1CB23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/passvault.app/passvault";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "passvault Tests/passvault Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "passvault Tests/passvault Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
 		338910FDBBB1EF3180AFD9E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -501,6 +616,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		287D096F18C9FC3100C1CB23 /* Build configuration list for PBXNativeTarget "passvault Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				287D096D18C9FC3100C1CB23 /* Release */,
+				287D096E18C9FC3100C1CB23 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		338912C2449029075AA53B2C /* Build configuration list for PBXNativeTarget "passvaultTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -508,6 +631,7 @@
 				3389198D9F8BB0AF71CA40DA /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		33891DBA015C49995DBCE8B9 /* Build configuration list for PBXNativeTarget "passvault" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +640,7 @@
 				338910FDBBB1EF3180AFD9E1 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		33891DBBB616B0C3961453A4 /* Build configuration list for PBXProject "passvault" */ = {
 			isa = XCConfigurationList;
