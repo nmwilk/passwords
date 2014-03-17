@@ -8,14 +8,14 @@
 
 @implementation TestRandomizer {
     NSArray *testWords;
-    NSUInteger lastPosition;
+    NSUInteger testPosition;
 }
 
 - (id)init {
     self = [super init];
     if (self) {
         testWords = [NSArray arrayWithObjects:@"ABC", @"DEFG", @"HIJKL", @"MNOPQR", @"STUVWXY", nil];
-        lastPosition = 0;
+        testPosition = 0;
     }
 
     return self;
@@ -30,7 +30,7 @@
 }
 
 - (NSUInteger)getPosition:(NSUInteger)count {
-    return lastPosition++ % count;
+    return testPosition++ % count;
 }
 
 - (CGFloat)getRandom {
