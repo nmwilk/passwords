@@ -29,6 +29,7 @@
 		33891874DA2D65132717E162 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891AA8C64BD3B1E036B887 /* main.m */; };
 		33891A5911C671CB07084846 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891DA0DE75914D7C97CD08 /* CoreGraphics.framework */; };
 		33891A6B1577A71A14591394 /* enable1_8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891A87BF4B11D79BC257C1 /* enable1_8.txt */; };
+		33891B658FA6B178038891CE /* TitleBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891B090A7D29EF5BD24A69 /* TitleBanner.m */; };
 		33891C25EBBCE8C3F160BDD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 338918D12308891EF3DCABEF /* Main.storyboard */; };
 		33891CBB9BA79A13D7848E44 /* PasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891976DADB1401DB3E1D80 /* PasswordModel.m */; };
 		33891D0858E53D0DEF04C43E /* TouchZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891FCA1E77C47B80112B19 /* TouchZone.m */; };
@@ -62,6 +63,7 @@
 		3389109F0348BE1E33DD115B /* enable1_3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_3.txt; sourceTree = "<group>"; };
 		338910FFF31AB9B3C9B24848 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3389111AFC0AC3F444B3AAAD /* enable1_4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_4.txt; sourceTree = "<group>"; };
+		3389111E08012D33C98CDD29 /* TitleBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleBanner.h; sourceTree = "<group>"; };
 		33891171DA38EB60279EF27C /* AddPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPasswordViewController.h; sourceTree = "<group>"; };
 		338912F4EB9222E7552B1E42 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		338913416EC974A80487B88B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -87,6 +89,7 @@
 		33891AA8C64BD3B1E036B887 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		33891AAF0FED218CDCE5F8B8 /* Arc4Randomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Arc4Randomizer.m; sourceTree = "<group>"; };
 		33891AC79E8367BD51D78950 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		33891B090A7D29EF5BD24A69 /* TitleBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleBanner.m; sourceTree = "<group>"; };
 		33891B5D5E702FD23780BD43 /* passvaultTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = passvaultTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33891B8A26EB611ACFD3C164 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		33891BA686F7C9D358C710C2 /* enable1_6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_6.txt; sourceTree = "<group>"; };
@@ -164,6 +167,8 @@
 				33891565DA646ADEFB70D920 /* Randomizer.h */,
 				33891AAF0FED218CDCE5F8B8 /* Arc4Randomizer.m */,
 				33891E656FD0A1ED2FB6912D /* Arc4Randomizer.h */,
+				33891B090A7D29EF5BD24A69 /* TitleBanner.m */,
+				3389111E08012D33C98CDD29 /* TitleBanner.h */,
 			);
 			path = passvault;
 			sourceTree = "<group>";
@@ -387,6 +392,7 @@
 				33891647713A2BB52C12A988 /* PasswordField.m in Sources */,
 				338917EC3300F0EC4334F965 /* PasswordModel.m in Sources */,
 				33891EF6AFAC3371ACADFFF9 /* Arc4Randomizer.m in Sources */,
+				33891B658FA6B178038891CE /* TitleBanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -34,7 +34,7 @@ NSUInteger const kDefaultPwdLength = 16;
 
 - (IBAction)lengthChanged {
     NSUInteger length = [self getLengthFromSlider];
-    self.passwordLengthText.text = [NSNumber numberWithInt:length].stringValue;
+    [self setPasswordLengthField:length];
 
     [self.password setLength:length];
 
@@ -71,9 +71,13 @@ NSUInteger const kDefaultPwdLength = 16;
         return NO;
     }
 
-    self.passwordLengthText.text = [NSNumber numberWithInt:passwordLength].stringValue;
+    [self setPasswordLengthField:passwordLength];
     self.passwordLengthSlider.value = [self getSliderValueFromLength:passwordLength];
     return YES;
+}
+
+- (void)setPasswordLengthField:(NSUInteger const)passwordLength {
+    self.passwordLengthText.text = [NSString stringWithFormat:@"%d chars", passwordLength];
 }
 
 - (IBAction)cancelled {

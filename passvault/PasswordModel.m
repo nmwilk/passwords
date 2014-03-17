@@ -80,13 +80,15 @@ NSInteger const kMaxWordLength = 7;
 
 - (NSString *)formPassword {
     password = [[NSMutableString alloc] init];
-    for (NSUInteger i = 0; i < [passwordItems count] + 1; i++) {
-        if (i == numberPosition) {
-            [password appendFormat:@"%d", number];
-        }
+    if ([passwordItems count] > 0) {
+        for (NSUInteger i = 0; i < [passwordItems count] + 1; i++) {
+            if (i == numberPosition) {
+                [password appendFormat:@"%d", number];
+            }
 
-        if (i < [passwordItems count]) {
-            [password appendString:[passwordItems objectAtIndex:i]];
+            if (i < [passwordItems count]) {
+                [password appendString:[passwordItems objectAtIndex:i]];
+            }
         }
     }
     return password;
