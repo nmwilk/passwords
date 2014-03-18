@@ -13,4 +13,5 @@
 extern NSMutableDictionary *gDictionary;
 
 @property(nonatomic, strong) IBOutlet UIBarButtonItem *addPasswordBtn;
+@property(nonatomic, strong) IBOutlet UIBarButtonItem *editPasswordBtn;
 @end

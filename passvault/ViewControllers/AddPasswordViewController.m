@@ -7,7 +7,6 @@
 #import "TouchZone.h"
 #import "PasswordField.h"
 
-
 @implementation AddPasswordViewController {
 
 }
@@ -24,6 +23,10 @@ NSUInteger const kDefaultPwdLength = 16;
     [self.touchZone addGestureRecognizer:panGesture];
 }
 
+-(PasswordField *)password {
+    return (PasswordField *) super.passwordField;
+}
+
 - (void)touchZonePanned:(UIPanGestureRecognizer *)panned {
     CGPoint pos = [panned locationInView:self.touchZone];
 
@@ -38,8 +41,8 @@ NSUInteger const kDefaultPwdLength = 16;
 
     [self.password setLength:length];
 
-    if (self.password.text.length > length) {
-        self.password.text = [self.password.text substringToIndex:length];
+    if (self.passwordField.text.length > length) {
+        self.passwordField.text = [self.passwordField.text substringToIndex:length];
     }
 }
 
@@ -51,9 +54,6 @@ NSUInteger const kDefaultPwdLength = 16;
     return ((length - kMinPwdLength) / (float) (kMaxPwdLength - kMinPwdLength));
 }
 
-- (IBAction)done {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     return YES;
@@ -80,7 +80,4 @@ NSUInteger const kDefaultPwdLength = 16;
     self.passwordLengthText.text = [NSString stringWithFormat:@"%d chars", passwordLength];
 }
 
-- (IBAction)cancelled {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 @end

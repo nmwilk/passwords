@@ -11,6 +11,7 @@
 		287D096018C9FC3100C1CB23 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891B8A26EB611ACFD3C164 /* Foundation.framework */; };
 		287D096118C9FC3100C1CB23 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891AC79E8367BD51D78950 /* UIKit.framework */; };
 		33891055EFBEA217BCDEECE3 /* enable1_7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891698ADC01CB9DF28D6E0 /* enable1_7.txt */; };
+		3389126A6C8D9A7FC7A238AC /* EditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338918139AF4C816694538FD /* EditPasswordViewController.m */; };
 		338912C0F889783FDBE87414 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 33891E1B743D9DEF7869899B /* InfoPlist.strings */; };
 		338912F35E5BBD1C34849851 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891B8A26EB611ACFD3C164 /* Foundation.framework */; };
 		338912F40CA5560970A0EDC1 /* enable1_5.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891D63C1474509B57663C2 /* enable1_5.txt */; };
@@ -26,6 +27,7 @@
 		33891732E6184D07A0920D63 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 338918F03073450693BCCCB5 /* AppDelegate.m */; };
 		338917536947C5D2BA994A21 /* enable1_6.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891BA686F7C9D358C710C2 /* enable1_6.txt */; };
 		338917EC3300F0EC4334F965 /* PasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891976DADB1401DB3E1D80 /* PasswordModel.m */; };
+		33891854AB1F06FCFB5C2469 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338915ED5F0E626EBE036C7D /* PasswordViewController.m */; };
 		33891874DA2D65132717E162 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891AA8C64BD3B1E036B887 /* main.m */; };
 		33891A5911C671CB07084846 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891DA0DE75914D7C97CD08 /* CoreGraphics.framework */; };
 		33891A6B1577A71A14591394 /* enable1_8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891A87BF4B11D79BC257C1 /* enable1_8.txt */; };
@@ -60,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		287D095E18C9FC3100C1CB23 /* passvault Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "passvault Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3389108D291E512AE192299D /* EditPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPasswordViewController.h; sourceTree = "<group>"; };
 		3389109F0348BE1E33DD115B /* enable1_3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_3.txt; sourceTree = "<group>"; };
 		338910FFF31AB9B3C9B24848 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3389111AFC0AC3F444B3AAAD /* enable1_4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_4.txt; sourceTree = "<group>"; };
@@ -73,10 +76,13 @@
 		33891519C6743D8D3582A35C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3389151E4B7BB3E0911E950F /* PasswordField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordField.h; sourceTree = "<group>"; };
 		33891565DA646ADEFB70D920 /* Randomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Randomizer.h; sourceTree = "<group>"; };
+		338915ED5F0E626EBE036C7D /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController.m; sourceTree = "<group>"; };
+		3389163A8CEE16847087E670 /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
 		33891698ADC01CB9DF28D6E0 /* enable1_7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_7.txt; sourceTree = "<group>"; };
 		3389173862522ECCA25EBB80 /* passvault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = passvault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3389176B9859808D17C4242E /* enable1_9.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_9.txt; sourceTree = "<group>"; };
 		3389179AC733A83911C1FB80 /* passvault-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "passvault-Prefix.pch"; sourceTree = "<group>"; };
+		338918139AF4C816694538FD /* EditPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPasswordViewController.m; sourceTree = "<group>"; };
 		3389181ECB5F30BD53C3938E /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		338918360C3A526D15570257 /* TestRandomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRandomizer.h; sourceTree = "<group>"; };
 		3389185040CC66B2526A56B9 /* passvaultTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "passvaultTests-Info.plist"; sourceTree = "<group>"; };
@@ -214,6 +220,10 @@
 				3389135D72C5C10A36F8117A /* AddPasswordViewController.m */,
 				33891171DA38EB60279EF27C /* AddPasswordViewController.h */,
 				33891BC3F64067D3B9EA2A86 /* ViewController.h */,
+				338918139AF4C816694538FD /* EditPasswordViewController.m */,
+				3389108D291E512AE192299D /* EditPasswordViewController.h */,
+				338915ED5F0E626EBE036C7D /* PasswordViewController.m */,
+				3389163A8CEE16847087E670 /* PasswordViewController.h */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -393,6 +403,8 @@
 				338917EC3300F0EC4334F965 /* PasswordModel.m in Sources */,
 				33891EF6AFAC3371ACADFFF9 /* Arc4Randomizer.m in Sources */,
 				33891B658FA6B178038891CE /* TitleBanner.m in Sources */,
+				3389126A6C8D9A7FC7A238AC /* EditPasswordViewController.m in Sources */,
+				33891854AB1F06FCFB5C2469 /* PasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
