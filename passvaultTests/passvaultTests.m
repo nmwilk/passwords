@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "PasswordModel.h"
+#import "PasswordGeneratorModel.h"
 #import "TestRandomizer.h"
 
 @interface passvaultTests : XCTestCase
@@ -27,7 +27,7 @@
 }
 
 - (void)testPasswordModel {
-    PasswordModel *passwordModel = [[PasswordModel alloc] initWithRandomizer:[[TestRandomizer alloc] init]];
+    PasswordGeneratorModel *passwordModel = [[PasswordGeneratorModel alloc] initWithRandomizer:[[TestRandomizer alloc] init]];
 
     NSArray *expected = @[@"1STUVWXY",
             @"HIJKLABC2",

@@ -50,11 +50,16 @@
                                 <rect key="frame" x="0.0" y="83" width="320" height="441"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="FxO-cd-yfh"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="2Ay-Gb-cZz"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="tableView" destination="D0V-ou-dGZ" id="7Ye-z7-F0E"/>
                         <outlet property="titleBanner" destination="x0i-3r-pi8" id="3W1-we-ZFn"/>
                         <outlet property="toolbar" destination="WMs-PB-h4T" id="qaD-U2-ee4"/>
                     </connections>

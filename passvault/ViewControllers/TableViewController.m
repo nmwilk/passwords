@@ -14,6 +14,10 @@
 #define kTitleEdit @"Edit"
 #define kTitleDone @"Done"
 
+#define kPrefsPasswordIds @"passwordIds"
+
+#define kCellIdPassword @"passwordCell"
+
 @interface TableViewController ()
 
 @end
@@ -23,12 +27,16 @@ NSArray *wordLengths;
 
 @implementation TableViewController {
     BOOL inEditMode;
+    NSMutableDictionary *passwords;
+    NSArray *passwordLabels;
+    NSComparator alphabeticOrderer;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self loadDictionary];
+        [self loadPasswords];
     }
     return self;
 }
@@ -37,14 +45,59 @@ NSArray *wordLengths;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self loadDictionary];
+        [self loadPasswords];
     }
     return self;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [self createToolbar];
-
+    
     [self.titleBanner.editButton addTarget:self action:@selector(editButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [self savePasswords];
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView == self.tableView) {
+        return [passwordLabels count];
+    }
+
+    return 0;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdPassword];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdPassword];
+    }
+
+    cell.textLabel.text = [passwordLabels objectAtIndex:indexPath.row];
+
+    return cell;
+}
+
+- (void)loadPasswords {
+    NSUserDefaults *userPrefs = [NSUserDefaults standardUserDefaults];
+    NSDictionary *storedPasswords = [userPrefs dictionaryForKey:kPrefsPasswordIds];
+
+    if (storedPasswords == nil) {
+        passwords = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"",@"iTunes", nil];
+    } else {
+        passwords = [storedPasswords mutableCopy];
+    }
+
+    passwordLabels = [passwords keysSortedByValueUsingComparator:^(NSString* obj1, NSString* obj2) {
+        return [obj1 caseInsensitiveCompare:obj2];
+    }];
+}
+
+-(void)savePasswords {
+    NSUserDefaults *userPrefs = [NSUserDefaults standardUserDefaults];
+    [userPrefs setObject:passwords forKey:kPrefsPasswordIds];
+    [userPrefs synchronize];
 }
 
 - (void)createToolbar {

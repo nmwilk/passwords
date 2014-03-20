@@ -3,17 +3,17 @@
 // Copyright (c) 2014 MeasuredSoftware. All rights reserved.
 //
 
-#import "PasswordModel.h"
+#import "PasswordGeneratorModel.h"
 #import "Randomizer.h"
 
 NSInteger const kMinWordLength = 3;
 NSInteger const kMaxWordLength = 7;
 
-@interface PasswordModel ()
+@interface PasswordGeneratorModel ()
 @property(nonatomic, strong) id <Randomizer> randomizer;
 @end
 
-@implementation PasswordModel {
+@implementation PasswordGeneratorModel {
     NSMutableArray *passwordItems;
     NSUInteger number;
     NSUInteger maxLength;

@@ -26,14 +26,14 @@
 		338916B8753CF935F269DB66 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 33891CC9571F04430DC1CAAD /* InfoPlist.strings */; };
 		33891732E6184D07A0920D63 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 338918F03073450693BCCCB5 /* AppDelegate.m */; };
 		338917536947C5D2BA994A21 /* enable1_6.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891BA686F7C9D358C710C2 /* enable1_6.txt */; };
-		338917EC3300F0EC4334F965 /* PasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891976DADB1401DB3E1D80 /* PasswordModel.m */; };
+		338917EC3300F0EC4334F965 /* PasswordGeneratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891976DADB1401DB3E1D80 /* PasswordGeneratorModel.m */; };
 		33891854AB1F06FCFB5C2469 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338915ED5F0E626EBE036C7D /* PasswordViewController.m */; };
 		33891874DA2D65132717E162 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891AA8C64BD3B1E036B887 /* main.m */; };
 		33891A5911C671CB07084846 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891DA0DE75914D7C97CD08 /* CoreGraphics.framework */; };
 		33891A6B1577A71A14591394 /* enable1_8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891A87BF4B11D79BC257C1 /* enable1_8.txt */; };
 		33891B658FA6B178038891CE /* TitleBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891B090A7D29EF5BD24A69 /* TitleBanner.m */; };
 		33891C25EBBCE8C3F160BDD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 338918D12308891EF3DCABEF /* Main.storyboard */; };
-		33891CBB9BA79A13D7848E44 /* PasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891976DADB1401DB3E1D80 /* PasswordModel.m */; };
+		33891CBB9BA79A13D7848E44 /* PasswordGeneratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891976DADB1401DB3E1D80 /* PasswordGeneratorModel.m */; };
 		33891D0858E53D0DEF04C43E /* TouchZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891FCA1E77C47B80112B19 /* TouchZone.m */; };
 		33891D95B92ADCCEEFB7D725 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33891519C6743D8D3582A35C /* Images.xcassets */; };
 		33891D9E60E51C0E34F0D5E0 /* enable1_9.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3389176B9859808D17C4242E /* enable1_9.txt */; };
@@ -88,7 +88,7 @@
 		3389185040CC66B2526A56B9 /* passvaultTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "passvaultTests-Info.plist"; sourceTree = "<group>"; };
 		3389185A4F3A4DD093461A1C /* PasswordField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordField.m; sourceTree = "<group>"; };
 		338918F03073450693BCCCB5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		33891976DADB1401DB3E1D80 /* PasswordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordModel.m; sourceTree = "<group>"; };
+		33891976DADB1401DB3E1D80 /* PasswordGeneratorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordGeneratorModel.m; sourceTree = "<group>"; };
 		33891999117EA570084BAA76 /* passvault-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "passvault-Info.plist"; sourceTree = "<group>"; };
 		33891A87BF4B11D79BC257C1 /* enable1_8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_8.txt; sourceTree = "<group>"; };
 		33891A90EF496EF0EC1E662A /* TestRandomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRandomizer.m; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 		33891DA56BFA174D93F1E749 /* TouchZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchZone.h; sourceTree = "<group>"; };
 		33891E656FD0A1ED2FB6912D /* Arc4Randomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arc4Randomizer.h; sourceTree = "<group>"; };
 		33891F4C3BC8BBE763B8D593 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		33891F7F7B2022A28C485007 /* PasswordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordModel.h; sourceTree = "<group>"; };
+		33891F7F7B2022A28C485007 /* PasswordGeneratorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordGeneratorModel.h; sourceTree = "<group>"; };
 		33891FCA1E77C47B80112B19 /* TouchZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchZone.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,8 +168,8 @@
 				3389185A4F3A4DD093461A1C /* PasswordField.m */,
 				3389151E4B7BB3E0911E950F /* PasswordField.h */,
 				338916F6E2486AD6A43CECBD /* dictionary_files */,
-				33891976DADB1401DB3E1D80 /* PasswordModel.m */,
-				33891F7F7B2022A28C485007 /* PasswordModel.h */,
+				33891976DADB1401DB3E1D80 /* PasswordGeneratorModel.m */,
+				33891F7F7B2022A28C485007 /* PasswordGeneratorModel.h */,
 				33891565DA646ADEFB70D920 /* Randomizer.h */,
 				33891AAF0FED218CDCE5F8B8 /* Arc4Randomizer.m */,
 				33891E656FD0A1ED2FB6912D /* Arc4Randomizer.h */,
@@ -400,7 +400,7 @@
 				338915E9D9951289DCFF0D09 /* TableViewController.m in Sources */,
 				3389162176B31B9D3730FA20 /* AddPasswordViewController.m in Sources */,
 				33891647713A2BB52C12A988 /* PasswordField.m in Sources */,
-				338917EC3300F0EC4334F965 /* PasswordModel.m in Sources */,
+				338917EC3300F0EC4334F965 /* PasswordGeneratorModel.m in Sources */,
 				33891EF6AFAC3371ACADFFF9 /* Arc4Randomizer.m in Sources */,
 				33891B658FA6B178038891CE /* TitleBanner.m in Sources */,
 				3389126A6C8D9A7FC7A238AC /* EditPasswordViewController.m in Sources */,
@@ -414,7 +414,7 @@
 			files = (
 				3389135652521D646B3DFC61 /* passvaultTests.m in Sources */,
 				33891E105661109E111BA63B /* TestRandomizer.m in Sources */,
-				33891CBB9BA79A13D7848E44 /* PasswordModel.m in Sources */,
+				33891CBB9BA79A13D7848E44 /* PasswordGeneratorModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

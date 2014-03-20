@@ -10,11 +10,12 @@
 
 @class TitleBanner;
 
-@interface TableViewController : UIViewController
+@interface TableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 extern NSMutableDictionary *gDictionary;
 
 @property(nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property(nonatomic, strong) IBOutlet TitleBanner *titleBanner;
+@property(nonatomic, strong) IBOutlet UITableView *tableView;
 
 @end

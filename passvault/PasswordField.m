@@ -4,18 +4,18 @@
 //
 
 #import "PasswordField.h"
-#import "PasswordModel.h"
+#import "PasswordGeneratorModel.h"
 #import "Arc4Randomizer.h"
 
 @implementation PasswordField {
-    PasswordModel *passwordModel;
+    PasswordGeneratorModel *passwordModel;
     NSUInteger lastLength;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        passwordModel = [[PasswordModel alloc] initWithRandomizer:[[Arc4Randomizer alloc] init]];
+        passwordModel = [[PasswordGeneratorModel alloc] initWithRandomizer:[[Arc4Randomizer alloc] init]];
     }
 
     return self;

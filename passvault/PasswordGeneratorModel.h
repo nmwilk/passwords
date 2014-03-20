@@ -8,7 +8,7 @@
 @protocol Randomizer;
 
 
-@interface PasswordModel : NSObject
+@interface PasswordGeneratorModel : NSObject
 - (id)initWithRandomizer:(id <Randomizer>)randomizer;
 
 - (void)addRandom:(CGFloat)random1;
