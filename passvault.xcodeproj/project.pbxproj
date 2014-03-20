@@ -19,7 +19,7 @@
 		3389136BDDFA09E5CBECB417 /* enable1_4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3389111AFC0AC3F444B3AAAD /* enable1_4.txt */; };
 		3389137B7BAD183DDAFFF7D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891AC79E8367BD51D78950 /* UIKit.framework */; };
 		338913E2D32ECFBDAD2A4831 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338913416EC974A80487B88B /* XCTest.framework */; };
-		338915E9D9951289DCFF0D09 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389181ECB5F30BD53C3938E /* ViewController.m */; };
+		338915E9D9951289DCFF0D09 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389181ECB5F30BD53C3938E /* TableViewController.m */; };
 		3389162176B31B9D3730FA20 /* AddPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389135D72C5C10A36F8117A /* AddPasswordViewController.m */; };
 		33891647713A2BB52C12A988 /* PasswordField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389185A4F3A4DD093461A1C /* PasswordField.m */; };
 		3389164DE1B495820635CF3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891AC79E8367BD51D78950 /* UIKit.framework */; };
@@ -83,7 +83,7 @@
 		3389176B9859808D17C4242E /* enable1_9.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_9.txt; sourceTree = "<group>"; };
 		3389179AC733A83911C1FB80 /* passvault-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "passvault-Prefix.pch"; sourceTree = "<group>"; };
 		338918139AF4C816694538FD /* EditPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPasswordViewController.m; sourceTree = "<group>"; };
-		3389181ECB5F30BD53C3938E /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3389181ECB5F30BD53C3938E /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		338918360C3A526D15570257 /* TestRandomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRandomizer.h; sourceTree = "<group>"; };
 		3389185040CC66B2526A56B9 /* passvaultTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "passvaultTests-Info.plist"; sourceTree = "<group>"; };
 		3389185A4F3A4DD093461A1C /* PasswordField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordField.m; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 		33891B5D5E702FD23780BD43 /* passvaultTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = passvaultTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33891B8A26EB611ACFD3C164 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		33891BA686F7C9D358C710C2 /* enable1_6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_6.txt; sourceTree = "<group>"; };
-		33891BC3F64067D3B9EA2A86 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		33891BC3F64067D3B9EA2A86 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		33891D63C1474509B57663C2 /* enable1_5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_5.txt; sourceTree = "<group>"; };
 		33891DA0DE75914D7C97CD08 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		33891DA56BFA174D93F1E749 /* TouchZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchZone.h; sourceTree = "<group>"; };
@@ -216,10 +216,10 @@
 		338917978AD6EFCD559DC7AD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				3389181ECB5F30BD53C3938E /* ViewController.m */,
+				3389181ECB5F30BD53C3938E /* TableViewController.m */,
 				3389135D72C5C10A36F8117A /* AddPasswordViewController.m */,
 				33891171DA38EB60279EF27C /* AddPasswordViewController.h */,
-				33891BC3F64067D3B9EA2A86 /* ViewController.h */,
+				33891BC3F64067D3B9EA2A86 /* TableViewController.h */,
 				338918139AF4C816694538FD /* EditPasswordViewController.m */,
 				3389108D291E512AE192299D /* EditPasswordViewController.h */,
 				338915ED5F0E626EBE036C7D /* PasswordViewController.m */,
@@ -397,7 +397,7 @@
 				33891874DA2D65132717E162 /* main.m in Sources */,
 				33891732E6184D07A0920D63 /* AppDelegate.m in Sources */,
 				33891D0858E53D0DEF04C43E /* TouchZone.m in Sources */,
-				338915E9D9951289DCFF0D09 /* ViewController.m in Sources */,
+				338915E9D9951289DCFF0D09 /* TableViewController.m in Sources */,
 				3389162176B31B9D3730FA20 /* AddPasswordViewController.m in Sources */,
 				33891647713A2BB52C12A988 /* PasswordField.m in Sources */,
 				338917EC3300F0EC4334F965 /* PasswordModel.m in Sources */,

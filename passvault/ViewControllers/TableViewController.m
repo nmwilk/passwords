@@ -1,23 +1,23 @@
 //
-//  ViewController.m
+//  TableViewController.m
 //  passvault
 //
 //  Created by Neil on 26/02/2014.
 //  Copyright (c) 2014 MeasuredSoftware. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "TableViewController.h"
 #import "EditPasswordViewController.h"
 #import "AddPasswordViewController.h"
 
-@interface ViewController ()
+@interface TableViewController ()
 
 @end
 
 NSMutableDictionary *gDictionary;
 NSArray *wordLengths;
 
-@implementation ViewController {
+@implementation TableViewController {
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {

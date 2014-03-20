@@ -4,7 +4,7 @@
 //
 
 #import "Arc4Randomizer.h"
-#import "ViewController.h"
+#import "TableViewController.h"
 
 
 @implementation Arc4Randomizer {

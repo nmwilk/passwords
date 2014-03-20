@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TableViewController.h
 //  passvault
 //
 //  Created by Neil on 26/02/2014.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface TableViewController : UIViewController
 
 extern NSMutableDictionary *gDictionary;
 
