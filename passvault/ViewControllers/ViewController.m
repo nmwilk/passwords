@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "EditPasswordViewController.h"
+#import "AddPasswordViewController.h"
 
 @interface ViewController ()
 
@@ -24,6 +26,28 @@ NSArray *wordLengths;
         [self loadDictionary];
     }
     return self;
+}
+
+- (void)createToolbar {
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonTapped)];
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonTapped)];
+
+    [self.toolbar setItems:[NSArray arrayWithObjects:addButton, flexibleSpace, editButton, nil]];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self createToolbar];
+}
+
+- (void)editButtonTapped {
+    EditPasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"EditPasswordViewController"];
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)addButtonTapped {
+    AddPasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"AddPasswordViewController"];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {

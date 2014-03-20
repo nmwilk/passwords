@@ -641,6 +641,7 @@
 				287D096E18C9FC3100C1CB23 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		338912C2449029075AA53B2C /* Build configuration list for PBXNativeTarget "passvaultTests" */ = {
 			isa = XCConfigurationList;
