@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class TitleBanner;
+
 @interface TableViewController : UIViewController
 
 extern NSMutableDictionary *gDictionary;
 
 @property(nonatomic, strong) IBOutlet UIToolbar *toolbar;
+@property(nonatomic, strong) IBOutlet TitleBanner *titleBanner;
 
 @end

@@ -9,6 +9,10 @@
 #import "TableViewController.h"
 #import "EditPasswordViewController.h"
 #import "AddPasswordViewController.h"
+#import "TitleBanner.h"
+
+#define kTitleEdit @"Edit"
+#define kTitleDone @"Done"
 
 @interface TableViewController ()
 
@@ -18,6 +22,7 @@ NSMutableDictionary *gDictionary;
 NSArray *wordLengths;
 
 @implementation TableViewController {
+    BOOL inEditMode;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
@@ -28,19 +33,43 @@ NSArray *wordLengths;
     return self;
 }
 
-- (void)createToolbar {
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonTapped)];
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonTapped)];
-
-    [self.toolbar setItems:[NSArray arrayWithObjects:addButton, flexibleSpace, editButton, nil]];
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [self loadDictionary];
+    }
+    return self;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [self createToolbar];
+
+    [self.titleBanner.editButton addTarget:self action:@selector(editButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)createToolbar {
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonTapped)];
+
+    [self.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, addButton, flexibleSpace, nil]];
 }
 
 - (void)editButtonTapped {
+
+    NSString *newTitle = inEditMode ? kTitleEdit : kTitleDone;
+
+    [self.titleBanner.editButton setTitle:newTitle forState:UIControlStateNormal];
+
+    if (inEditMode) {
+
+    } else {
+        
+    }
+
+    inEditMode = !inEditMode;
+}
+
+-(void)openEditScreen {
     EditPasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"EditPasswordViewController"];
     [self presentViewController:vc animated:YES completion:nil];
 }
@@ -48,14 +77,6 @@ NSArray *wordLengths;
 - (void)addButtonTapped {
     AddPasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"AddPasswordViewController"];
     [self presentViewController:vc animated:YES completion:nil];
-}
-
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        [self loadDictionary];
-    }
-    return self;
 }
 
 - (void)loadDictionary {
