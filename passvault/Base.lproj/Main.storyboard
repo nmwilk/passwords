@@ -46,7 +46,7 @@
                                     <outlet property="editButton" destination="pAA-ut-7xJ" id="wz7-Qq-45m"/>
                                 </connections>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="D0V-ou-dGZ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="D0V-ou-dGZ">
                                 <rect key="frame" x="0.0" y="83" width="320" height="441"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

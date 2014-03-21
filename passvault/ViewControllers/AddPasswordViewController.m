@@ -77,7 +77,7 @@ NSUInteger const kDefaultPwdLength = 16;
 }
 
 - (void)setPasswordLengthField:(NSUInteger const)passwordLength {
-    self.passwordLengthText.text = [NSString stringWithFormat:@"%d chars", passwordLength];
+    self.passwordLengthText.text = [NSString stringWithFormat:@"%d chars", (int)passwordLength];
 }
 
 @end

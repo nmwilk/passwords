@@ -13,13 +13,13 @@
 
 - (NSUInteger)getNumber:(CGFloat)random {
     NSString *randomString = [NSString stringWithFormat:@"%.0f", random];
-    arc4random_addrandom((unsigned char *) [randomString UTF8String], [randomString length]);
+    arc4random_addrandom((unsigned char *) [randomString UTF8String], (int)[randomString length]);
 
     return arc4random() % 10;
 }
 
 - (NSString *)getWord:(NSUInteger)length {
-    NSArray *currentDict = [gDictionary objectForKey:[NSString stringWithFormat:@"%d", length]];
+    NSArray *currentDict = [gDictionary objectForKey:[NSString stringWithFormat:@"%d", (int)length]];
     NSUInteger index = arc4random() % [currentDict count];
     return [currentDict objectAtIndex:index];
 }

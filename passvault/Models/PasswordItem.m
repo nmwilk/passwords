@@ -12,7 +12,7 @@
 @implementation PasswordItem {
 
 }
-- (id)initWithUid:(NSUInteger)uid label:(NSString *)label {
+- (id)initWithUid:(NSInteger)uid label:(NSString *)label {
     self = [super init];
 
     if (self) {
@@ -26,14 +26,14 @@
 - (id)initWithCoder:(NSCoder *)decoder {
     self = [self init];
     if (self != nil) {
-        self.uid = (NSUInteger) [decoder decodeIntegerForKey:kKeyUid];
+        self.uid = [decoder decodeIntegerForKey:kKeyUid];
         self.label = [decoder decodeObjectForKey:kKeyLabel];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeInt:self.uid forKey:kKeyUid];
+    [encoder encodeInteger:self.uid forKey:kKeyUid];
     [encoder encodeObject:self.label forKey:kKeyLabel];
 }
 

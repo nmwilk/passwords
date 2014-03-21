@@ -83,7 +83,7 @@ NSInteger const kMaxWordLength = 7;
     if ([passwordItems count] > 0) {
         for (NSUInteger i = 0; i < [passwordItems count] + 1; i++) {
             if (i == numberPosition) {
-                [password appendFormat:@"%d", number];
+                [password appendFormat:@"%d", (int)number];
             }
 
             if (i < [passwordItems count]) {

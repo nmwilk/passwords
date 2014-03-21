@@ -8,8 +8,8 @@
 
 @interface PasswordItem : NSObject<NSCoding>
 
-@property(nonatomic, assign) NSUInteger uid;
+@property(nonatomic, assign) NSInteger uid;
 @property(nonatomic, strong) NSString *label;
 
-- (id)initWithUid:(NSUInteger)uid label:(NSString *)label;
+- (id)initWithUid:(NSInteger)uid label:(NSString *)label;
 @end
