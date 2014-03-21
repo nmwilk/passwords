@@ -58,6 +58,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="tableView" destination="D0V-ou-dGZ" id="7Ye-z7-F0E"/>
                         <outlet property="titleBanner" destination="x0i-3r-pi8" id="3W1-we-ZFn"/>

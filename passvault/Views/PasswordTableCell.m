@@ -6,6 +6,8 @@
 #import "PasswordTableCell.h"
 
 
+static const float scale = 1.2;
+
 @implementation PasswordTableCell {
 
 }
@@ -28,7 +30,7 @@
                           delay:0.0
                         options:(UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone)
                      animations:^{
-                         CATransform3D tr = CATransform3DMakeScale(1.4, 1.4, 1);
+                         CATransform3D tr = CATransform3DMakeScale(scale, scale, 1);
                          self.copiedToClipboard.layer.anchorPoint = CGPointMake(0.5, 0.5);
                          self.copiedToClipboard.layer.transform = tr;
                          self.copiedToClipboard.alpha = 0.0;
