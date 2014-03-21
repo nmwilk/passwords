@@ -5,12 +5,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class JNKeychain;
+
 
 @interface PasswordList : NSObject
 
-@property(nonatomic, strong) NSMutableArray *passwordArray;
+@property(nonatomic, strong) NSMutableArray *passwordInfoData;
 
-- (void)savePasswords;
+- (void)savePasswordsInfos;
 
 - (NSUInteger)count;
 

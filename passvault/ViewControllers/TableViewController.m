@@ -61,7 +61,7 @@ NSArray *wordLengths;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [passwordList savePasswords];
+    [passwordList savePasswordsInfos];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

@@ -36,7 +36,7 @@
 -(IBAction)done {
     [self.list writeLabel:self.labelField.text forRow:self.editedItem];
     [self.list writePassword:self.passwordField.text forRow:self.editedItem];
-    [self.list savePasswords];
+    [self.list savePasswordsInfos];
     [super done];
 }
 

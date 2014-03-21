@@ -42,7 +42,7 @@ NSUInteger const kDefaultPwdLength = 16;
 
 - (IBAction)done {
     [self.list addNew:self.labelField.text password:self.passwordField.text];
-    [self.list savePasswords];
+    [self.list savePasswordsInfos];
     [super done];
 }
 

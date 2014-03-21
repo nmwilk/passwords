@@ -6,7 +6,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface PasswordItem : NSObject<NSCoding>
+@interface PasswordInfoItem : NSObject<NSCoding>
 
 @property(nonatomic, assign) NSInteger uid;
 @property(nonatomic, strong) NSString *label;

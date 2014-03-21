@@ -14,6 +14,9 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.backgroundColor = [UIColor lightGrayColor];
+
+        self.layer.cornerRadius = 15;
+        self.layer.masksToBounds = YES;
     }
     
     return self;

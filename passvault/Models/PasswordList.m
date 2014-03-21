@@ -2,9 +2,11 @@
 // Created by Neil on 20/03/2014.
 // Copyright (c) 2014 MeasuredSoftware. All rights reserved.
 //
+// Stores actual passwords in a secure store. The label and uid (used to look it up) is stored in NSUserDefaults.
 
 #import "PasswordList.h"
-#import "PasswordItem.h"
+#import "PasswordInfoItem.h"
+#import "JNKeychain.h"
 
 #define kPrefsPasswordIds @"passwords"
 
@@ -16,71 +18,71 @@
     if (self) {
 
         NSUserDefaults *userPrefs = [NSUserDefaults standardUserDefaults];
-        NSData *passwordArrayData = [userPrefs objectForKey:kPrefsPasswordIds];
+        NSData *passwordInfoData = [userPrefs objectForKey:kPrefsPasswordIds];
 
-        if (passwordArrayData == nil) {
-            _passwordArray = [[NSMutableArray alloc] init];
-            [_passwordArray addObject:[[PasswordItem alloc] initWithUid:1 label:@"iTunes"]];
+        if (passwordInfoData == nil) {
+            _passwordInfoData = [[NSMutableArray alloc] init];
+            [_passwordInfoData addObject:[[PasswordInfoItem alloc] initWithUid:1 label:@"iTunes"]];
         } else {
-            _passwordArray = [NSKeyedUnarchiver unarchiveObjectWithData:passwordArrayData];
+            _passwordInfoData = [NSKeyedUnarchiver unarchiveObjectWithData:passwordInfoData];
         }
     }
 
     return self;
 }
 
-- (void)savePasswords {
+- (void)savePasswordsInfos {
     NSUserDefaults *userPrefs = [NSUserDefaults standardUserDefaults];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.passwordArray];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.passwordInfoData];
     [userPrefs setObject:data forKey:kPrefsPasswordIds];
     [userPrefs synchronize];
-
-    for (PasswordItem *item in self.passwordArray) {
-        // TODO write all passwords
-    }
 }
 
 - (NSUInteger)count {
-    return [self.passwordArray count];
+    return [self.passwordInfoData count];
 }
 
 - (NSString *)password:(NSUInteger)index {
-    // TODO just set as label for now. But need to use uid to lookup password in secure store.
-    NSString *found = ((PasswordItem *) [self.passwordArray objectAtIndex:index]).label;
+    return [JNKeychain loadValueForKey:[self getKeyForItem:[self.passwordInfoData objectAtIndex:index]]];
+}
 
-    return found;
+- (NSString *)getKeyForItem:(PasswordInfoItem *)item {
+    return [[NSNumber numberWithInteger:item.uid] stringValue];
 }
 
 - (NSString *)label:(NSUInteger)index {
-    id const o = [self.passwordArray objectAtIndex:index];
-    return ((PasswordItem *) o).label;
+    id const o = [self.passwordInfoData objectAtIndex:index];
+    return ((PasswordInfoItem *) o).label;
 }
 
 -(void)writeLabel:(NSString *)label forRow:(NSInteger)row {
-    PasswordItem *item = [self.passwordArray objectAtIndex:(NSUInteger) row];
+    PasswordInfoItem *item = [self.passwordInfoData objectAtIndex:(NSUInteger) row];
     item.label = label;
 }
 
 - (void)writePassword:(NSString *)text forRow:(NSInteger)row {
+    [JNKeychain saveValue:text forKey:[self getKeyForItem:[self.passwordInfoData objectAtIndex:(NSUInteger) row]]];
 }
 
 - (void)addNew:(NSString *)label password:(NSString *)password {
     NSInteger uid = [self allocateNewUid];
-    PasswordItem *newItem = [[PasswordItem alloc] initWithUid:uid label:label];
+    PasswordInfoItem *newItem = [[PasswordInfoItem alloc] initWithUid:uid label:label];
 
-    [self.passwordArray addObject:newItem];
+    [self.passwordInfoData addObject:newItem];
     [self sortList];
+
+    [JNKeychain saveValue:password forKey:[self getKeyForItem:newItem]];
 }
 
 - (void)sortList {
-    [self.passwordArray sortUsingComparator:^(PasswordItem *item1, PasswordItem *item2) {
+    [self.passwordInfoData sortUsingComparator:^(PasswordInfoItem *item1, PasswordInfoItem *item2) {
         return [item1.label compare:item2.label];
     }];
 }
 
 - (NSInteger)allocateNewUid {
     NSInteger highest = 0;
-    for(PasswordItem *passwordItem in self.passwordArray) {
+    for(PasswordInfoItem *passwordItem in self.passwordInfoData) {
         if (passwordItem.uid > highest) {
             highest = passwordItem.uid;
         }

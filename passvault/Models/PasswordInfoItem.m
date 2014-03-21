@@ -3,13 +3,13 @@
 // Copyright (c) 2014 MeasuredSoftware. All rights reserved.
 //
 
-#import "PasswordItem.h"
+#import "PasswordInfoItem.h"
 
 
 #define kKeyUid @"UID"
 #define kKeyLabel @"LABEL"
 
-@implementation PasswordItem {
+@implementation PasswordInfoItem {
 
 }
 - (id)initWithUid:(NSInteger)uid label:(NSString *)label {
