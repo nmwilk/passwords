@@ -48,10 +48,16 @@ NSArray *wordLengths;
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+-(void)viewDidLoad {
+    [super viewDidLoad];
+
     [self createToolbar];
 
     [self.titleBanner.editButton addTarget:self action:@selector(editButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -91,7 +97,7 @@ NSArray *wordLengths;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.tableView.isEditing) {
-        [self openEditScreen];
+        [self openEditScreen:indexPath.row];
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     } else {
         PasswordTableCell *const cell = (PasswordTableCell *) [self.tableView cellForRowAtIndexPath:indexPath];
@@ -105,7 +111,6 @@ NSArray *wordLengths;
 }
 
 - (void)editButtonTapped {
-
     const BOOL isEditing = self.tableView.isEditing;
     NSString *newTitle = isEditing ? kTitleEdit : kTitleDone;
 
@@ -116,13 +121,15 @@ NSArray *wordLengths;
     [self.tableView setEditing:!isEditing animated:YES];
 }
 
-- (void)openEditScreen {
+- (void)openEditScreen:(NSInteger)row {
     EditPasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"EditPasswordViewController"];
+    [vc configureWithPasswordList:passwordList row:row];
     [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)addButtonTapped {
     AddPasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"AddPasswordViewController"];
+    [vc configureWithPasswordList:passwordList];
     [self presentViewController:vc animated:YES completion:nil];
 }
 
@@ -138,11 +145,6 @@ NSArray *wordLengths;
         NSArray *fileAsArray = [fileContent componentsSeparatedByString:delimiter];
         [gDictionary setObject:fileAsArray forKey:wordLength];
     }
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning {

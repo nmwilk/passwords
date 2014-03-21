@@ -17,4 +17,10 @@
 - (NSString *)password:(NSUInteger)needle;
 
 - (NSString *)label:(NSUInteger)index1;
+
+- (void)writeLabel:(NSString *)label forRow:(NSInteger)row;
+
+- (void)writePassword:(NSString *)text forRow:(NSInteger)row;
+
+- (void)addNew:(NSString *)label password:(NSString *)password;
 @end

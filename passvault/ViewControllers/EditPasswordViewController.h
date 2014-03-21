@@ -6,5 +6,10 @@
 #import <Foundation/Foundation.h>
 #import "PasswordViewController.h"
 
+@class PasswordList;
+
 @interface EditPasswordViewController : PasswordViewController
+
+- (void)configureWithPasswordList:(PasswordList *)list row:(NSInteger)row;
+
 @end

@@ -56,4 +56,36 @@
     return ((PasswordItem *) o).label;
 }
 
+-(void)writeLabel:(NSString *)label forRow:(NSInteger)row {
+    PasswordItem *item = [self.passwordArray objectAtIndex:(NSUInteger) row];
+    item.label = label;
+}
+
+- (void)writePassword:(NSString *)text forRow:(NSInteger)row {
+}
+
+- (void)addNew:(NSString *)label password:(NSString *)password {
+    NSInteger uid = [self allocateNewUid];
+    PasswordItem *newItem = [[PasswordItem alloc] initWithUid:uid label:label];
+
+    [self.passwordArray addObject:newItem];
+    [self sortList];
+}
+
+- (void)sortList {
+    [self.passwordArray sortUsingComparator:^(PasswordItem *item1, PasswordItem *item2) {
+        return [item1.label compare:item2.label];
+    }];
+}
+
+- (NSInteger)allocateNewUid {
+    NSInteger highest = 0;
+    for(PasswordItem *passwordItem in self.passwordArray) {
+        if (passwordItem.uid > highest) {
+            highest = passwordItem.uid;
+        }
+    }
+
+    return highest + 1;
+}
 @end

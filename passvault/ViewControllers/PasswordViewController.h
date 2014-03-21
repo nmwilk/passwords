@@ -5,11 +5,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class PasswordList;
+
 
 @interface PasswordViewController : UIViewController <UITextFieldDelegate>
 
 @property(nonatomic, strong) IBOutlet UITextField *labelField;
 @property(nonatomic, strong) IBOutlet UITextField *passwordField;
+@property(nonatomic, strong) PasswordList *list;
 
 - (IBAction)cancelled;
 

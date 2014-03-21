@@ -6,6 +6,7 @@
 #import "AddPasswordViewController.h"
 #import "TouchZone.h"
 #import "PasswordField.h"
+#import "PasswordList.h"
 
 @implementation AddPasswordViewController {
 
@@ -23,7 +24,7 @@ NSUInteger const kDefaultPwdLength = 16;
     [self.touchZone addGestureRecognizer:panGesture];
 }
 
--(PasswordField *)password {
+- (PasswordField *)password {
     return (PasswordField *) super.passwordField;
 }
 
@@ -33,6 +34,16 @@ NSUInteger const kDefaultPwdLength = 16;
     CGFloat combined = pos.x * pos.y;
 
     [self.password addRandom:combined];
+}
+
+- (void)configureWithPasswordList:(PasswordList *)list {
+    self.list = list;
+}
+
+- (IBAction)done {
+    [self.list addNew:self.labelField.text password:self.passwordField.text];
+    [self.list savePasswords];
+    [super done];
 }
 
 - (IBAction)lengthChanged {
@@ -55,7 +66,7 @@ NSUInteger const kDefaultPwdLength = 16;
 }
 
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     return YES;
 }
 
@@ -77,7 +88,7 @@ NSUInteger const kDefaultPwdLength = 16;
 }
 
 - (void)setPasswordLengthField:(NSUInteger const)passwordLength {
-    self.passwordLengthText.text = [NSString stringWithFormat:@"%d chars", (int)passwordLength];
+    self.passwordLengthText.text = [NSString stringWithFormat:@"%d chars", (int) passwordLength];
 }
 
 @end
