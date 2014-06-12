@@ -107,7 +107,7 @@ NSArray *wordLengths;
 - (void)showQuickView:(CGPoint)point {
     self.quickView.alpha = 0.0f;
     self.quickView.hidden = NO;
-    self.quickView.center = CGPointMake(self.quickView.center.x, point.y);
+    self.quickView.center = CGPointMake(point.x, point.y);
     [self.quickView layer].transform = CATransform3DMakeScale(0.6f, 0.6f, 1.0f);
     [UIView animateWithDuration:0.5f
                           delay:0.0f

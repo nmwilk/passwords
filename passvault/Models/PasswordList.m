@@ -83,7 +83,8 @@
 
 - (void)sortList {
     [self.passwordInfoData sortUsingComparator:^(PasswordInfoItem *item1, PasswordInfoItem *item2) {
-        return [item1.label compare:item2.label];
+        NSLog(@"sort comparing %@ vs %@", item1.label, item2.label);
+        return [item1.label.uppercaseString compare:item2.label.uppercaseString];
     }];
 }
 

@@ -42,9 +42,19 @@ NSUInteger const kDefaultPwdLength = 16;
         [self lengthChanged];
     }
 
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(touchZonePanned:)];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(touchZonePanned:)];
     [self.touchZone addGestureRecognizer:panGesture];
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    if (self.pageType == PageTypeNew) {
+        [self.labelField becomeFirstResponder];
+    }
+}
+
 
 - (void)touchZonePanned:(UIPanGestureRecognizer *)panned {
     if ([self.passwordField isFirstResponder]) {
@@ -107,6 +117,10 @@ replacementString:(NSString *)string {
 
     if (textField == self.passwordField) {
         if (range.length == 0) {
+            if (string.length == 1) {
+                [self hideRandomizer];
+            }
+
             return YES;
         }
 
@@ -114,13 +128,10 @@ replacementString:(NSString *)string {
             if (textField.text.length - range.length == 0) {
                 [self showRandomizer];
             }
-        } else if (range.length == 1 && textField.text.length > 0) {
-            [self hideRandomizer];
         }
 
         else {
             const NSUInteger passwordLength = [self getLengthFromSlider] + (string.length - range.length);
-
             // don't allow
             if (passwordLength < kMinPwdLength || passwordLength > kMaxPwdLength) {
                 return NO;
@@ -169,9 +180,8 @@ replacementString:(NSString *)string {
                      animations:^{
         self.randomizerSection.alpha = 0.0f;
     } completion:(void (^)(BOOL)) ^{
-            self.randomizerSection.hidden = YES;
-        }];
-    [self lengthChanged];
+        self.randomizerSection.hidden = YES;
+    }];
 }
 
 - (void)setPasswordLengthField:(NSUInteger const)passwordLength {
@@ -184,8 +194,10 @@ replacementString:(NSString *)string {
         [self.list writePassword:self.passwordField.text forRow:self.editedItem];
         [self.list savePasswordsInfos];
     } else if (self.pageType == PageTypeNew) {
-        [self.list addNew:self.labelField.text password:self.passwordField.text];
-        [self.list savePasswordsInfos];
+        if (self.labelField.text.length > 0 && self.passwordField.text.length > 0) {
+            [self.list addNew:self.labelField.text password:self.passwordField.text];
+            [self.list savePasswordsInfos];
+        }
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
