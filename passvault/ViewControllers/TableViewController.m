@@ -113,8 +113,11 @@ NSArray *wordLengths;
     } else {
         PasswordTableCell *const cell = (PasswordTableCell *) [self.tableView cellForRowAtIndexPath:indexPath];
         if (!cell.animating) {
-            [UIPasteboard generalPasteboard].string = [passwordList password:(NSUInteger) indexPath.row];
-            [cell animateCopyNotification];
+            NSString *const string = [passwordList password:(NSUInteger) indexPath.row];
+            if (string != nil) {
+                [UIPasteboard generalPasteboard].string = string;
+                [cell animateCopyNotification];
+            }
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     }

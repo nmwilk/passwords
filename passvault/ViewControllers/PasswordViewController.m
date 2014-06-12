@@ -13,6 +13,7 @@
 @property(nonatomic, copy) NSString *labelText;
 @property(nonatomic, copy) NSString *passwordText;
 @property(nonatomic) PageType pageType;
+@property(nonatomic, strong) UIDynamicAnimator *animator;
 @end
 
 @implementation PasswordViewController {
@@ -62,7 +63,8 @@ NSUInteger const kDefaultPwdLength = 16;
     self.list = list;
 }
 
-- (void)configureForEditPasswordWithPasswordList:(PasswordList *)list row:(NSInteger)row {
+- (void)configureForEditPasswordWithPasswordList:(PasswordList *)list
+                                             row:(NSInteger)row {
     self.pageType = PageTypeEdit;
 
     self.list = list;
@@ -92,46 +94,66 @@ NSUInteger const kDefaultPwdLength = 16;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
+    if (textField == self.passwordField) {
+        [textField resignFirstResponder];
+    } else if (textField == self.labelField) {
+        [self.passwordField becomeFirstResponder];
+    }
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (range.length == 0) {
-        return YES;
-    }
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string {
 
-    if (self.randomizerSection.hidden) {
-        if (textField.text.length - range.length == 0) {
-            [self showRandomizer];
-        }
-    }
-
-    else {
-        const NSUInteger passwordLength = [self getLengthFromSlider] + (string.length - range.length);
-
-        // don't allow
-        if (passwordLength < kMinPwdLength || passwordLength > kMaxPwdLength) {
-            return NO;
+    if (textField == self.passwordField) {
+        if (range.length == 0) {
+            return YES;
         }
 
-        [self setPasswordLengthField:passwordLength];
-        self.passwordLengthSlider.value = [self getSliderValueFromLength:passwordLength];
+        if (self.randomizerSection.hidden) {
+            if (textField.text.length - range.length == 0) {
+                [self showRandomizer];
+            }
+        }
+
+        else {
+            const NSUInteger passwordLength = [self getLengthFromSlider] + (string.length - range.length);
+
+            // don't allow
+            if (passwordLength < kMinPwdLength || passwordLength > kMaxPwdLength) {
+                return NO;
+            }
+
+            [self setPasswordLengthField:passwordLength];
+            self.passwordLengthSlider.value = [self getSliderValueFromLength:passwordLength];
+        }
     }
     return YES;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    if (self.randomizerSection.hidden) {
-        [self showRandomizer];
+    if (textField == self.passwordField) {
+        if (self.randomizerSection.hidden) {
+            [self showRandomizer];
+        }
     }
     return YES;
 }
 
 
 - (void)showRandomizer {
-    // TODO animate
+    self.randomizerSection.alpha = 0.0;
     self.randomizerSection.hidden = NO;
+    self.randomizerSection.transform = CGAffineTransformMakeScale(0.8, 0.8);
+    [UIView animateWithDuration:0.5
+                          delay:0.0
+         usingSpringWithDamping:0.5
+          initialSpringVelocity:0
+                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone
+                     animations:^{
+        self.randomizerSection.alpha = 1.0;
+        self.randomizerSection.transform = CGAffineTransformMakeScale(1.0, 1.0);
+    } completion:nil];
     [self lengthChanged];
 }
 
