@@ -7,11 +7,10 @@
 //
 
 #import "TableViewController.h"
-#import "EditPasswordViewController.h"
-#import "AddPasswordViewController.h"
 #import "TitleBanner.h"
 #import "PasswordTableCell.h"
 #import "PasswordList.h"
+#import "PasswordViewController.h"
 
 #define kTitleEdit @"Edit"
 #define kTitleDone @"Done"
@@ -66,9 +65,7 @@ NSArray *wordLengths;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.tableView) {
-        const NSUInteger count = [passwordList count];
-        NSLog(@"%d passwords found", count);
-        return count;
+        return [passwordList count];
     }
 
     return 0;
@@ -135,14 +132,14 @@ NSArray *wordLengths;
 }
 
 - (void)openEditScreen:(NSInteger)row {
-    EditPasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"EditPasswordViewController"];
-    [vc configureWithPasswordList:passwordList row:row];
+    PasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"PasswordViewController"];
+    [vc configureForEditPasswordWithPasswordList:passwordList row:row];
     [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)addButtonTapped {
-    AddPasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"AddPasswordViewController"];
-    [vc configureWithPasswordList:passwordList];
+    PasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"PasswordViewController"];
+    [vc configureForNewPasswordWithPasswordList:passwordList];
     [self presentViewController:vc animated:YES completion:nil];
 }
 

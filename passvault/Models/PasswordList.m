@@ -75,7 +75,9 @@
 }
 
 - (void)deleteAtIndex:(NSUInteger)index {
+    PasswordInfoItem *const item = [self.passwordInfoData objectAtIndex:index];
     [self.passwordInfoData removeObjectAtIndex:index];
+    [JNKeychain deleteValueForKey:[self getKeyForItem:item]];
     [self sortList];
 }
 
