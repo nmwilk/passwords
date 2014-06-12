@@ -1,0 +1,4 @@
+
+[submodule "passvault/JNKeychain"]
+	path = passvault/JNKeychain
+	url = https://github.com/jeremangnr/JNKeychain.git
