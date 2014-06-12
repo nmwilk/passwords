@@ -66,7 +66,9 @@ NSArray *wordLengths;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.tableView) {
-        return [passwordList count];
+        const NSUInteger count = [passwordList count];
+        NSLog(@"%d passwords found", count);
+        return count;
     }
 
     return 0;
@@ -95,6 +97,18 @@ NSArray *wordLengths;
     [self.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, self.addButton, flexibleSpace, nil]];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger index = indexPath.row;
+    [passwordList deleteAtIndex:(NSUInteger) index];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+
+    [passwordList savePasswordsInfos];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.tableView.isEditing) {
         [self openEditScreen:indexPath.row];
@@ -107,7 +121,6 @@ NSArray *wordLengths;
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     }
-
 }
 
 - (void)editButtonTapped {

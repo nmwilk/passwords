@@ -15,7 +15,6 @@ static const float scale = 1.2;
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"copy icon"]];
     }
     return self;
 }

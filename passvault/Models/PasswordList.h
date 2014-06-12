@@ -25,4 +25,6 @@
 - (void)writePassword:(NSString *)text forRow:(NSInteger)row;
 
 - (void)addNew:(NSString *)label password:(NSString *)password;
+
+- (void)deleteAtIndex:(NSUInteger)index;
 @end

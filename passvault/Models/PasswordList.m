@@ -55,7 +55,7 @@
     return ((PasswordInfoItem *) o).label;
 }
 
--(void)writeLabel:(NSString *)label forRow:(NSInteger)row {
+- (void)writeLabel:(NSString *)label forRow:(NSInteger)row {
     PasswordInfoItem *item = [self.passwordInfoData objectAtIndex:(NSUInteger) row];
     item.label = label;
 }
@@ -74,6 +74,11 @@
     [JNKeychain saveValue:password forKey:[self getKeyForItem:newItem]];
 }
 
+- (void)deleteAtIndex:(NSUInteger)index {
+    [self.passwordInfoData removeObjectAtIndex:index];
+    [self sortList];
+}
+
 - (void)sortList {
     [self.passwordInfoData sortUsingComparator:^(PasswordInfoItem *item1, PasswordInfoItem *item2) {
         return [item1.label compare:item2.label];
@@ -82,7 +87,7 @@
 
 - (NSInteger)allocateNewUid {
     NSInteger highest = 0;
-    for(PasswordInfoItem *passwordItem in self.passwordInfoData) {
+    for (PasswordInfoItem *passwordItem in self.passwordInfoData) {
         if (passwordItem.uid > highest) {
             highest = passwordItem.uid;
         }
