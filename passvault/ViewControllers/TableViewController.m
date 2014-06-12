@@ -11,6 +11,8 @@
 #import "PasswordTableCell.h"
 #import "PasswordList.h"
 #import "PasswordViewController.h"
+#import "LongTapGestureRecogniser.h"
+#import "QuickView.h"
 
 #define kTitleEdit @"Edit"
 #define kTitleDone @"Done"
@@ -47,16 +49,89 @@ NSArray *wordLengths;
     return self;
 }
 
--(void)viewDidLoad {
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     [self createToolbar];
 
-    [self.titleBanner.editButton addTarget:self action:@selector(editButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.titleBanner.editButton addTarget:self action:@selector(editButtonTapped)
+                          forControlEvents:UIControlEventTouchUpInside];
+
+    [self.tableView addGestureRecognizer:[[LongTapGestureRecogniser alloc] initWithTarget:self]];
+}
+
+- (void)longTapAtPoint:(CGPoint)point withIndexPath:(NSIndexPath *)indexPath {
+    NSString *const string = [passwordList password:(NSUInteger) indexPath.row];
+    if (string != nil && [string length] > 0) {
+        [self quickViewPassword:string atPosition:point];
+    }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(void)longTapEnded {
+    [self hideQuickView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableView.isEditing) {
+        [self openEditScreen:indexPath.row];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else {
+        PasswordTableCell *const cell = (PasswordTableCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+        if (!cell.animating) {
+            NSString *const string = [passwordList password:(NSUInteger) indexPath.row];
+            if (string != nil && [string length] > 0) {
+                [self copyPassword:cell string:string];
+            }
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }
+    }
+}
+
+- (void)copyPassword:(PasswordTableCell *const)cell string:(NSString *const)string {
+    [UIPasteboard generalPasteboard].string = string;
+    [cell animateCopyNotification];
+}
+
+- (void)quickViewPassword:(NSString *const)string atPosition:(CGPoint)point {
+    if (self.quickView.hidden) {
+        self.quickView.password.text = string;
+        [self showQuickView:point];
+    }
+}
+
+- (void)showQuickView:(CGPoint)point {
+    self.quickView.alpha = 0.0f;
+    self.quickView.hidden = NO;
+    self.quickView.center = CGPointMake(self.quickView.center.x, point.y);
+    [self.quickView layer].transform = CATransform3DMakeScale(0.6f, 0.6f, 1.0f);
+    [UIView animateWithDuration:0.5f
+                          delay:0.0f
+         usingSpringWithDamping:0.5f
+          initialSpringVelocity:0.0f
+                        options:UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+        self.quickView.alpha = 1.0f;
+        [self.quickView layer].transform = CATransform3DMakeScale(1.0f, 1.0f, 1.0f);
+    }
+                     completion:^(BOOL finished) {
+    }];
+}
+
+- (void)hideQuickView {
+    [UIView animateWithDuration:0.5f delay:0.0f
+         usingSpringWithDamping:0.5f initialSpringVelocity:0.0f
+                        options:UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+        self.quickView.alpha = 0.0f;
+    }
+                     completion:^(BOOL finished) {
+        self.quickView.hidden = YES;
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -88,8 +163,10 @@ NSArray *wordLengths;
 }
 
 - (void)createToolbar {
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonTapped)];
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                   target:nil action:nil];
+    self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self
+                                                                   action:@selector(addButtonTapped)];
 
     [self.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, self.addButton, flexibleSpace, nil]];
 }
@@ -98,29 +175,14 @@ NSArray *wordLengths;
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+ forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger index = indexPath.row;
     [passwordList deleteAtIndex:(NSUInteger) index];
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 
     [passwordList savePasswordsInfos];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.tableView.isEditing) {
-        [self openEditScreen:indexPath.row];
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    } else {
-        PasswordTableCell *const cell = (PasswordTableCell *) [self.tableView cellForRowAtIndexPath:indexPath];
-        if (!cell.animating) {
-            NSString *const string = [passwordList password:(NSUInteger) indexPath.row];
-            if (string != nil) {
-                [UIPasteboard generalPasteboard].string = string;
-                [cell animateCopyNotification];
-            }
-            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-        }
-    }
 }
 
 - (void)editButtonTapped {
@@ -152,7 +214,9 @@ NSArray *wordLengths;
 
     for (NSString *wordLength in wordLengths) {
 
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"enable1_%@", wordLength] ofType:@"txt"];
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"enable1_%@",
+                                                                                               wordLength]
+                                                             ofType:@"txt"];
         NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
         NSString *delimiter = @"\n";
         NSArray *fileAsArray = [fileContent componentsSeparatedByString:delimiter];

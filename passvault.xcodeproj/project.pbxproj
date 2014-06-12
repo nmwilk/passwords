@@ -13,6 +13,7 @@
 		287D096118C9FC3100C1CB23 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891AC79E8367BD51D78950 /* UIKit.framework */; };
 		33891055EFBEA217BCDEECE3 /* enable1_7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891698ADC01CB9DF28D6E0 /* enable1_7.txt */; };
 		3389107318C9123F2612737F /* JNKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891FC248A97FDE6E6A973C /* JNKeychain.m */; };
+		338910AAB6713CF28EDD4D0C /* QuickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 338915FDCD4481983C746D48 /* QuickView.m */; };
 		338910EF969B64DB3B226032 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 338917C5A7C0F68DD35809EC /* Images.xcassets */; };
 		338911144CA4CECD56453916 /* TouchZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 338915D6D4E071433B30C2BB /* TouchZone.m */; };
 		3389121DC807688B364DBAA9 /* PasswordGeneratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389131E3C6B8AF8A93244A8 /* PasswordGeneratorModel.m */; };
@@ -37,6 +38,7 @@
 		33891874DA2D65132717E162 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891AA8C64BD3B1E036B887 /* main.m */; };
 		33891A5911C671CB07084846 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891DA0DE75914D7C97CD08 /* CoreGraphics.framework */; };
 		33891A6B1577A71A14591394 /* enable1_8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891A87BF4B11D79BC257C1 /* enable1_8.txt */; };
+		33891BBCE9C7D27B391C86E6 /* LongTapGestureRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 338910BF17318294E167F08D /* LongTapGestureRecogniser.m */; };
 		33891C3A1D15521A1EA73BED /* TitleBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891B3BE9799CBED0A07354 /* TitleBanner.m */; };
 		33891C85DDAA518C548108A0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 33891CF2FCD9E1550808D8D6 /* LICENSE */; };
 		33891CF310933193EEF3F8CC /* PasswordGeneratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389131E3C6B8AF8A93244A8 /* PasswordGeneratorModel.m */; };
@@ -72,6 +74,7 @@
 		2815708D18DB445A0065FEED /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = passvault/Media.xcassets; sourceTree = "<group>"; };
 		287D095E18C9FC3100C1CB23 /* passvault Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "passvault Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3389109F0348BE1E33DD115B /* enable1_3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_3.txt; sourceTree = "<group>"; };
+		338910BF17318294E167F08D /* LongTapGestureRecogniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongTapGestureRecogniser.m; sourceTree = "<group>"; };
 		3389111AFC0AC3F444B3AAAD /* enable1_4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_4.txt; sourceTree = "<group>"; };
 		3389111D73338EDC24040DB9 /* PasswordField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordField.m; sourceTree = "<group>"; };
 		33891157549F9C7E6084302F /* PasswordInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordInfoItem.m; sourceTree = "<group>"; };
@@ -84,12 +87,14 @@
 		3389152058AFF819ED6A98AF /* PasswordField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordField.h; sourceTree = "<group>"; };
 		338915D6D4E071433B30C2BB /* TouchZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchZone.m; sourceTree = "<group>"; };
 		338915ED5F0E626EBE036C7D /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController.m; sourceTree = "<group>"; };
+		338915FDCD4481983C746D48 /* QuickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickView.m; sourceTree = "<group>"; };
 		3389163A8CEE16847087E670 /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
 		33891693DBA4236D4D8F058F /* PasswordGeneratorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordGeneratorModel.h; sourceTree = "<group>"; };
 		33891698ADC01CB9DF28D6E0 /* enable1_7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_7.txt; sourceTree = "<group>"; };
 		338916A34CE1172FEE7CB962 /* Arc4Randomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arc4Randomizer.h; sourceTree = "<group>"; };
 		3389170E90E310D55A626A5B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = file.md; path = README.md; sourceTree = "<group>"; };
 		3389173862522ECCA25EBB80 /* passvault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = passvault.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3389174E4A855003F7883324 /* QuickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickView.h; sourceTree = "<group>"; };
 		3389176B9859808D17C4242E /* enable1_9.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_9.txt; sourceTree = "<group>"; };
 		3389179AC733A83911C1FB80 /* passvault-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "passvault-Prefix.pch"; sourceTree = "<group>"; };
 		338917C5A7C0F68DD35809EC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -125,6 +130,7 @@
 		33891ECDAD880F84F6171F63 /* PasswordListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordListCell.xib; sourceTree = "<group>"; };
 		33891F4C3BC8BBE763B8D593 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		33891FC248A97FDE6E6A973C /* JNKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNKeychain.m; sourceTree = "<group>"; };
+		33891FECD61A7764F3B25845 /* LongTapGestureRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongTapGestureRecogniser.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +201,7 @@
 				3389196F587BDC9614310F78 /* Views */,
 				3389162F38EFE4ABB9197FAD /* Resources */,
 				3389161AA7B0E7E71CB22B05 /* JNKeychain */,
+				33891D618701164E8B0F0EFE /* Gestures */,
 			);
 			path = passvault;
 			sourceTree = "<group>";
@@ -290,6 +297,8 @@
 				33891B3BE9799CBED0A07354 /* TitleBanner.m */,
 				338918B85AF9BAC1534FB040 /* TouchZone.h */,
 				338915D6D4E071433B30C2BB /* TouchZone.m */,
+				338915FDCD4481983C746D48 /* QuickView.m */,
+				3389174E4A855003F7883324 /* QuickView.h */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -315,6 +324,15 @@
 				33891257F05613594077C9D7 /* passvaultTests */,
 				3389170E90E310D55A626A5B /* README.md */,
 			);
+			sourceTree = "<group>";
+		};
+		33891D618701164E8B0F0EFE /* Gestures */ = {
+			isa = PBXGroup;
+			children = (
+				33891FECD61A7764F3B25845 /* LongTapGestureRecogniser.h */,
+				338910BF17318294E167F08D /* LongTapGestureRecogniser.m */,
+			);
+			path = Gestures;
 			sourceTree = "<group>";
 		};
 		33891EA80FA6BEE1FF94D202 /* Products */ = {
@@ -481,6 +499,8 @@
 				33891C3A1D15521A1EA73BED /* TitleBanner.m in Sources */,
 				338911144CA4CECD56453916 /* TouchZone.m in Sources */,
 				3389107318C9123F2612737F /* JNKeychain.m in Sources */,
+				33891BBCE9C7D27B391C86E6 /* LongTapGestureRecogniser.m in Sources */,
+				338910AAB6713CF28EDD4D0C /* QuickView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

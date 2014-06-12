@@ -114,6 +114,8 @@ replacementString:(NSString *)string {
             if (textField.text.length - range.length == 0) {
                 [self showRandomizer];
             }
+        } else if (range.length == 1 && textField.text.length > 0) {
+            [self hideRandomizer];
         }
 
         else {
@@ -154,6 +156,21 @@ replacementString:(NSString *)string {
         self.randomizerSection.alpha = 1.0;
         self.randomizerSection.transform = CGAffineTransformMakeScale(1.0, 1.0);
     } completion:nil];
+    [self lengthChanged];
+}
+
+- (void)hideRandomizer {
+    self.randomizerSection.alpha = 1.0;
+    [UIView animateWithDuration:0.5
+                          delay:0.0
+         usingSpringWithDamping:0.5
+          initialSpringVelocity:0
+                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone
+                     animations:^{
+        self.randomizerSection.alpha = 0.0f;
+    } completion:(void (^)(BOOL)) ^{
+            self.randomizerSection.hidden = YES;
+        }];
     [self lengthChanged];
 }
 

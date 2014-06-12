@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LongTapGestureRecogniser.h"
 
 @class TitleBanner;
+@class QuickView;
 
-@interface TableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface TableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, LongTapGestureRecogniserListener>
 
 extern NSMutableDictionary *gDictionary;
 
 @property(nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property(nonatomic, strong) IBOutlet TitleBanner *titleBanner;
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
+@property(nonatomic, strong) IBOutlet QuickView* quickView;
 
 @end
