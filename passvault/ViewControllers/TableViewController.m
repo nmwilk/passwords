@@ -14,6 +14,7 @@
 #import "QuickView.h"
 #import "UIViewController+MFSideMenuAdditions.h"
 #import "MFSideMenuContainerViewController.h"
+#import "Preferences.h"
 
 #define kTitleEdit @"Edit"
 #define kTitleDone @"Done"
@@ -102,8 +103,32 @@ NSArray *wordLengths;
 
 - (void)quickViewPassword:(NSString *const)string atPosition:(CGPoint)point {
     if (self.quickView.hidden) {
-        self.quickView.password.text = string;
+        self.quickView.password.text = [self getDisplayedPassword:string];
         [self showQuickView:point];
+    }
+}
+
+- (NSString *)getDisplayedPassword:(NSString *const)string {
+    if ([Preferences sharedPrefs].obscurePasswords) {
+
+        NSMutableString *copy = [string mutableCopy];
+
+        NSRange rangeToReplace;
+        if (string.length < 5) {
+            rangeToReplace = NSMakeRange(0, string.length);
+        } else if (string.length < 7) {
+            rangeToReplace = NSMakeRange(1, string.length - 2);
+        } else {
+            rangeToReplace = NSMakeRange(2, string.length - 4);
+        }
+
+        [copy replaceCharactersInRange:rangeToReplace withString:[@"" stringByPaddingToLength:rangeToReplace.length
+                                                                                   withString:@"●"
+                                                                              startingAtIndex:0]];
+
+        return copy;
+    } else {
+        return string;
     }
 }
 

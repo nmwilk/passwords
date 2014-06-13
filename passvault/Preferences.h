@@ -6,7 +6,10 @@
 #import <Foundation/Foundation.h>
 
 
-@interface MenuViewController : UIViewController
+@interface Preferences : NSObject
++ (Preferences *)sharedPrefs;
 
-@property (nonatomic,strong) IBOutlet UISwitch *obscurePasswords;
+- (BOOL)obscurePasswords;
+
+- (void)setObscurePasswords:(BOOL)obscurePasswords;
 @end
