@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2815708E18DB445A0065FEED /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2815708D18DB445A0065FEED /* Media.xcassets */; };
 		287D095F18C9FC3100C1CB23 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338913416EC974A80487B88B /* XCTest.framework */; };
 		287D096018C9FC3100C1CB23 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891B8A26EB611ACFD3C164 /* Foundation.framework */; };
 		287D096118C9FC3100C1CB23 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891AC79E8367BD51D78950 /* UIKit.framework */; };
@@ -82,7 +81,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2815708D18DB445A0065FEED /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = passvault/Media.xcassets; sourceTree = "<group>"; };
 		287D095E18C9FC3100C1CB23 /* passvault Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "passvault Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3389104617AB580D0BA02400 /* MFSideMenu.podspec */ = {isa = PBXFileReference; lastKnownFileType = file.podspec; path = MFSideMenu.podspec; sourceTree = "<group>"; };
 		3389109F0348BE1E33DD115B /* enable1_3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_3.txt; sourceTree = "<group>"; };
@@ -380,7 +378,6 @@
 		33891BEE4EB53F27E65F1D98 = {
 			isa = PBXGroup;
 			children = (
-				2815708D18DB445A0065FEED /* Media.xcassets */,
 				33891EA80FA6BEE1FF94D202 /* Products */,
 				33891AAEA41FC3A1A3482229 /* Frameworks */,
 				33891379764F67DECC4F1F1E /* passvault */,
@@ -538,7 +535,6 @@
 				33891055EFBEA217BCDEECE3 /* enable1_7.txt in Resources */,
 				33891A6B1577A71A14591394 /* enable1_8.txt in Resources */,
 				33891D9E60E51C0E34F0D5E0 /* enable1_9.txt in Resources */,
-				2815708E18DB445A0065FEED /* Media.xcassets in Resources */,
 				33891E78ED2D378840C78E7B /* PasswordListCell.xib in Resources */,
 				338917E9787F747C8F6D5685 /* Main.storyboard in Resources */,
 				338910EF969B64DB3B226032 /* Images.xcassets in Resources */,
