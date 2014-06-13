@@ -3,8 +3,6 @@
 // Copyright (c) 2014 MeasuredSoftware. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @class PasswordList;
 @class TouchZone;
 @class PasswordField;
@@ -32,7 +30,7 @@ typedef enum PageType PageType;
 
 - (void)configureForEditPasswordWithPasswordList:(PasswordList *)list row:(NSInteger)row;
 
-- (IBAction)lengthChanged;
+- (IBAction)sliderLengthChanged;
 
 - (IBAction)cancelled;
 

@@ -9,5 +9,6 @@
 @interface TitleBanner : UIView
 
 @property (nonatomic, strong) IBOutlet UIButton *editButton;
+@property (nonatomic, strong) IBOutlet UIButton *menuButton;
 
 @end

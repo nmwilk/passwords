@@ -11,7 +11,6 @@
 #import "PasswordTableCell.h"
 #import "PasswordList.h"
 #import "PasswordViewController.h"
-#import "LongTapGestureRecogniser.h"
 #import "QuickView.h"
 
 #define kTitleEdit @"Edit"
@@ -20,7 +19,6 @@
 #define kCellIdPassword @"PasswordCellView"
 
 @interface TableViewController ()
-
 @property(nonatomic, strong) UIBarButtonItem *addButton;
 @end
 
@@ -55,6 +53,9 @@ NSArray *wordLengths;
     [self createToolbar];
 
     [self.titleBanner.editButton addTarget:self action:@selector(editButtonTapped)
+                          forControlEvents:UIControlEventTouchUpInside];
+
+    [self.titleBanner.menuButton addTarget:self action:@selector(menuButtonTapped)
                           forControlEvents:UIControlEventTouchUpInside];
 
     [self.tableView addGestureRecognizer:[[LongTapGestureRecogniser alloc] initWithTarget:self]];
@@ -194,6 +195,10 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     self.addButton.enabled = isEditing;
 
     [self.tableView setEditing:!isEditing animated:YES];
+}
+
+-(void)menuButtonTapped {
+    // TODO
 }
 
 - (void)openEditScreen:(NSInteger)row {

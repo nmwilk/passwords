@@ -13,7 +13,6 @@
 @property(nonatomic, copy) NSString *labelText;
 @property(nonatomic, copy) NSString *passwordText;
 @property(nonatomic) PageType pageType;
-@property(nonatomic, strong) UIDynamicAnimator *animator;
 @end
 
 @implementation PasswordViewController {
@@ -55,16 +54,22 @@ NSUInteger const kDefaultPwdLength = 16;
     }
 }
 
-
 - (void)touchZonePanned:(UIPanGestureRecognizer *)panned {
-    if ([self.passwordField isFirstResponder]) {
-        [self.passwordField resignFirstResponder];
-    }
+    [self removeFocusFromTextFields];
+
     CGPoint pos = [panned locationInView:self.touchZone];
 
     CGFloat combined = pos.x * pos.y;
 
     [self.passwordField addRandom:combined];
+}
+
+- (void)removeFocusFromTextFields {
+    if ([self.passwordField isFirstResponder]) {
+        [self.passwordField resignFirstResponder];
+    } else if ([self.labelField isFirstResponder]) {
+        [self.labelField resignFirstResponder];
+    }
 }
 
 - (void)configureForNewPasswordWithPasswordList:(PasswordList *)list {
@@ -84,7 +89,12 @@ NSUInteger const kDefaultPwdLength = 16;
     self.passwordText = [list password:(NSUInteger) row];
 }
 
-- (IBAction)lengthChanged {
+- (IBAction)sliderLengthChanged {
+    [self removeFocusFromTextFields];
+    [self lengthChanged];
+}
+
+-(void)lengthChanged {
     NSUInteger length = [self getLengthFromSlider];
     [self setPasswordLengthField:length];
 
