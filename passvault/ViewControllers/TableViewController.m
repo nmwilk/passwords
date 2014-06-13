@@ -12,6 +12,8 @@
 #import "PasswordList.h"
 #import "PasswordViewController.h"
 #import "QuickView.h"
+#import "UIViewController+MFSideMenuAdditions.h"
+#import "MFSideMenuContainerViewController.h"
 
 #define kTitleEdit @"Edit"
 #define kTitleDone @"Done"
@@ -198,7 +200,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 }
 
 -(void)menuButtonTapped {
-    // TODO
+    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
 - (void)openEditScreen:(NSInteger)row {

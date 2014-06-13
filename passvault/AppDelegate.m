@@ -7,12 +7,23 @@
 //
 
 #import "AppDelegate.h"
+#import "MFSideMenuContainerViewController+LightStatusBar.h"
+#import "TableViewController.h"
+#import "MenuViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    MFSideMenuContainerViewController *container = (MFSideMenuContainerViewController *)self.window.rootViewController;
+
+    TableViewController* tableViewController =[storyboard instantiateViewControllerWithIdentifier:@"tableViewController"];
+    MenuViewController* menuViewController =[storyboard instantiateViewControllerWithIdentifier:@"menuViewController"];
+
+    [container setLeftMenuViewController:menuViewController];
+    [container setCenterViewController:tableViewController];
+
     return YES;
 }
 							
