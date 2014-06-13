@@ -125,7 +125,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="center" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eYe-YV-nsO" userLabel="passwordField value" customClass="PasswordField">
-                                <rect key="frame" x="11" y="120" width="298" height="36"/>
+                                <rect key="frame" x="11" y="109" width="298" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="18"/>
@@ -162,19 +162,19 @@
                                     <action selector="cancelled" destination="m86-co-JMf" eventType="touchUpInside" id="QlR-gS-NCe"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m4k-H9-m6e" userLabel="randomizer">
-                                <rect key="frame" x="-9" y="170" width="338" height="405"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m4k-H9-m6e" userLabel="randomizer">
+                                <rect key="frame" x="-9" y="167" width="338" height="405"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Auto-generate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEz-yc-713">
-                                        <rect key="frame" x="20" y="20" width="298" height="37"/>
+                                        <rect key="frame" x="20" y="0.0" width="298" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="1" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c5S-GB-gnq" customClass="TouchZone">
-                                        <rect key="frame" x="20" y="132" width="298" height="253"/>
+                                        <rect key="frame" x="20" y="112" width="298" height="273"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Touchpad Randomizer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="182" translatesAutoresizingMaskIntoConstraints="NO" id="rjh-Yr-aHq">
@@ -191,15 +191,15 @@
                                             <constraint firstAttribute="centerX" secondItem="rjh-Yr-aHq" secondAttribute="centerX" id="bro-oJ-ClD"/>
                                         </constraints>
                                     </view>
-                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="bWJ-fF-8zk" userLabel="password length slider">
-                                        <rect key="frame" x="32" y="86" width="274" height="31"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="bWJ-fF-8zk" userLabel="password length slider">
+                                        <rect key="frame" x="32" y="66" width="274" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="sliderLengthChanged" destination="m86-co-JMf" eventType="valueChanged" id="qz7-x6-ghR"/>
                                         </connections>
                                     </slider>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="riD-ri-aaa" userLabel="password length label">
-                                        <rect key="frame" x="75" y="57" width="188" height="21"/>
+                                        <rect key="frame" x="75" y="37" width="188" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -207,9 +207,17 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="c5S-GB-gnq" firstAttribute="top" secondItem="bWJ-fF-8zk" secondAttribute="bottom" constant="16" id="FN0-7N-nSS"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cTF-VQ-IiC" firstAttribute="top" secondItem="c5S-GB-gnq" secondAttribute="bottom" constant="13" id="VCi-55-oSr"/>
+                            <constraint firstItem="m4k-H9-m6e" firstAttribute="top" secondItem="2Gw-Kq-8fF" secondAttribute="bottom" constant="147" id="hKd-w6-Rn9"/>
+                            <constraint firstItem="cTF-VQ-IiC" firstAttribute="bottom" secondItem="m4k-H9-m6e" secondAttribute="bottom" id="xT1-oi-zkC"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="labelField" destination="8PQ-md-Xn9" id="Ul8-oX-khP"/>
