@@ -27,6 +27,7 @@
 
 
 @implementation AppDelegate {
+    TableViewController *tableViewController;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -37,7 +38,7 @@
     _container = (MFSideMenuContainerViewController *) self.window.rootViewController;
     _container.panMode = MFSideMenuPanModeNone;
 
-    TableViewController *tableViewController = [storyboard instantiateViewControllerWithIdentifier:@"tableViewController"];
+    tableViewController = [storyboard instantiateViewControllerWithIdentifier:@"tableViewController"];
     MenuViewController *menuViewController = [storyboard instantiateViewControllerWithIdentifier:@"menuViewController"];
 
     [_container setLeftMenuViewController:menuViewController];
@@ -57,9 +58,11 @@
     switch (event) {
         case MFSideMenuStateEventMenuDidOpen:
             self.container.panMode = MFSideMenuPanModeDefault;
+            tableViewController.tableView.userInteractionEnabled = NO;
             break;
         case MFSideMenuStateEventMenuDidClose:
             self.container.panMode = MFSideMenuPanModeNone;
+            tableViewController.tableView.userInteractionEnabled = YES;
             break;
         default:
             break;
