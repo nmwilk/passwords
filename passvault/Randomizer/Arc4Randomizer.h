@@ -17,4 +17,5 @@
 
 
 @interface Arc4Randomizer : NSObject<Randomizer>
++ (Arc4Randomizer *)sharedInstance;
 @end

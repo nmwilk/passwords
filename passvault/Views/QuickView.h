@@ -19,4 +19,7 @@
 
 @property(nonatomic, strong) IBOutlet UILabel *password;
 
+- (void)showWithText:(NSString *)password atPoint:(CGPoint)point;
+
+- (void)hide;
 @end

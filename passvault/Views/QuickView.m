@@ -14,6 +14,7 @@
 
 
 #import "QuickView.h"
+#import "PasswordTools.h"
 
 
 @implementation QuickView {
@@ -30,4 +31,37 @@
     return self;
 }
 
+- (void)showWithText:(NSString *)password atPoint:(CGPoint)point {
+    self.password.text = [PasswordTools getDisplayedPassword:password];
+
+    if (self.hidden) {
+        self.alpha = 0.0f;
+        self.hidden = NO;
+        self.center = CGPointMake(point.x, point.y);
+        [self layer].transform = CATransform3DMakeScale(0.6f, 0.6f, 1.0f);
+        [UIView animateWithDuration:0.5f
+                              delay:0.0f
+             usingSpringWithDamping:0.65f
+              initialSpringVelocity:0.0f
+                            options:UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut
+                         animations:^ {
+            self.alpha = 1.0f;
+            [self layer].transform = CATransform3DMakeScale(1.0f, 1.0f, 1.0f);
+        }
+                         completion:^(BOOL finished) {
+        }];
+    }
+}
+
+-(void)hide {
+    [UIView animateWithDuration:0.5f delay:0.0f
+         usingSpringWithDamping:0.5f initialSpringVelocity:0.0f
+                        options:UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+        self.alpha = 0.0f;
+    }
+                     completion:^(BOOL finished) {
+        self.hidden = YES;
+    }];
+}
 @end

@@ -17,6 +17,7 @@
 #import "MFSideMenuContainerViewController+LightStatusBar.h"
 #import "TableViewController.h"
 #import "MenuViewController.h"
+#import "Arc4Randomizer.h"
 
 @interface AppDelegate ()
 
@@ -29,6 +30,9 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // can take some cpu time, so do it here rather than when we actually use it.
+    [Arc4Randomizer sharedInstance];
+
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     _container = (MFSideMenuContainerViewController *) self.window.rootViewController;
     _container.panMode = MFSideMenuPanModeNone;

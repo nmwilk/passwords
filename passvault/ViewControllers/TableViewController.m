@@ -15,22 +15,19 @@
 
 #import "TableViewController.h"
 #import "TitleBanner.h"
-#import "PasswordTableCell.h"
 #import "PasswordList.h"
 #import "PasswordViewController.h"
 #import "QuickView.h"
 #import "UIViewController+MFSideMenuAdditions.h"
 #import "MFSideMenuContainerViewController.h"
-#import "Preferences.h"
+#import "AddButton.h"
+#import "PasswordTableCell.h"
 
 #define kCellIdPassword @"PasswordCellView"
 
 @interface TableViewController ()
 @property(nonatomic, strong) UIBarButtonItem *addButton;
 @end
-
-NSMutableDictionary *gDictionary;
-NSArray *wordLengths;
 
 @implementation TableViewController {
     PasswordList *passwordList;
@@ -39,7 +36,6 @@ NSArray *wordLengths;
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self loadDictionary];
         [self loadPasswords];
     }
     return self;
@@ -48,7 +44,6 @@ NSArray *wordLengths;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self loadDictionary];
         [self loadPasswords];
     }
     return self;
@@ -68,109 +63,30 @@ NSArray *wordLengths;
     [self.tableView addGestureRecognizer:[[LongTapGestureRecogniser alloc] initWithTarget:self]];
 }
 
-- (void)longTapAtPoint:(CGPoint)point withIndexPath:(NSIndexPath *)indexPath {
-    NSString *const string = [passwordList password:(NSUInteger) indexPath.row];
-    if (string != nil && [string length] > 0) {
-        [self quickViewPassword:string atPosition:point];
-    }
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-- (void)longTapEnded {
-    [self hideQuickView];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
-}
-
-- (void)copyPassword:(PasswordTableCell *const)cell string:(NSString *const)string {
-    [UIPasteboard generalPasteboard].string = string;
-    [cell animateCopyNotification];
-}
-
-- (void)quickViewPassword:(NSString *const)string atPosition:(CGPoint)point {
-    if (self.quickView.hidden) {
-        self.quickView.password.text = [self getDisplayedPassword:string];
-        [self showQuickView:point];
-    }
-}
-
-- (NSString *)getDisplayedPassword:(NSString *const)string {
-    if ([Preferences sharedPrefs].obscurePasswords) {
-
-        NSMutableString *copy = [string mutableCopy];
-
-        NSRange rangeToReplace;
-        if (string.length < 5) {
-            rangeToReplace = NSMakeRange(0, string.length);
-        } else if (string.length < 7) {
-            rangeToReplace = NSMakeRange(1, string.length - 2);
-        } else {
-            rangeToReplace = NSMakeRange(2, string.length - 4);
-        }
-
-        [copy replaceCharactersInRange:rangeToReplace withString:[@"" stringByPaddingToLength:rangeToReplace.length
-                                                                                   withString:@"●"
-                                                                              startingAtIndex:0]];
-
-        return copy;
-    } else {
-        return string;
-    }
-}
-
-- (void)showQuickView:(CGPoint)point {
-    self.quickView.alpha = 0.0f;
-    self.quickView.hidden = NO;
-    self.quickView.center = CGPointMake(point.x, point.y);
-    [self.quickView layer].transform = CATransform3DMakeScale(0.6f, 0.6f, 1.0f);
-    [UIView animateWithDuration:0.5f
-                          delay:0.0f
-         usingSpringWithDamping:0.5f
-          initialSpringVelocity:0.0f
-                        options:UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut
-                     animations:^ {
-        self.quickView.alpha = 1.0f;
-        [self.quickView layer].transform = CATransform3DMakeScale(1.0f, 1.0f, 1.0f);
-    }
-                     completion:^(BOOL finished) {
-    }];
-}
-
-- (void)hideQuickView {
-    [UIView animateWithDuration:0.5f delay:0.0f
-         usingSpringWithDamping:0.5f initialSpringVelocity:0.0f
-                        options:UIViewAnimationOptionTransitionNone | UIViewAnimationOptionCurveEaseInOut
-                     animations:^ {
-        self.quickView.alpha = 0.0f;
-    }
-                     completion:^(BOOL finished) {
-        self.quickView.hidden = YES;
-    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [passwordList savePasswordsInfos];
 }
 
-- (void)loadPasswords {
-    passwordList = [[PasswordList alloc] init];
+- (void)longTapAtPoint:(CGPoint)point withIndexPath:(NSIndexPath *)indexPath {
+    NSString *const string = [passwordList password:(NSUInteger) indexPath.row];
+    if (string != nil && [string length] > 0) {
+        [self.quickView showWithText:string atPoint:point];
+    }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)createToolbar {
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                   target:nil action:nil];
+- (void)longTapEnded {
+    [self.quickView hide];
+}
 
-
-    UIImage *const image = [[UIImage imageNamed:@"add_icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIButton *customButtonView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
-    [customButtonView setImage:image forState:UIControlStateNormal];
-    customButtonView.adjustsImageWhenDisabled = YES;
-    [customButtonView addTarget:self action:@selector(addButtonTapped)forControlEvents:UIControlEventTouchUpInside];
-    self.addButton = [[UIBarButtonItem alloc] initWithCustomView:customButtonView];
-
-    [self.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, self.addButton, flexibleSpace, nil]];
+- (void)addButtonTapped {
+    PasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"PasswordViewController"];
+    [vc configureForNewPasswordWithPasswordList:passwordList];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)editButtonTapped {
@@ -181,45 +97,36 @@ NSArray *wordLengths;
     [self.tableView setEditing:!isEditing animated:YES];
 }
 
+- (void)menuButtonTapped {
+    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
+}
+
+- (void)loadPasswords {
+    passwordList = [[PasswordList alloc] init];
+}
+
+- (void)createToolbar {
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                   target:nil action:nil];
+
+    self.addButton = [[AddButton alloc] initWithTarget:self action:@selector(addButtonTapped)];
+
+    [self.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, self.addButton, flexibleSpace, nil]];
+}
+
 - (void)updateButtonsForEditState:(BOOL const)isEditing {
     self.titleBanner.menuButton.enabled = !isEditing;
     self.addButton.enabled = !isEditing;
 }
 
-- (void)menuButtonTapped {
-    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)openEditScreen:(NSInteger)row {
     PasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"PasswordViewController"];
     [vc configureForEditPasswordWithPasswordList:passwordList row:row];
     [self presentViewController:vc animated:YES completion:nil];
-}
-
-- (void)addButtonTapped {
-    PasswordViewController *const vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"PasswordViewController"];
-    [vc configureForNewPasswordWithPasswordList:passwordList];
-    [self presentViewController:vc animated:YES completion:nil];
-}
-
-- (void)loadDictionary {
-    wordLengths = [NSArray arrayWithObjects:@"3", @"4", @"5", @"6", @"7", @"8", @"9", nil];
-    gDictionary = [[NSMutableDictionary alloc] init];
-
-    for (NSString *wordLength in wordLengths) {
-
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"enable1_%@",
-                                                                                               wordLength]
-                                                             ofType:@"txt"];
-        NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-        NSString *delimiter = @"\n";
-        NSArray *fileAsArray = [fileContent componentsSeparatedByString:delimiter];
-        [gDictionary setObject:fileAsArray forKey:wordLength];
-    }
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
 }
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -253,7 +160,8 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
         if (!cell.animating) {
             NSString *const string = [passwordList password:(NSUInteger) indexPath.row];
             if (string != nil && [string length] > 0) {
-                [self copyPassword:cell string:string];
+                [UIPasteboard generalPasteboard].string = string;
+                [cell animateCopyNotification];
             }
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         }

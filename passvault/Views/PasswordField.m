@@ -25,7 +25,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        passwordModel = [[PasswordGeneratorModel alloc] initWithRandomizer:[[Arc4Randomizer alloc] init]];
+        passwordModel = [[PasswordGeneratorModel alloc] initWithRandomizer:[Arc4Randomizer sharedInstance]];
     }
 
     return self;

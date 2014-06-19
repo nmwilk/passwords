@@ -14,22 +14,53 @@
 
 
 #import "Arc4Randomizer.h"
-#import "TableViewController.h"
-
 
 @implementation Arc4Randomizer {
+    NSArray *wordLengths;
+    NSMutableDictionary *dictionary;
+}
 
+
+- (id)init {
+    self = [super init];
+
+    wordLengths = [NSArray arrayWithObjects:@"3", @"4", @"5", @"6", @"7", @"8", @"9", nil];
+    dictionary = [[NSMutableDictionary alloc] init];
+
+    for (NSString *wordLength in wordLengths) {
+
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"enable1_%@",
+                                                                                               wordLength]
+                                                             ofType:@"txt"];
+        NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding
+                                                             error:nil];
+        NSString *delimiter = @"\n";
+        NSArray *fileAsArray = [fileContent componentsSeparatedByString:delimiter];
+        [dictionary setObject:fileAsArray forKey:wordLength];
+    }
+
+    return self;
 }
 
 - (NSUInteger)getNumber:(CGFloat)random {
     NSString *randomString = [NSString stringWithFormat:@"%.0f", random];
-    arc4random_addrandom((unsigned char *) [randomString UTF8String], (int)[randomString length]);
+    arc4random_addrandom((unsigned char *) [randomString UTF8String], (int) [randomString length]);
 
     return arc4random() % 10;
 }
 
++ (Arc4Randomizer *)sharedInstance {
+    static Arc4Randomizer *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+
+    return sharedInstance;
+}
+
 - (NSString *)getWord:(NSUInteger)length {
-    NSArray *currentDict = [gDictionary objectForKey:[NSString stringWithFormat:@"%d", (int)length]];
+    NSArray *currentDict = [dictionary objectForKey:[NSString stringWithFormat:@"%d", (int) length]];
     NSUInteger index = arc4random() % [currentDict count];
     return [currentDict objectAtIndex:index];
 }
@@ -39,7 +70,7 @@
 }
 
 - (CGFloat)getRandom {
-    return ((CGFloat)arc4random()) / 0x100000000;
+    return ((CGFloat) arc4random()) / 0x100000000;
 }
 
 
