@@ -37,7 +37,7 @@
     if (self.hidden) {
         self.alpha = 0.0f;
         self.hidden = NO;
-        self.center = CGPointMake(point.x, point.y);
+        self.center = CGPointMake(self.center.x, point.y);
         [self layer].transform = CATransform3DMakeScale(0.6f, 0.6f, 1.0f);
         [UIView animateWithDuration:0.5f
                               delay:0.0f
