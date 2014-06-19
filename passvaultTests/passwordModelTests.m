@@ -17,11 +17,11 @@
 #import "PasswordGeneratorModel.h"
 #import "TestRandomizer.h"
 
-@interface passvaultTests : XCTestCase
+@interface passwordModelTests : XCTestCase
 
 @end
 
-@implementation passvaultTests
+@implementation passwordModelTests
 
 - (void)setUp {
     [super setUp];

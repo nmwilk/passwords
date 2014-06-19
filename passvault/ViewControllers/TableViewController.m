@@ -22,6 +22,7 @@
 #import "MFSideMenuContainerViewController.h"
 #import "AddButton.h"
 #import "PasswordTableCell.h"
+#import "JNKeychainPasswordStore.h"
 
 #define kCellIdPassword @"PasswordCellView"
 
@@ -102,7 +103,7 @@
 }
 
 - (void)loadPasswords {
-    passwordList = [[PasswordList alloc] init];
+    passwordList = [[PasswordList alloc] initWithPasswordStore:[[JNKeychainPasswordStore alloc] init]];
 }
 
 - (void)createToolbar {

@@ -10,6 +10,7 @@
 		287D095F18C9FC3100C1CB23 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338913416EC974A80487B88B /* XCTest.framework */; };
 		287D096018C9FC3100C1CB23 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891B8A26EB611ACFD3C164 /* Foundation.framework */; };
 		287D096118C9FC3100C1CB23 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891AC79E8367BD51D78950 /* UIKit.framework */; };
+		3389102E95CD8E4983EB576B /* PasswordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 338918827E14C2B3ADD51437 /* PasswordList.m */; };
 		33891055EFBEA217BCDEECE3 /* enable1_7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891698ADC01CB9DF28D6E0 /* enable1_7.txt */; };
 		3389107318C9123F2612737F /* JNKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891FC248A97FDE6E6A973C /* JNKeychain.m */; };
 		338910AAB6713CF28EDD4D0C /* QuickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 338915FDCD4481983C746D48 /* QuickView.m */; };
@@ -27,13 +28,14 @@
 		338912F35E5BBD1C34849851 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891B8A26EB611ACFD3C164 /* Foundation.framework */; };
 		338912F40CA5560970A0EDC1 /* enable1_5.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891D63C1474509B57663C2 /* enable1_5.txt */; };
 		33891321F86217C40DEC0B6C /* contents.xcworkspacedata in Resources */ = {isa = PBXBuildFile; fileRef = 338912A0850468E8368EC153 /* contents.xcworkspacedata */; };
-		3389135652521D646B3DFC61 /* passvaultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389137651FFB8C6B02F352F /* passvaultTests.m */; };
+		3389135652521D646B3DFC61 /* passwordModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389137651FFB8C6B02F352F /* passwordModelTests.m */; };
 		3389136BDDFA09E5CBECB417 /* enable1_4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3389111AFC0AC3F444B3AAAD /* enable1_4.txt */; };
 		3389137B7BAD183DDAFFF7D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891AC79E8367BD51D78950 /* UIKit.framework */; };
 		338913A306AEE4A0795132A6 /* MFSideMenu.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 3389104617AB580D0BA02400 /* MFSideMenu.podspec */; };
 		338913ACDA814E3615C69E0A /* UIColor+AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891CE08F8AB9D613A5FE3C /* UIColor+AppColors.m */; };
 		338913E2D32ECFBDAD2A4831 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338913416EC974A80487B88B /* XCTest.framework */; };
 		33891480D811C57AEA9C8D08 /* PasswordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 338918827E14C2B3ADD51437 /* PasswordList.m */; };
+		3389149B302BF6DB471526B0 /* TestPasswordStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891DDFBD678993B54248E4 /* TestPasswordStore.m */; };
 		338915217CF623FFB8CA0DC6 /* README.mdown in Resources */ = {isa = PBXBuildFile; fileRef = 338918B0142ED67C08EAE1D0 /* README.mdown */; };
 		338915B5B16A97DB8E693F14 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891C71BD9EE7D748BE8478 /* MFSideMenuContainerViewController.m */; };
 		3389164DE1B495820635CF3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891AC79E8367BD51D78950 /* UIKit.framework */; };
@@ -47,14 +49,17 @@
 		33891875063498004F2D1158 /* MFSideMenuContainerViewController+LightStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891C7FA688A6B3A21D2612 /* MFSideMenuContainerViewController+LightStatusBar.m */; };
 		338919127ABEEBBB88FD3A79 /* MFSideMenu.xccheckout in Resources */ = {isa = PBXBuildFile; fileRef = 33891250014E219C449B473A /* MFSideMenu.xccheckout */; };
 		338919248E2D061EF11BEB0D /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 338917E815208D968B713ECF /* LICENSE */; };
+		33891A19C572B434B9ACD59B /* passwordListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389159A756328ADC89682BD /* passwordListTests.m */; };
 		33891A2B8B392FE62979B3D8 /* PasswordTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891F96525B27506979BCFE /* PasswordTools.m */; };
 		33891A5911C671CB07084846 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891DA0DE75914D7C97CD08 /* CoreGraphics.framework */; };
 		33891A6B1577A71A14591394 /* enable1_8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33891A87BF4B11D79BC257C1 /* enable1_8.txt */; };
 		33891A8DCF29DE854D307429 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338916977D9005A2ADC05368 /* MenuViewController.m */; };
+		33891AA7F36CACC9085397F3 /* JNKeychainPasswordStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 338919C4637AB5481B562C1E /* JNKeychainPasswordStore.m */; };
 		33891BBCE9C7D27B391C86E6 /* LongTapGestureRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 338910BF17318294E167F08D /* LongTapGestureRecogniser.m */; };
 		33891C3A1D15521A1EA73BED /* TitleBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891B3BE9799CBED0A07354 /* TitleBanner.m */; };
 		33891C85DDAA518C548108A0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 33891CF2FCD9E1550808D8D6 /* LICENSE */; };
 		33891CF310933193EEF3F8CC /* PasswordGeneratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389131E3C6B8AF8A93244A8 /* PasswordGeneratorModel.m */; };
+		33891D4682C6190FB55FCE2C /* PasswordInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891157549F9C7E6084302F /* PasswordInfoItem.m */; };
 		33891D53488288A7123EE2F2 /* PasswordField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389111D73338EDC24040DB9 /* PasswordField.m */; };
 		33891D9E60E51C0E34F0D5E0 /* enable1_9.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3389176B9859808D17C4242E /* enable1_9.txt */; };
 		33891DB827B154E4595265E9 /* Arc4Randomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891D830A529E7EB2B5FFAD /* Arc4Randomizer.m */; };
@@ -101,13 +106,15 @@
 		3389131E3C6B8AF8A93244A8 /* PasswordGeneratorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordGeneratorModel.m; sourceTree = "<group>"; };
 		338913360B53AEB7A066088B /* PasswordInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordInfoItem.h; sourceTree = "<group>"; };
 		338913416EC974A80487B88B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		3389137651FFB8C6B02F352F /* passvaultTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = passvaultTests.m; sourceTree = "<group>"; };
+		3389137651FFB8C6B02F352F /* passwordModelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = passwordModelTests.m; sourceTree = "<group>"; };
 		3389139A02D294E5E8EEA49F /* MFSideMenuShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuShadow.h; sourceTree = "<group>"; };
 		338913E87C375286C140F4C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3389144A5F27276FEC77EDC2 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		338914B232DFBFE5D705B78D /* AddButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddButton.h; sourceTree = "<group>"; };
+		338914BCF83F297B02C08DCD /* JNKeychainPasswordStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JNKeychainPasswordStore.h; path = passvault/Models/JNKeychainPasswordStore.h; sourceTree = SOURCE_ROOT; };
 		338914DAB4B672D4AD180A2A /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
 		3389152058AFF819ED6A98AF /* PasswordField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordField.h; sourceTree = "<group>"; };
+		3389159A756328ADC89682BD /* passwordListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = passwordListTests.m; sourceTree = "<group>"; };
 		338915D6D4E071433B30C2BB /* TouchZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchZone.m; sourceTree = "<group>"; };
 		338915ED5F0E626EBE036C7D /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController.m; sourceTree = "<group>"; };
 		338915FDCD4481983C746D48 /* QuickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickView.m; sourceTree = "<group>"; };
@@ -134,8 +141,10 @@
 		338918F03073450693BCCCB5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3389191F481D2E1CBD2CF317 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = ViewControllers/Localizable.strings; sourceTree = "<group>"; };
 		33891999117EA570084BAA76 /* passvault-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "passvault-Info.plist"; sourceTree = "<group>"; };
+		338919C4637AB5481B562C1E /* JNKeychainPasswordStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JNKeychainPasswordStore.m; path = passvault/Models/JNKeychainPasswordStore.m; sourceTree = SOURCE_ROOT; };
 		33891A38CAA8D296284152F2 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		33891A87BF4B11D79BC257C1 /* enable1_8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_8.txt; sourceTree = "<group>"; };
+		33891A8E325F3BE6E32CADFB /* TestPasswordStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPasswordStore.h; sourceTree = "<group>"; };
 		33891A90EF496EF0EC1E662A /* TestRandomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRandomizer.m; sourceTree = "<group>"; };
 		33891AA8C64BD3B1E036B887 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		33891AC79E8367BD51D78950 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -158,6 +167,7 @@
 		33891DA0DE75914D7C97CD08 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		33891DBFCCE6205773A9EDF7 /* Randomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Randomizer.h; sourceTree = "<group>"; };
 		33891DDAD2A1B64BAE37CC8C /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		33891DDFBD678993B54248E4 /* TestPasswordStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPasswordStore.m; sourceTree = "<group>"; };
 		33891E10ADE8E636D02070B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33891E44BFB464C087559319 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = file.md; path = README.md; sourceTree = "<group>"; };
 		33891E91A5874975FEBB7E9C /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -165,6 +175,7 @@
 		33891F4C3BC8BBE763B8D593 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		33891F96525B27506979BCFE /* PasswordTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordTools.m; sourceTree = "<group>"; };
 		33891FC248A97FDE6E6A973C /* JNKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNKeychain.m; sourceTree = "<group>"; };
+		33891FE87E0B16ED1AFF24D4 /* PasswordStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordStore.h; sourceTree = "<group>"; };
 		33891FECD61A7764F3B25845 /* LongTapGestureRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongTapGestureRecogniser.h; sourceTree = "<group>"; };
 		33891FF30D7BBF61D3DB5AE0 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -238,9 +249,12 @@
 			isa = PBXGroup;
 			children = (
 				338916BDA1FF56617C280B06 /* Supporting Files */,
-				3389137651FFB8C6B02F352F /* passvaultTests.m */,
+				3389137651FFB8C6B02F352F /* passwordModelTests.m */,
 				33891A90EF496EF0EC1E662A /* TestRandomizer.m */,
 				338918360C3A526D15570257 /* TestRandomizer.h */,
+				33891DDFBD678993B54248E4 /* TestPasswordStore.m */,
+				33891A8E325F3BE6E32CADFB /* TestPasswordStore.h */,
+				3389159A756328ADC89682BD /* passwordListTests.m */,
 			);
 			path = passvaultTests;
 			sourceTree = "<group>";
@@ -320,6 +334,7 @@
 				338913360B53AEB7A066088B /* PasswordInfoItem.h */,
 				3389131E3C6B8AF8A93244A8 /* PasswordGeneratorModel.m */,
 				33891693DBA4236D4D8F058F /* PasswordGeneratorModel.h */,
+				33891FE87E0B16ED1AFF24D4 /* PasswordStore.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -358,6 +373,8 @@
 				3389175746412F459CB29B73 /* MFSideMenuContainerViewController+LightStatusBar.h */,
 				33891DDAD2A1B64BAE37CC8C /* TableViewController.h */,
 				3389144A5F27276FEC77EDC2 /* TableViewController.m */,
+				338919C4637AB5481B562C1E /* JNKeychainPasswordStore.m */,
+				338914BCF83F297B02C08DCD /* JNKeychainPasswordStore.h */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -613,6 +630,7 @@
 				3389118B581D7790831ADE51 /* TableViewController.m in Sources */,
 				3389128F9D5FFAF4CE0E7983 /* AddButton.m in Sources */,
 				33891A2B8B392FE62979B3D8 /* PasswordTools.m in Sources */,
+				33891AA7F36CACC9085397F3 /* JNKeychainPasswordStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,9 +638,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3389135652521D646B3DFC61 /* passvaultTests.m in Sources */,
+				3389135652521D646B3DFC61 /* passwordModelTests.m in Sources */,
 				33891E105661109E111BA63B /* TestRandomizer.m in Sources */,
 				33891CF310933193EEF3F8CC /* PasswordGeneratorModel.m in Sources */,
+				33891A19C572B434B9ACD59B /* passwordListTests.m in Sources */,
+				3389102E95CD8E4983EB576B /* PasswordList.m in Sources */,
+				33891D4682C6190FB55FCE2C /* PasswordInfoItem.m in Sources */,
+				3389149B302BF6DB471526B0 /* TestPasswordStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

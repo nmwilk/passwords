@@ -16,16 +16,22 @@
 
 #import "PasswordList.h"
 #import "PasswordInfoItem.h"
-#import "JNKeychain.h"
+#import "PasswordStore.h"
 
 #define kPrefsPasswordIds @"passwords"
+
+@interface PasswordList ()
+@property(nonatomic, strong) id <PasswordStore> passwordStore;
+@end
 
 @implementation PasswordList {
 }
 
-- (id)init {
+- (id)initWithPasswordStore:(id <PasswordStore>)passwordStore {
     self = [super init];
     if (self) {
+
+        self.passwordStore = passwordStore;
 
         NSUserDefaults *userPrefs = [NSUserDefaults standardUserDefaults];
         NSData *passwordInfoData = [userPrefs objectForKey:kPrefsPasswordIds];
@@ -53,7 +59,8 @@
 }
 
 - (NSString *)password:(NSUInteger)index {
-    return [JNKeychain loadValueForKey:[self getKeyForItem:[self.passwordInfoData objectAtIndex:index]]];
+    NSString *const string = [self.passwordStore loadFromKey:[self getKeyForItem:[self.passwordInfoData objectAtIndex:index]]];
+    return string == nil ? @"" : string;
 }
 
 - (NSString *)getKeyForItem:(PasswordInfoItem *)item {
@@ -71,7 +78,8 @@
 }
 
 - (void)writePassword:(NSString *)text forRow:(NSInteger)row {
-    [JNKeychain saveValue:text forKey:[self getKeyForItem:[self.passwordInfoData objectAtIndex:(NSUInteger) row]]];
+    [self.passwordStore saveValue:text
+                          withKey:[self getKeyForItem:[self.passwordInfoData objectAtIndex:(NSUInteger) row]]];
 }
 
 - (void)addNew:(NSString *)label password:(NSString *)password {
@@ -81,13 +89,14 @@
     [self.passwordInfoData addObject:newItem];
     [self sortList];
 
-    [JNKeychain saveValue:password forKey:[self getKeyForItem:newItem]];
+
+    [self.passwordStore saveValue:password withKey:[self getKeyForItem:newItem]];
 }
 
 - (void)deleteAtIndex:(NSUInteger)index {
     PasswordInfoItem *const item = [self.passwordInfoData objectAtIndex:index];
     [self.passwordInfoData removeObjectAtIndex:index];
-    [JNKeychain deleteValueForKey:[self getKeyForItem:item]];
+    [self.passwordStore deleteValueWithKey:[self getKeyForItem:item]];
     [self sortList];
 }
 

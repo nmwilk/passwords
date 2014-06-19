@@ -15,12 +15,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class JNKeychain;
-
+@protocol PasswordStore;
 
 @interface PasswordList : NSObject
 
 @property(nonatomic, strong) NSMutableArray *passwordInfoData;
+
+- (id)initWithPasswordStore:(id<PasswordStore>)passwordStore;
 
 - (void)savePasswordsInfos;
 
