@@ -65,6 +65,7 @@ NSUInteger const kDefaultPwdLength = 16;
 }
 
 - (void)touchZonePanned:(UIPanGestureRecognizer *)panned {
+
     [self removeFocusFromTextFields];
 
     CGPoint pos = [panned locationInView:self.touchZone];
@@ -72,6 +73,12 @@ NSUInteger const kDefaultPwdLength = 16;
     CGFloat combined = pos.x * pos.y;
 
     [self.passwordField addRandom:combined];
+
+    if (panned.state == UIGestureRecognizerStateEnded) {
+        [self.touchZone randomisingDidFinish];
+    } else {
+        [self.touchZone randomisingDidUpdate:(CGFloat) ((arc4random() % 100) / 100.0)];
+    }
 
     [self updateDoneButton];
 }

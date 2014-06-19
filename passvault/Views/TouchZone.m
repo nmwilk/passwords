@@ -11,16 +11,12 @@
     CGFloat textMaxAlpha;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        textMaxAlpha = self.title.alpha;
-    }
-    
-    return self;
+-(void)awakeFromNib {
+    textMaxAlpha = self.title.alpha;
 }
 
--(void)randomisingDidStart:(CGFloat)normalised {
+
+-(void)randomisingDidUpdate:(CGFloat)normalised {
     self.title.alpha = (CGFloat) (textMaxAlpha * (normalised > 1.0 ? 1.0 : normalised));
 }
 

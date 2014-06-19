@@ -10,7 +10,7 @@
 
 @property(nonatomic, strong) IBOutlet UILabel *title;
 
-- (void)randomisingDidStart:(CGFloat)normalised;
+- (void)randomisingDidUpdate:(CGFloat)normalised;
 
 - (void)randomisingDidFinish;
 @end

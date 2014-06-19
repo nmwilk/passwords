@@ -37,5 +37,4 @@
         self.text = [passwordModel formPassword];
     }
 }
-
 @end
