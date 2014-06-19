@@ -19,6 +19,7 @@ typedef enum PageType PageType;
 @property(nonatomic, strong) IBOutlet TouchZone *touchZone;
 @property(nonatomic, strong) IBOutlet UILabel *pageTitle;
 @property(nonatomic, strong) IBOutlet UILabel *passwordLengthText;
+@property(nonatomic, strong) IBOutlet UIButton *doneButton;
 
 @property(nonatomic, strong) IBOutlet UISlider *passwordLengthSlider;
 @property(nonatomic, strong) IBOutlet UITextField *labelField;

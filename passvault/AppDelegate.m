@@ -11,19 +11,48 @@
 #import "TableViewController.h"
 #import "MenuViewController.h"
 
-@implementation AppDelegate
+@interface AppDelegate ()
+
+@property(nonatomic, strong) MFSideMenuContainerViewController *container;
+
+@end
+
+
+@implementation AppDelegate {
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    MFSideMenuContainerViewController *container = (MFSideMenuContainerViewController *) self.window.rootViewController;
+    _container = (MFSideMenuContainerViewController *) self.window.rootViewController;
+    _container.panMode = MFSideMenuPanModeNone;
 
     TableViewController *tableViewController = [storyboard instantiateViewControllerWithIdentifier:@"tableViewController"];
     MenuViewController *menuViewController = [storyboard instantiateViewControllerWithIdentifier:@"menuViewController"];
 
-    [container setLeftMenuViewController:menuViewController];
-    [container setCenterViewController:tableViewController];
+    [_container setLeftMenuViewController:menuViewController];
+    [_container setCenterViewController:tableViewController];
+
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(menuStateEventOccurred:)
+                                                 name:MFSideMenuStateNotificationEvent
+                                               object:nil];
 
     return YES;
+}
+
+- (void)menuStateEventOccurred:(NSNotification *)notification {
+    MFSideMenuStateEvent event = (MFSideMenuStateEvent) [[[notification userInfo] objectForKey:@"eventType"] intValue];
+    switch (event) {
+        case MFSideMenuStateEventMenuDidOpen:
+            self.container.panMode = MFSideMenuPanModeDefault;
+            break;
+        case MFSideMenuStateEventMenuDidClose:
+            self.container.panMode = MFSideMenuPanModeNone;
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

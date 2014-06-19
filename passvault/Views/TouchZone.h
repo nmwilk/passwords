@@ -8,4 +8,9 @@
 
 @interface TouchZone : UIView
 
+@property(nonatomic, strong) IBOutlet UILabel *title;
+
+- (void)randomisingDidStart:(CGFloat)normalised;
+
+- (void)randomisingDidFinish;
 @end

@@ -8,18 +8,24 @@
 
 @implementation TouchZone {
 
+    CGFloat textMaxAlpha;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.backgroundColor = [UIColor lightGrayColor];
-
-        self.layer.cornerRadius = 15;
-        self.layer.masksToBounds = YES;
+        textMaxAlpha = self.title.alpha;
     }
     
     return self;
+}
+
+-(void)randomisingDidStart:(CGFloat)normalised {
+    self.title.alpha = (CGFloat) (textMaxAlpha * (normalised > 1.0 ? 1.0 : normalised));
+}
+
+-(void)randomisingDidFinish {
+    self.title.alpha = textMaxAlpha;
 }
 
 @end

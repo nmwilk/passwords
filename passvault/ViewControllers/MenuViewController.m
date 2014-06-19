@@ -5,6 +5,7 @@
 
 #import "MenuViewController.h"
 #import "Preferences.h"
+#import "UIColor+AppColors.h"
 
 @implementation MenuViewController {
 
@@ -13,12 +14,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    UIColor *switchColour = [UIColor colorWithRed:0.0 green:0.5 blue:1.0f alpha:1.0f];
-
     for (UIView *subview in self.view.subviews) {
         if ([subview class] == [UISwitch class]) {
             UISwitch *const switchControl = (UISwitch *) subview;
-            [switchControl setOnTintColor:switchColour];
+            [switchControl setOnTintColor:[UIColor mainColour]];
 
             [switchControl addTarget:self action:@selector(switchToggled:) forControlEvents:UIControlEventValueChanged];
         }

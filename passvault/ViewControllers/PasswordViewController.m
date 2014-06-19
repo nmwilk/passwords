@@ -16,6 +16,7 @@
 @end
 
 @implementation PasswordViewController {
+    BOOL animating;
 }
 
 NSUInteger const kMinPwdLength = 8;
@@ -44,6 +45,15 @@ NSUInteger const kDefaultPwdLength = 16;
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(touchZonePanned:)];
     [self.touchZone addGestureRecognizer:panGesture];
+
+    [self updateDoneButton];
+}
+
+- (void)updateDoneButton {
+    const BOOL newState = self.labelField.text.length > 0 && self.passwordField.text.length > 0;
+    if (newState != self.doneButton.enabled) {
+        self.doneButton.enabled = newState;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -62,6 +72,8 @@ NSUInteger const kDefaultPwdLength = 16;
     CGFloat combined = pos.x * pos.y;
 
     [self.passwordField addRandom:combined];
+
+    [self updateDoneButton];
 }
 
 - (void)removeFocusFromTextFields {
@@ -94,7 +106,7 @@ NSUInteger const kDefaultPwdLength = 16;
     [self lengthChanged];
 }
 
--(void)lengthChanged {
+- (void)lengthChanged {
     NSUInteger length = [self getLengthFromSlider];
     [self setPasswordLengthField:length];
 
@@ -119,6 +131,8 @@ NSUInteger const kDefaultPwdLength = 16;
     } else if (textField == self.labelField) {
         [self.passwordField becomeFirstResponder];
     }
+
+    [self updateDoneButtonNextCycle];
     return YES;
 }
 
@@ -126,11 +140,18 @@ NSUInteger const kDefaultPwdLength = 16;
 replacementString:(NSString *)string {
 
     if (textField == self.passwordField) {
-        if (range.length == 0) {
-            if (string.length == 1) {
+
+        BOOL allow = NO;
+        if (range.length == 1) {
+            allow = [self handleCharRemoved:textField];
+        } else if (string.length == 1) {
+            if (!self.randomizerSection.hidden) {
                 [self hideRandomizer];
             }
+            allow = YES;
+        }
 
+        if (allow) {
             return YES;
         }
 
@@ -151,7 +172,23 @@ replacementString:(NSString *)string {
             self.passwordLengthSlider.value = [self getSliderValueFromLength:passwordLength];
         }
     }
+
+    [self updateDoneButton];
+
     return YES;
+}
+
+- (BOOL)handleCharRemoved:(UITextField *)textField {
+    BOOL handled = NO;
+
+    if (textField.text.length == 1) {
+        [self showRandomizer];
+        handled = YES;
+    } else if (!self.randomizerSection.hidden) {
+        [self hideRandomizer];
+        handled = YES;
+    }
+    return handled;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
@@ -160,38 +197,53 @@ replacementString:(NSString *)string {
             [self showRandomizer];
         }
     }
+
+    [self updateDoneButtonNextCycle];
+
     return YES;
 }
 
+- (void)updateDoneButtonNextCycle {
+    [self performSelector:@selector(updateDoneButton) withObject:nil afterDelay:0.0];
+}
 
 - (void)showRandomizer {
-    self.randomizerSection.alpha = 0.0;
-    self.randomizerSection.hidden = NO;
-    self.randomizerSection.transform = CGAffineTransformMakeScale(0.8, 0.8);
-    [UIView animateWithDuration:0.5
-                          delay:0.0
-         usingSpringWithDamping:0.5
-          initialSpringVelocity:0
-                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone
-                     animations:^{
-        self.randomizerSection.alpha = 1.0;
-        self.randomizerSection.transform = CGAffineTransformMakeScale(1.0, 1.0);
-    } completion:nil];
-    [self lengthChanged];
+    if (!animating) {
+        animating = YES;
+        self.randomizerSection.alpha = 0.0;
+        self.randomizerSection.hidden = NO;
+        self.randomizerSection.transform = CGAffineTransformMakeScale(0.8, 0.8);
+        [UIView animateWithDuration:0.5
+                              delay:0.0
+             usingSpringWithDamping:0.5
+              initialSpringVelocity:0
+                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone
+                         animations:^{
+            self.randomizerSection.alpha = 1.0;
+            self.randomizerSection.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        } completion:^(BOOL finished) {
+            animating = NO;
+        }];
+        [self lengthChanged];
+    }
 }
 
 - (void)hideRandomizer {
-    self.randomizerSection.alpha = 1.0;
-    [UIView animateWithDuration:0.5
-                          delay:0.0
-         usingSpringWithDamping:0.5
-          initialSpringVelocity:0
-                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone
-                     animations:^{
-        self.randomizerSection.alpha = 0.0f;
-    } completion:(void (^)(BOOL)) ^{
-        self.randomizerSection.hidden = YES;
-    }];
+    if (!animating) {
+        animating = YES;
+        self.randomizerSection.alpha = 1.0;
+        [UIView animateWithDuration:0.5
+                              delay:0.0
+             usingSpringWithDamping:0.5
+              initialSpringVelocity:0
+                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone
+                         animations:^{
+            self.randomizerSection.alpha = 0.0f;
+        } completion:(void (^)(BOOL)) ^{
+            self.randomizerSection.hidden = YES;
+            animating = NO;
+        }];
+    }
 }
 
 - (void)setPasswordLengthField:(NSUInteger const)passwordLength {

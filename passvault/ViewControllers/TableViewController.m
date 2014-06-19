@@ -16,9 +16,6 @@
 #import "MFSideMenuContainerViewController.h"
 #import "Preferences.h"
 
-#define kTitleEdit @"Edit"
-#define kTitleDone @"Done"
-
 #define kCellIdPassword @"PasswordCellView"
 
 @interface TableViewController ()
@@ -72,28 +69,12 @@ NSArray *wordLengths;
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
--(void)longTapEnded {
+- (void)longTapEnded {
     [self hideQuickView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.tableView.isEditing) {
-        [self openEditScreen:indexPath.row];
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    } else {
-        PasswordTableCell *const cell = (PasswordTableCell *) [self.tableView cellForRowAtIndexPath:indexPath];
-        if (!cell.animating) {
-            NSString *const string = [passwordList password:(NSUInteger) indexPath.row];
-            if (string != nil && [string length] > 0) {
-                [self copyPassword:cell string:string];
-            }
-            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-        }
-    }
 }
 
 - (void)copyPassword:(PasswordTableCell *const)cell string:(NSString *const)string {
@@ -166,26 +147,6 @@ NSArray *wordLengths;
     [passwordList savePasswordsInfos];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (tableView == self.tableView) {
-        return [passwordList count];
-    }
-
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PasswordTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdPassword];
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PasswordListCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
-
-    cell.titleLabel.text = [passwordList label:(NSUInteger) indexPath.row];
-
-    return cell;
-}
-
 - (void)loadPasswords {
     passwordList = [[PasswordList alloc] init];
 }
@@ -193,38 +154,32 @@ NSArray *wordLengths;
 - (void)createToolbar {
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil action:nil];
-    self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self
-                                                                   action:@selector(addButtonTapped)];
+
+
+    UIImage *const image = [[UIImage imageNamed:@"add_icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIButton *customButtonView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
+    [customButtonView setImage:image forState:UIControlStateNormal];
+    customButtonView.adjustsImageWhenDisabled = YES;
+    [customButtonView addTarget:self action:@selector(addButtonTapped)forControlEvents:UIControlEventTouchUpInside];
+    self.addButton = [[UIBarButtonItem alloc] initWithCustomView:customButtonView];
 
     [self.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, self.addButton, flexibleSpace, nil]];
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
-- (void) tableView:(UITableView *)tableView
-commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
- forRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger index = indexPath.row;
-    [passwordList deleteAtIndex:(NSUInteger) index];
-    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-
-    [passwordList savePasswordsInfos];
-}
-
 - (void)editButtonTapped {
     const BOOL isEditing = self.tableView.isEditing;
-    NSString *newTitle = isEditing ? kTitleEdit : kTitleDone;
 
-    [self.titleBanner.editButton setTitle:newTitle forState:UIControlStateNormal];
-
-    self.addButton.enabled = isEditing;
+    [self updateButtonsForEditState:!isEditing];
 
     [self.tableView setEditing:!isEditing animated:YES];
 }
 
--(void)menuButtonTapped {
+- (void)updateButtonsForEditState:(BOOL const)isEditing {
+    self.titleBanner.menuButton.enabled = !isEditing;
+    self.addButton.enabled = !isEditing;
+}
+
+- (void)menuButtonTapped {
     [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
@@ -260,10 +215,62 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     return UIStatusBarStyleLightContent;
 }
 
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self updateButtonsForEditState:YES];
+}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self updateButtonsForEditState:NO];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void) tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+ forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger index = indexPath.row;
+    [passwordList deleteAtIndex:(NSUInteger) index];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+
+    [passwordList savePasswordsInfos];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableView.isEditing) {
+        [self openEditScreen:indexPath.row];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else {
+        PasswordTableCell *const cell = (PasswordTableCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+        if (!cell.animating) {
+            NSString *const string = [passwordList password:(NSUInteger) indexPath.row];
+            if (string != nil && [string length] > 0) {
+                [self copyPassword:cell string:string];
+            }
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView == self.tableView) {
+        return [passwordList count];
+    }
+
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PasswordTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdPassword];
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PasswordListCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+
+    cell.titleLabel.text = [passwordList label:(NSUInteger) indexPath.row];
+
+    return cell;
 }
 
 @end

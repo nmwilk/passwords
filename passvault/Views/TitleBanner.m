@@ -5,7 +5,6 @@
 
 #import "TitleBanner.h"
 
-
 @implementation TitleBanner {
 
 }
@@ -13,7 +12,6 @@
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.backgroundColor = [UIColor lightGrayColor];
     }
     return self;
 }

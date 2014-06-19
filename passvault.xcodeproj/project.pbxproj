@@ -15,6 +15,7 @@
 		338910AAB6713CF28EDD4D0C /* QuickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 338915FDCD4481983C746D48 /* QuickView.m */; };
 		338910CC8B9047DCCE9A7A66 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 338912E734F740069E7C12A2 /* MFSideMenuShadow.m */; };
 		338910EF969B64DB3B226032 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 338917C5A7C0F68DD35809EC /* Images.xcassets */; };
+		338910F000C8A8269EF3F9CE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3389191F481D2E1CBD2CF317 /* Localizable.strings */; };
 		338911144CA4CECD56453916 /* TouchZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 338915D6D4E071433B30C2BB /* TouchZone.m */; };
 		3389121DC807688B364DBAA9 /* PasswordGeneratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389131E3C6B8AF8A93244A8 /* PasswordGeneratorModel.m */; };
 		33891223B4CAF7578AF68ED5 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891FF30D7BBF61D3DB5AE0 /* UIViewController+MFSideMenuAdditions.m */; };
@@ -28,10 +29,10 @@
 		3389136BDDFA09E5CBECB417 /* enable1_4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3389111AFC0AC3F444B3AAAD /* enable1_4.txt */; };
 		3389137B7BAD183DDAFFF7D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891AC79E8367BD51D78950 /* UIKit.framework */; };
 		338913A306AEE4A0795132A6 /* MFSideMenu.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 3389104617AB580D0BA02400 /* MFSideMenu.podspec */; };
+		338913ACDA814E3615C69E0A /* UIColor+AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891CE08F8AB9D613A5FE3C /* UIColor+AppColors.m */; };
 		338913E2D32ECFBDAD2A4831 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 338913416EC974A80487B88B /* XCTest.framework */; };
 		33891480D811C57AEA9C8D08 /* PasswordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 338918827E14C2B3ADD51437 /* PasswordList.m */; };
 		338915217CF623FFB8CA0DC6 /* README.mdown in Resources */ = {isa = PBXBuildFile; fileRef = 338918B0142ED67C08EAE1D0 /* README.mdown */; };
-		3389158E80C4B0C12011D6AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 33891E3930E3CB78D578FC81 /* Localizable.strings */; };
 		338915B5B16A97DB8E693F14 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891C71BD9EE7D748BE8478 /* MFSideMenuContainerViewController.m */; };
 		338915E9D9951289DCFF0D09 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389181ECB5F30BD53C3938E /* TableViewController.m */; };
 		3389164DE1B495820635CF3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33891AC79E8367BD51D78950 /* UIKit.framework */; };
@@ -61,7 +62,6 @@
 		33891E7B50A5D0D7EAE05B35 /* enable1_3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3389109F0348BE1E33DD115B /* enable1_3.txt */; };
 		33891EEC0A33961A1095730A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 33891E44BFB464C087559319 /* README.md */; };
 		33891FB0E8B5423FF253DB57 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 33891B71E02420F7C5828147 /* Preferences.m */; };
-		33891FB110EF3C8534E768D6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3389170E90E310D55A626A5B /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,11 +107,11 @@
 		338915ED5F0E626EBE036C7D /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController.m; sourceTree = "<group>"; };
 		338915FDCD4481983C746D48 /* QuickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickView.m; sourceTree = "<group>"; };
 		3389163A8CEE16847087E670 /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
+		3389164E9CE09AF79DA4053D /* UIColor+AppColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AppColors.h"; sourceTree = "<group>"; };
 		33891693DBA4236D4D8F058F /* PasswordGeneratorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordGeneratorModel.h; sourceTree = "<group>"; };
 		338916977D9005A2ADC05368 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		33891698ADC01CB9DF28D6E0 /* enable1_7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_7.txt; sourceTree = "<group>"; };
 		338916A34CE1172FEE7CB962 /* Arc4Randomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arc4Randomizer.h; sourceTree = "<group>"; };
-		3389170E90E310D55A626A5B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = file.md; path = README.md; sourceTree = "<group>"; };
 		3389173862522ECCA25EBB80 /* passvault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = passvault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3389174E4A855003F7883324 /* QuickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickView.h; sourceTree = "<group>"; };
 		3389175746412F459CB29B73 /* MFSideMenuContainerViewController+LightStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFSideMenuContainerViewController+LightStatusBar.h"; sourceTree = "<group>"; };
@@ -127,6 +127,7 @@
 		338918B0142ED67C08EAE1D0 /* README.mdown */ = {isa = PBXFileReference; lastKnownFileType = file.mdown; path = README.mdown; sourceTree = "<group>"; };
 		338918B85AF9BAC1534FB040 /* TouchZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchZone.h; sourceTree = "<group>"; };
 		338918F03073450693BCCCB5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3389191F481D2E1CBD2CF317 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = ViewControllers/Localizable.strings; sourceTree = "<group>"; };
 		33891999117EA570084BAA76 /* passvault-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "passvault-Info.plist"; sourceTree = "<group>"; };
 		33891A38CAA8D296284152F2 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		33891A87BF4B11D79BC257C1 /* enable1_8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_8.txt; sourceTree = "<group>"; };
@@ -145,6 +146,7 @@
 		33891C71BD9EE7D748BE8478 /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
 		33891C7A053D9576ECB8E659 /* JNKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNKeychain.h; sourceTree = "<group>"; };
 		33891C7FA688A6B3A21D2612 /* MFSideMenuContainerViewController+LightStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFSideMenuContainerViewController+LightStatusBar.m"; sourceTree = "<group>"; };
+		33891CE08F8AB9D613A5FE3C /* UIColor+AppColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AppColors.m"; sourceTree = "<group>"; };
 		33891CF2FCD9E1550808D8D6 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		33891D0C18779F3504F30157 /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
 		33891D63C1474509B57663C2 /* enable1_5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable1_5.txt; sourceTree = "<group>"; };
@@ -152,7 +154,6 @@
 		33891DA0DE75914D7C97CD08 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		33891DBFCCE6205773A9EDF7 /* Randomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Randomizer.h; sourceTree = "<group>"; };
 		33891E10ADE8E636D02070B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		33891E3930E3CB78D578FC81 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		33891E44BFB464C087559319 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = file.md; path = README.md; sourceTree = "<group>"; };
 		33891E91A5874975FEBB7E9C /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		33891ECDAD880F84F6171F63 /* PasswordListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordListCell.xib; sourceTree = "<group>"; };
@@ -296,6 +297,9 @@
 				33891ECDAD880F84F6171F63 /* PasswordListCell.xib */,
 				3389175D42A34D074E6C5C2F /* Main.storyboard */,
 				338917C5A7C0F68DD35809EC /* Images.xcassets */,
+				3389191F481D2E1CBD2CF317 /* Localizable.strings */,
+				33891CE08F8AB9D613A5FE3C /* UIColor+AppColors.m */,
+				3389164E9CE09AF79DA4053D /* UIColor+AppColors.h */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -343,7 +347,6 @@
 				33891BC3F64067D3B9EA2A86 /* TableViewController.h */,
 				338915ED5F0E626EBE036C7D /* PasswordViewController.m */,
 				3389163A8CEE16847087E670 /* PasswordViewController.h */,
-				33891E3930E3CB78D578FC81 /* Localizable.strings */,
 				338916977D9005A2ADC05368 /* MenuViewController.m */,
 				33891E91A5874975FEBB7E9C /* MenuViewController.h */,
 				33891C7FA688A6B3A21D2612 /* MFSideMenuContainerViewController+LightStatusBar.m */,
@@ -387,7 +390,6 @@
 				33891AAEA41FC3A1A3482229 /* Frameworks */,
 				33891379764F67DECC4F1F1E /* passvault */,
 				33891257F05613594077C9D7 /* passvaultTests */,
-				3389170E90E310D55A626A5B /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -545,14 +547,13 @@
 				338910EF969B64DB3B226032 /* Images.xcassets in Resources */,
 				33891C85DDAA518C548108A0 /* LICENSE in Resources */,
 				33891EEC0A33961A1095730A /* README.md in Resources */,
-				33891FB110EF3C8534E768D6 /* README.md in Resources */,
-				3389158E80C4B0C12011D6AB /* Localizable.strings in Resources */,
 				338919248E2D061EF11BEB0D /* LICENSE in Resources */,
 				3389125EE67D6B11041FD58C /* .gitignore in Resources */,
 				338915217CF623FFB8CA0DC6 /* README.mdown in Resources */,
 				338913A306AEE4A0795132A6 /* MFSideMenu.podspec in Resources */,
 				338919127ABEEBBB88FD3A79 /* MFSideMenu.xccheckout in Resources */,
 				33891321F86217C40DEC0B6C /* contents.xcworkspacedata in Resources */,
+				338910F000C8A8269EF3F9CE /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +592,7 @@
 				33891A8DCF29DE854D307429 /* MenuViewController.m in Sources */,
 				33891875063498004F2D1158 /* MFSideMenuContainerViewController+LightStatusBar.m in Sources */,
 				33891FB0E8B5423FF253DB57 /* Preferences.m in Sources */,
+				338913ACDA814E3615C69E0A /* UIColor+AppColors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
