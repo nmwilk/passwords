@@ -66,6 +66,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
+
+    [self updateEditButton];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -112,7 +114,7 @@
 
     self.addButton = [[AddButton alloc] initWithTarget:self action:@selector(addButtonTapped)];
 
-    [self.toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, self.addButton, flexibleSpace, nil]];
+    [self.toolbar setItems:@[flexibleSpace, self.addButton, flexibleSpace]];
 }
 
 - (void)updateButtonsForEditState:(BOOL const)isEditing {
@@ -150,6 +152,17 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 
     [passwordList savePasswordsInfos];
+
+    if (passwordList.count == 0 && self.tableView.isEditing)
+    {
+        [self editButtonTapped];
+    }
+
+    [self updateEditButton];
+}
+
+- (void)updateEditButton {
+    self.titleBanner.editButton.enabled = passwordList.count > 0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -181,7 +194,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     PasswordTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdPassword];
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PasswordListCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
+        cell = nib[0];
     }
 
     cell.titleLabel.text = [passwordList label:(NSUInteger) indexPath.row];
