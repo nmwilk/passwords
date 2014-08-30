@@ -1,7 +1,7 @@
 PassVault
 =========
 
-iOS/Android password manager/generater.
+iOS/Android password manager and generater.
 
 Generates passwords from a Dictionary.
 
