@@ -23,7 +23,6 @@ import com.measuredsoftware.passvault.R;
 public class UserPreferences
 {
     private static final String PREFS = "904hkjfnbkwef";
-    private static final String PREFS_OBSCURE_PASSWORDS = "4oikjkjw";
     private final SharedPreferences preferences;
 
     public void setOptionChecked(final Options option, final boolean checked)
@@ -34,36 +33,99 @@ public class UserPreferences
         switch (option)
         {
             case OBSCURE_PASSWORDS:
-                editor.putBoolean(PREFS_OBSCURE_PASSWORDS, checked);
+            case INCLUDE_SYMBOL:
+            case CAPITALISATION_EVERY_WORD:
+                editor.putBoolean(option.getStorageKey(), checked);
                 break;
             default:
                 save = false;
                 break;
         }
 
-        //noinspection ConstantConditions
         if (save)
         {
             editor.commit();
         }
     }
 
+    public void setOptionInt(final Options option, final int value)
+    {
+        final SharedPreferences.Editor editor = preferences.edit();
+        boolean save = true;
+
+        switch (option)
+        {
+            case PREFS_PASSWORD_LENGTH:
+                editor.putInt(option.getStorageKey(), value);
+                break;
+            default:
+                save = false;
+                break;
+        }
+
+        if (save)
+        {
+            editor.commit();
+        }
+    }
+
+    public UserPreferences(final ContextWrapper contextWrapper)
+    {
+        preferences = contextWrapper.getSharedPreferences(PREFS, ContextWrapper.MODE_PRIVATE);
+    }
+
+    public boolean isOptionChecked(final Options option)
+    {
+        boolean checked = false;
+
+        switch (option)
+        {
+            case OBSCURE_PASSWORDS:
+            case CAPITALISATION_EVERY_WORD:
+            case INCLUDE_SYMBOL:
+                checked = preferences.getBoolean(option.getStorageKey(), option.defaultSetting());
+                break;
+        }
+
+
+        return checked;
+    }
+
+    public int getOptionInt(final Options options)
+    {
+        int value = 0;
+
+        switch (options)
+        {
+            case PREFS_PASSWORD_LENGTH:
+                value = preferences.getInt(options.getStorageKey(), 0);
+                break;
+        }
+
+        return value;
+    }
+
     public enum Options
     {
-        OBSCURE_PASSWORDS(false, R.id.obscure_passwords);
+        OBSCURE_PASSWORDS(false, R.id.obscure_passwords, "4oikjkjw"),
+        INCLUDE_SYMBOL(true, R.id.include_symbol, "kjnk3iubj4"),
+        CAPITALISATION_EVERY_WORD(true, R.id.capitalise_every_word, "iojnkbkbl2s"),
+        PREFS_PASSWORD_LENGTH(false, 0, "09kjnkjbk2");
 
         private final boolean defaultSetting;
         private final int viewId;
+        private final String storageKey;
 
-        Options(final boolean defaultSetting, final int viewId)
+        Options(final boolean defaultSetting, final int viewId, final String storageKey)
         {
             this.defaultSetting = defaultSetting;
             this.viewId = viewId;
+            this.storageKey = storageKey;
         }
 
         public static Options getOptionFromViewId(final int viewId)
         {
-            for(final Options option : values())
+            for (final Options option : values())
             {
                 if (viewId == option.viewId)
                 {
@@ -74,31 +136,19 @@ public class UserPreferences
             return null;
         }
 
+        public int getViewId()
+        {
+            return viewId;
+        }
+
         public boolean defaultSetting()
         {
             return defaultSetting;
         }
-    }
 
-
-    public UserPreferences(final ContextWrapper contextWrapper)
-    {
-        preferences = contextWrapper.getSharedPreferences(PREFS, ContextWrapper.MODE_PRIVATE);
-
-    }
-
-    public boolean isOptionChecked(final Options option)
-    {
-        boolean checked = false;
-
-        switch (option)
+        public String getStorageKey()
         {
-            case OBSCURE_PASSWORDS:
-                checked = preferences.getBoolean(PREFS_OBSCURE_PASSWORDS, option.defaultSetting());
-                break;
+            return storageKey;
         }
-
-
-        return checked;
     }
 }

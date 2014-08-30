@@ -56,6 +56,12 @@ public class RandomRandomizer implements Randomizer
         return random.nextInt(10);
     }
 
+    @Override
+    public boolean getBoolean()
+    {
+        return random.nextBoolean();
+    }
+
     private long updateSeed(final long additionalRandom)
     {
         currentSeed += additionalRandom;

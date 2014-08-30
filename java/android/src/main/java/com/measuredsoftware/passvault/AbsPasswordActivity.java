@@ -28,6 +28,7 @@ import com.measuredsoftware.passvault.listener.PasswordTextWatcher;
 import com.measuredsoftware.passvault.model.PasswordGenerator;
 import com.measuredsoftware.passvault.model.PasswordModel;
 import com.measuredsoftware.passvault.model.RandomRandomizer;
+import com.measuredsoftware.passvault.model.UserPreferences;
 import com.measuredsoftware.passvault.view.GeneratorSection;
 import com.measuredsoftware.passvault.view.PasswordLengthSlider;
 
@@ -47,6 +48,7 @@ public abstract class AbsPasswordActivity extends Activity implements SeekBar.On
     private View doneButton;
     private PasswordLengthSlider lengthSlider;
     private boolean started;
+    private int passwordLength;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -55,6 +57,10 @@ public abstract class AbsPasswordActivity extends Activity implements SeekBar.On
 
         final PassVaultApplication application = (PassVaultApplication) getApplication();
         passwordGenerator = new PasswordGenerator(new RandomRandomizer(application.getDictionary(), application.getWordLengths()));
+
+        passwordGenerator.setIncludeSymbol(application.getUserPrefs().isOptionChecked(UserPreferences.Options.INCLUDE_SYMBOL));
+        passwordGenerator.setCapitalisation(
+            application.getUserPrefs().isOptionChecked(UserPreferences.Options.CAPITALISATION_EVERY_WORD) ? PasswordGenerator.Capitalisation.EVERY_WORD : PasswordGenerator.Capitalisation.RANDOM);
 
         charsText = getResources().getString(R.string.chars_suffix);
 
@@ -198,9 +204,9 @@ public abstract class AbsPasswordActivity extends Activity implements SeekBar.On
     @Override
     public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser)
     {
-        final int length = progress + ((PasswordLengthSlider) seekBar).getPwdLenMin();
+        passwordLength = progress + ((PasswordLengthSlider) seekBar).getPwdLenMin();
 
-        passwordGenerator.setLength(length);
+        passwordGenerator.setLength(passwordLength);
 
         if (started)
         {
@@ -247,6 +253,8 @@ public abstract class AbsPasswordActivity extends Activity implements SeekBar.On
     {
         if (submit)
         {
+            ((PassVaultApplication)getApplication()).getUserPrefs().setOptionInt(UserPreferences.Options.PREFS_PASSWORD_LENGTH, passwordLength);
+
             final Intent intent = new Intent();
             final Gson gson = new Gson();
             intent.putExtra(MainActivity.RESULT_EXTRA, gson.toJson(getPasswordModelToCommit()));

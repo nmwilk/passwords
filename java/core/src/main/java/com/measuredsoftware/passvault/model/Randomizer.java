@@ -23,4 +23,6 @@ public interface Randomizer
     int getMaxSingleWordLength();
 
     int getMinSingleWordLength();
+
+    boolean getBoolean();
 }

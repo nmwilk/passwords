@@ -39,15 +39,12 @@ public class MainActivity extends Activity implements View.OnClickListener, Menu
     private View editButton;
     private View menuButton;
     private DrawerLayout slidingDrawer;
-    private UserPreferences userPrefs;
     private AddArrow addArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        userPrefs = new UserPreferences(this);
 
         setContentView(R.layout.activity_main);
 
@@ -94,9 +91,17 @@ public class MainActivity extends Activity implements View.OnClickListener, Menu
 
         final MenuScreen menuScreen = (MenuScreen) findViewById(R.id.menu_screen);
         menuScreen.setListener(this);
-        menuScreen.setOption(R.id.obscure_passwords, userPrefs.isOptionChecked(UserPreferences.Options.OBSCURE_PASSWORDS));
+        for (UserPreferences.Options option : UserPreferences.Options.values())
+        {
+            menuScreen.setOption(option.getViewId(), getUserPrefs().isOptionChecked(option));
+        }
 
         updateEditButtonState();
+    }
+
+    private UserPreferences getUserPrefs()
+    {
+        return ((PassVaultApplication) getApplication()).getUserPrefs();
     }
 
     @Override
@@ -208,7 +213,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Menu
 
         if (option != null)
         {
-            userPrefs.setOptionChecked(option, checked);
+            getUserPrefs().setOptionChecked(option, checked);
         }
     }
 
@@ -221,6 +226,6 @@ public class MainActivity extends Activity implements View.OnClickListener, Menu
     @Override
     public void onOpenPopup(final PasswordModel item, final int x, final int y)
     {
-        passwordList.openPopup(x, y, item.getPassword(), userPrefs.isOptionChecked(UserPreferences.Options.OBSCURE_PASSWORDS));
+        passwordList.openPopup(x, y, item.getPassword(), getUserPrefs().isOptionChecked(UserPreferences.Options.OBSCURE_PASSWORDS));
     }
 }

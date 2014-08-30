@@ -51,6 +51,12 @@ public class TestRandomizer implements Randomizer
     }
 
     @Override
+    public boolean getBoolean()
+    {
+        return false;
+    }
+
+    @Override
     public int getMaxSingleWordLength()
     {
         return testWords.get(testWords.size() - 1).length();

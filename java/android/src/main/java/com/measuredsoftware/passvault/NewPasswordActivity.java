@@ -14,6 +14,7 @@
 package com.measuredsoftware.passvault;
 
 import com.measuredsoftware.passvault.model.PasswordModel;
+import com.measuredsoftware.passvault.model.UserPreferences;
 
 public class NewPasswordActivity extends AbsPasswordActivity
 {
@@ -35,6 +36,8 @@ public class NewPasswordActivity extends AbsPasswordActivity
     @Override
     protected int getStartingPasswordLength()
     {
-        return getResources().getInteger(R.integer.pwd_len_default);
+        final int length = ((PassVaultApplication) getApplication()).getUserPrefs()
+                                                                       .getOptionInt(UserPreferences.Options.PREFS_PASSWORD_LENGTH);
+        return length == 0 ? getResources().getInteger(R.integer.pwd_len_default) : length;
     }
 }

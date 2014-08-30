@@ -20,13 +20,13 @@ import android.view.View;
 import android.widget.CheckedTextView;
 import android.widget.FrameLayout;
 import com.measuredsoftware.passvault.R;
+import com.measuredsoftware.passvault.model.UserPreferences;
 
 /**
  * Root layout of Menu Options Screen.
  */
 public class MenuScreen extends FrameLayout implements View.OnClickListener
 {
-    private final CheckedTextView obscurePasswords;
     private ChangedListener listener;
 
     public MenuScreen(final Context context, final AttributeSet attrs)
@@ -37,8 +37,14 @@ public class MenuScreen extends FrameLayout implements View.OnClickListener
 
         View.inflate(context, R.layout.menu_screen, this);
 
-        obscurePasswords = (CheckedTextView) findViewById(R.id.obscure_passwords);
-        obscurePasswords.setOnClickListener(this);
+        for (UserPreferences.Options option : UserPreferences.Options.values())
+        {
+            final View view = findViewById(option.getViewId());
+            if (view instanceof CheckedTextView)
+            {
+                view.setOnClickListener(this);
+            }
+        }
     }
 
     public void setListener(final ChangedListener listener)
@@ -53,10 +59,12 @@ public class MenuScreen extends FrameLayout implements View.OnClickListener
         {
             throw new IllegalStateException("Must set a listener for " + getClass().getSimpleName());
         }
-        if (v.getId() == R.id.obscure_passwords)
+
+        if (v instanceof CheckedTextView)
         {
-            obscurePasswords.setChecked(!obscurePasswords.isChecked());
-            listener.optionChanged(v.getId(), obscurePasswords.isChecked());
+            final CheckedTextView option = (CheckedTextView) v;
+            option.setChecked(!option.isChecked());
+            listener.optionChanged(v.getId(), option.isChecked());
         }
     }
 
@@ -69,9 +77,10 @@ public class MenuScreen extends FrameLayout implements View.OnClickListener
 
     public void setOption(final int viewId, final boolean checked)
     {
-        if (viewId == R.id.obscure_passwords)
+        final View view = findViewById(viewId);
+        if (view != null && view instanceof CheckedTextView)
         {
-            obscurePasswords.setChecked(checked);
+            ((CheckedTextView)view).setChecked(checked);
         }
     }
 

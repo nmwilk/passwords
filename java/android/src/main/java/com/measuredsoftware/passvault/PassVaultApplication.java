@@ -14,6 +14,7 @@
 package com.measuredsoftware.passvault;
 
 import android.app.Application;
+import com.measuredsoftware.passvault.model.UserPreferences;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class PassVaultApplication extends Application
 {
     private Map<Integer, List<String>> dictionary;
     private final List<Integer> wordLengths = Arrays.asList(3, 4, 5, 6, 7);
+    private UserPreferences userPrefs;
 
     @Override
     public void onCreate()
@@ -35,6 +37,8 @@ public class PassVaultApplication extends Application
         super.onCreate();
 
         dictionary = new HashMap<Integer, List<String>>();
+
+        userPrefs = new UserPreferences(this);
 
         for (final Integer wordLength : wordLengths)
         {
@@ -62,6 +66,11 @@ public class PassVaultApplication extends Application
                 throw new IllegalStateException("Failure reading password files: " + e.getMessage());
             }
         }
+    }
+
+    public UserPreferences getUserPrefs()
+    {
+        return userPrefs;
     }
 
     public Map<Integer, List<String>> getDictionary()
