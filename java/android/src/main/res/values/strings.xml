@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PassVault</string>
+    <string name="action_settings">Settings</string>
+    <string name="edit_button_desc">Edit Passwords</string>
+    <string name="menu_button_desc">Go to Menu</string>
+    <string name="edit_password">Edit Password</string>
+    <string name="auto_generate">AUTO-GENERATE</string>
+    <string name="new_password">New Password</string>
+    <string name="chars_suffix">chars</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
+    <string name="touch_randomizer">touchpad\nrandomizer</string>
+    <string name="password_hint">Password</string>
+    <string name="name_hint">Label</string>
+    <string name="delete">Delete</string>
+    <string name="edit_pointer_text"><![CDATA[>]]></string>
+    <string name="obscure_passwords">Obscure Passwords</string>
+    <string name="copied">COPIED</string>
+
+</resources>

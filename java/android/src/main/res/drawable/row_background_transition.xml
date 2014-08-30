@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<transition xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/row_background_normal"/>
+    <item android:drawable="@color/row_background_selected" android:bottom="1px" />
+</transition>

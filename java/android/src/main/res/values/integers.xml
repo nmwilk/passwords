@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="pwd_len_min">8</integer>
+    <integer name="pwd_len_max">32</integer>
+    <integer name="anim_time_activity_in">300</integer>
+    <integer name="pwd_len_default">16</integer>
+    <integer name="delete_animation_duration">2000</integer>
+</resources>

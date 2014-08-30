@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_tint">#86adca</color>
+    <color name="disabled_button_text">#BBB</color>
+    <color name="app_tint_dark">#6290a6</color>
+    <color name="title_colour">#FFF</color>
+    <color name="heading_colour">#727272</color>
+    <color name="password_length_colour">#808080</color>
+
+    <color name="touch_zone_background">@color/app_tint</color>
+    <color name="touch_zone_text">#55FFFFFF</color>
+    <color name="delete_text_colour">#FFF</color>
+    <color name="delete_pressed">#B00</color>
+    <color name="delete">#D11</color>
+    <color name="menu_screen_background">#4C4C4C</color>
+    <color name="menu_option_text">#FFF</color>
+    <color name="list_background">#FFF</color>
+    <color name="text_default">#333</color>
+    <color name="password_item_text_pressed">#FFF</color>
+    <color name="copied_text_colour">#7D7D7D</color>
+    <color name="password_item_colour_normal">#758695</color>
+    <color name="password_item_arrow_colour">#AAA</color>
+    <color name="row_background_selected">#bfbfbf</color>
+    <color name="row_background_normal">#fff</color>
+    <color name="divider_colour">#BBB</color>
+    <color name="popup_password_background">#3000</color>
+</resources>

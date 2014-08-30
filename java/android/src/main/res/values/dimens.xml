@@ -1,0 +1,35 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_margin_small">6dp</dimen>
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="menu_screen_margin">22dp</dimen>
+    <dimen name="title_text_size">34dp</dimen>
+    <dimen name="password_list_item_margin">10dp</dimen>
+    <dimen name="password_list_item_margin_vert">11dp</dimen>
+    <dimen name="password_list_item_name_size">24sp</dimen>
+    <dimen name="generator_section_gap">20dp</dimen>
+
+    <dimen name="large_text">28dp</dimen>
+    <dimen name="normal_text">24dp</dimen>
+    <dimen name="small_text">20dp</dimen>
+    <dimen name="touchzone_text_size">32dp</dimen>
+    <dimen name="edit_text_size">26dp</dimen>
+    <dimen name="edit_text_height">40dp</dimen>
+
+    <dimen name="edit_text_padding">4dp</dimen>
+    <dimen name="slider_margin_top">4dp</dimen>
+    <dimen name="slider_margin_bottom">10dp</dimen>
+    <dimen name="sliding_drawer_margin">60dp</dimen>
+    <dimen name="menu_option_text_size">@dimen/small_text</dimen>
+    <dimen name="delete_icon_padding">10dp</dimen>
+    <dimen name="footer_height">55dp</dimen>
+    <dimen name="header_height">55dp</dimen>
+    <dimen name="copied_text_right_margin">80dp</dimen>
+    <dimen name="copied_text_size">18dp</dimen>
+    <dimen name="password_list_item_margin_left">12dp</dimen>
+    <dimen name="popup_password_text_size">10dp</dimen>
+    <dimen name="popup_password_corner_radius">12dp</dimen>
+    <dimen name="popup_password_padding_horz">16dp</dimen>
+    <dimen name="popup_password_padding_vert">10dp</dimen>
+
+</resources>

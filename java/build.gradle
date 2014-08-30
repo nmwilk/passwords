@@ -1,0 +1,41 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.9.+'
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+project(":android") {
+    apply plugin: 'android'
+
+    dependencies {
+        compile project(":core")
+        compile fileTree(dir: 'libs', include: ['*.jar'])
+        compile 'com.google.code.gson:gson:2.2.4'
+        compile 'com.android.support:appcompat-v7:19.+'
+    }
+}
+
+project(":core") {
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.7
+
+    sourceSets.main.java.srcDirs = ["src/main/java"]
+    sourceSets.test.java.srcDirs = ["src/test/java"]
+
+    dependencies {
+        compile fileTree(dir: 'libs', include: ['*.jar'])
+        testCompile 'junit:junit:4.11'
+    }
+}
