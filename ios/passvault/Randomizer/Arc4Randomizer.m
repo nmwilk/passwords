@@ -24,7 +24,7 @@
 - (id)init {
     self = [super init];
 
-    wordLengths = [NSArray arrayWithObjects:@"3", @"4", @"5", @"6", @"7", @"8", @"9", nil];
+    wordLengths = @[@"3", @"4", @"5", @"6", @"7", @"8", @"9"];
     dictionary = [[NSMutableDictionary alloc] init];
 
     for (NSString *wordLength in wordLengths) {
@@ -36,7 +36,7 @@
                                                              error:nil];
         NSString *delimiter = @"\n";
         NSArray *fileAsArray = [fileContent componentsSeparatedByString:delimiter];
-        [dictionary setObject:fileAsArray forKey:wordLength];
+        dictionary[wordLength] = fileAsArray;
     }
 
     return self;
@@ -60,9 +60,9 @@
 }
 
 - (NSString *)getWord:(NSUInteger)length {
-    NSArray *currentDict = [dictionary objectForKey:[NSString stringWithFormat:@"%d", (int) length]];
+    NSArray *currentDict = dictionary[[NSString stringWithFormat:@"%d", (int) length]];
     NSUInteger index = arc4random() % [currentDict count];
-    return [currentDict objectAtIndex:index];
+    return currentDict[index];
 }
 
 - (NSUInteger)getPosition:(NSUInteger)availablePositions {

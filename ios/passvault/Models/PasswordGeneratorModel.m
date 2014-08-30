@@ -97,7 +97,7 @@ NSInteger const kMaxWordLength = 7;
             }
 
             if (i < [passwordItems count]) {
-                [password appendString:[passwordItems objectAtIndex:i]];
+                [password appendString:passwordItems[i]];
             }
         }
     }

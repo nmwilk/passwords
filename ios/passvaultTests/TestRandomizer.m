@@ -12,33 +12,39 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "TestPasswordStore.h"
+#import "TestRandomizer.h"
 
 
-@implementation TestPasswordStore {
-
-    NSMutableDictionary *passwords;
+@implementation TestRandomizer {
+    NSArray *testWords;
+    NSUInteger testPosition;
 }
 
 - (id)init {
     self = [super init];
     if (self) {
-        passwords = [[NSMutableDictionary alloc] init];
+        testWords = @[@"ABC", @"DEFG", @"HIJKL", @"MNOPQR", @"STUVWXY"];
+        testPosition = 0;
     }
 
     return self;
 }
 
-- (NSString *)loadFromKey:(NSString *)key {
-    return [passwords objectForKey:key];
+- (NSUInteger)getNumber:(CGFloat)random {
+    return ((NSUInteger) random) % 10;
 }
 
-- (void)saveValue:(NSString *)value withKey:(NSString *)key {
-    [passwords setValue:value forKey:key];
+- (NSString *)getWord:(NSUInteger)length {
+    return testWords[length - 3];
 }
 
-- (void)deleteValueWithKey:(NSString *)key {
-    [passwords removeObjectForKey:key];
+- (NSUInteger)getPosition:(NSUInteger)count {
+    return testPosition++ % count;
 }
+
+- (CGFloat)getRandom {
+    return 1.0;
+}
+
 
 @end

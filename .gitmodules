@@ -1,7 +1,7 @@
 
-[submodule "passvault/JNKeychain"]
-	path = passvault/JNKeychain
-	url = https://github.com/jeremangnr/JNKeychain.git
-[submodule "passvault/MFSideMenu"]
-	path = passvault/MFSideMenu
-	url = https://github.com/mikefrederick/MFSideMenu.git
+[submodule "ios/passvault/JNKeychain"]
+	path = ios/passvault/JNKeychain
+	url = git://github.com/jeremangnr/JNKeychain.git
+[submodule "ios/passvault/MFSideMenu"]
+	path = ios/passvault/MFSideMenu
+	url = git://github.com/mikefrederick/MFSideMenu.git

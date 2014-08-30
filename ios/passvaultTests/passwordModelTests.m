@@ -68,7 +68,7 @@
 
         NSString *result = [passwordModel formPassword];
 
-        XCTAssertEqualObjects([expected objectAtIndex:j-8], result, @"");
+        XCTAssertEqualObjects(expected[j - 8], result, @"");
     }
 }
 

@@ -59,27 +59,27 @@
 }
 
 - (NSString *)password:(NSUInteger)index {
-    NSString *const string = [self.passwordStore loadFromKey:[self getKeyForItem:[self.passwordInfoData objectAtIndex:index]]];
+    NSString *const string = [self.passwordStore loadFromKey:[self getKeyForItem:(self.passwordInfoData)[index]]];
     return string == nil ? @"" : string;
 }
 
 - (NSString *)getKeyForItem:(PasswordInfoItem *)item {
-    return [[NSNumber numberWithInteger:item.uid] stringValue];
+    return [@(item.uid) stringValue];
 }
 
 - (NSString *)label:(NSUInteger)index {
-    id const o = [self.passwordInfoData objectAtIndex:index];
+    id const o = (self.passwordInfoData)[index];
     return ((PasswordInfoItem *) o).label;
 }
 
 - (void)writeLabel:(NSString *)label forRow:(NSInteger)row {
-    PasswordInfoItem *item = [self.passwordInfoData objectAtIndex:(NSUInteger) row];
+    PasswordInfoItem *item = (self.passwordInfoData)[(NSUInteger) row];
     item.label = label;
 }
 
 - (void)writePassword:(NSString *)text forRow:(NSInteger)row {
     [self.passwordStore saveValue:text
-                          withKey:[self getKeyForItem:[self.passwordInfoData objectAtIndex:(NSUInteger) row]]];
+                          withKey:[self getKeyForItem:(self.passwordInfoData)[(NSUInteger) row]]];
 }
 
 - (void)addNew:(NSString *)label password:(NSString *)password {
@@ -94,7 +94,7 @@
 }
 
 - (void)deleteAtIndex:(NSUInteger)index {
-    PasswordInfoItem *const item = [self.passwordInfoData objectAtIndex:index];
+    PasswordInfoItem *const item = (self.passwordInfoData)[index];
     [self.passwordInfoData removeObjectAtIndex:index];
     [self.passwordStore deleteValueWithKey:[self getKeyForItem:item]];
     [self sortList];

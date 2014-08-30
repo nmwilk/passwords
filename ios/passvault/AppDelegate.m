@@ -54,7 +54,7 @@
 }
 
 - (void)menuStateEventOccurred:(NSNotification *)notification {
-    MFSideMenuStateEvent event = (MFSideMenuStateEvent) [[[notification userInfo] objectForKey:@"eventType"] intValue];
+    MFSideMenuStateEvent event = (MFSideMenuStateEvent) [[notification userInfo][@"eventType"] intValue];
     switch (event) {
         case MFSideMenuStateEventMenuDidOpen:
             self.container.panMode = MFSideMenuPanModeDefault;
