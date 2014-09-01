@@ -46,5 +46,8 @@
     return 1.0;
 }
 
+- (BOOL)getBoolean {
+    return NO;
+}
 
 @end

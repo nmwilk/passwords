@@ -16,8 +16,9 @@
 #import "PasswordGeneratorModel.h"
 #import "Randomizer.h"
 
-NSInteger const kMinWordLength = 3;
-NSInteger const kMaxWordLength = 7;
+static const NSInteger kMinWordLength = 3;
+static const NSInteger kMaxWordLength = 7;
+static const NSString *kSymbols = @"\"!$%&'()*+,-./:;<=>?@[\\]^_`";
 
 @interface PasswordGeneratorModel ()
 @property(nonatomic, strong) id <Randomizer> randomizer;
@@ -30,6 +31,10 @@ NSInteger const kMaxWordLength = 7;
     CGFloat lastRandom;
     NSUInteger numberPosition;
     NSMutableString *password;
+    NSUInteger totalLength;
+    NSUInteger symbolPosition;
+    unichar symbol;
+    NSUInteger reservedSpace;
 }
 
 - (id)initWithRandomizer:(id <Randomizer>)randomizer {
@@ -37,8 +42,18 @@ NSInteger const kMaxWordLength = 7;
     if (self) {
         self.randomizer = randomizer;
         passwordItems = [[NSMutableArray alloc] init];
+
+        self.capitalisationType = PVCapitalisationTypeEveryWord;
+        reservedSpace = 1;
     }
     return self;
+}
+
+- (void)setIncludeSymbol:(BOOL)includeSymbol {
+    _includeSymbol = includeSymbol;
+
+    reservedSpace = _includeSymbol ? 2 : 1;
+    [self setLength:totalLength];
 }
 
 - (void)addRandom:(CGFloat)random {
@@ -48,19 +63,38 @@ NSInteger const kMaxWordLength = 7;
 
     number = [self.randomizer getNumber:random];
 
+    if (self.includeSymbol) {
+        symbol = [kSymbols characterAtIndex:[self.randomizer getPosition:kSymbols.length]];
+    }
+
     NSUInteger passwordLength = [self getLength];
     do {
         NSUInteger desiredLength = [self calcDesiredWordLength:passwordLength withRandom:[self.randomizer getRandom]];
 
-        NSString *word;
-        word = [self.randomizer getWord:desiredLength];
+        NSString *word = [self capitaliseWord:[self.randomizer getWord:desiredLength] withRandom:[self.randomizer getBoolean]];
 
         [passwordItems addObject:word];
 
         passwordLength = [self getLength];
     } while (passwordLength < maxLength);
 
-    numberPosition = [self.randomizer getPosition:[passwordItems count] + 1];
+    numberPosition = [self.randomizer getPosition:[passwordItems count] + reservedSpace];
+
+    if (self.includeSymbol) {
+        symbolPosition = [self.randomizer getPosition:[passwordItems count] + reservedSpace];
+    }
+}
+
+- (NSString *)capitaliseWord:(NSString *)word withRandom:(BOOL)capitaliseWord {
+    NSString *formattedWord;
+
+    if (self.capitalisationType == PVCapitalisationTypeEveryWord || capitaliseWord) {
+        formattedWord = word.capitalizedString;
+    } else {
+        formattedWord = word.lowercaseString;
+    }
+
+    return formattedWord;
 }
 
 - (NSUInteger)calcDesiredWordLength:(NSUInteger)currentFormedLength withRandom:(CGFloat)random {
@@ -70,7 +104,7 @@ NSInteger const kMaxWordLength = 7;
     if (maxWordLength > kMaxWordLength) {
         maxWordLength = kMaxWordLength;
     }
-    NSUInteger desiredLength = (NSUInteger) (kMinWordLength + roundf(random * ((maxWordLength - kMinWordLength) + 1)));
+    NSUInteger desiredLength = (NSUInteger) (kMinWordLength + roundf(random * ((maxWordLength - kMinWordLength) + reservedSpace)));
     if (desiredLength > maxWordLength) {
         desiredLength = maxWordLength;
     }
@@ -91,9 +125,13 @@ NSInteger const kMaxWordLength = 7;
 - (NSString *)formPassword {
     password = [[NSMutableString alloc] init];
     if ([passwordItems count] > 0) {
-        for (NSUInteger i = 0; i < [passwordItems count] + 1; i++) {
+        for (NSUInteger i = 0; i < [passwordItems count] + reservedSpace; i++) {
             if (i == numberPosition) {
                 [password appendFormat:@"%d", (int)number];
+            }
+
+            if (self.includeSymbol && i == symbolPosition) {
+                [password appendFormat:@"%c", symbol];
             }
 
             if (i < [passwordItems count]) {
@@ -113,7 +151,9 @@ NSInteger const kMaxWordLength = 7;
 }
 
 - (void)setLength:(NSUInteger)length {
-    maxLength = length - 1;
+    totalLength = length;
+
+    maxLength = length - reservedSpace;
 
     // recalculate.
     [passwordItems removeAllObjects];

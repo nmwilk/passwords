@@ -74,4 +74,9 @@
 }
 
 
+- (BOOL)getBoolean {
+    return arc4random() % 2 == 1;
+}
+
+
 @end

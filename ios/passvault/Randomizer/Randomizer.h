@@ -23,4 +23,6 @@
 - (NSUInteger)getPosition:(NSUInteger)count;
 
 - (CGFloat)getRandom;
+
+- (BOOL)getBoolean;
 @end

@@ -15,10 +15,20 @@
 
 #import <Foundation/Foundation.h>
 
+enum PVCapitalisationType {
+    PVCapitalisationTypeEveryWord,
+    PVCapitalisationTypeRandom
+};
+
+typedef enum PVCapitalisationType PVCapitalisationType;
+
 @protocol Randomizer;
 
-
 @interface PasswordGeneratorModel : NSObject
+
+@property(nonatomic, assign) PVCapitalisationType capitalisationType;
+@property(nonatomic, assign) BOOL includeSymbol;
+
 - (id)initWithRandomizer:(id <Randomizer>)randomizer;
 
 - (void)addRandom:(CGFloat)random1;
