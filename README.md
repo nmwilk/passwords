@@ -9,6 +9,8 @@ Stores passwords in the iOS7 Keychain/Android preferences. So when your device i
 
 Use of the app comes with the understanding that if someone knows your iPhone/Android passcode (or you have no passcode set), then they can read all your passwords in PassVault.
 
+The aim of this is not to provide bullet-proof passwords, just ones that are a good mix of security and ease of use.
+
 - Long tap a row in the list to show a quick view of the password - optionally obscured via a menu option.
 
 - Quick tap a row in the list to copy the password to the clipboard.
