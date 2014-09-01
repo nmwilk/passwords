@@ -60,7 +60,7 @@ public abstract class AbsPasswordActivity extends Activity implements SeekBar.On
 
         passwordGenerator.setIncludeSymbol(application.getUserPrefs().isOptionChecked(UserPreferences.Options.INCLUDE_SYMBOL));
         passwordGenerator.setCapitalisation(
-            application.getUserPrefs().isOptionChecked(UserPreferences.Options.CAPITALISATION_EVERY_WORD) ? PasswordGenerator.Capitalisation.EVERY_WORD : PasswordGenerator.Capitalisation.RANDOM);
+            application.getUserPrefs().isOptionChecked(UserPreferences.Options.CAPITALISE_EVERY_WORD) ? PasswordGenerator.Capitalisation.EVERY_WORD : PasswordGenerator.Capitalisation.RANDOM);
 
         charsText = getResources().getString(R.string.chars_suffix);
 

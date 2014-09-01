@@ -27,7 +27,7 @@ NSString *const OptionKeyIncludeSymbol = @"OptionKeyIncludeSymbol";
     @synchronized (self) {
         if (!sharedPrefs) {
             sharedPrefs = [[Preferences alloc] init];
-            NSDictionary *defaultValues = @{OptionKeyObscurePasswords : @NO, OptionKeyCapitaliseEveryWord : @YES, OptionKeyIncludeSymbol : @YES};
+            NSDictionary *defaultValues = @{OptionKeyObscurePasswords : @NO, OptionKeyCapitaliseEveryWord : @(arc4random() % 2 == 1), OptionKeyIncludeSymbol : @(arc4random() % 2 == 1)};
             [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
         }
     }

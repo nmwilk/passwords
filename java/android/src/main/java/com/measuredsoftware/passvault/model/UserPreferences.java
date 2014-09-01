@@ -15,7 +15,10 @@ package com.measuredsoftware.passvault.model;
 
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
+import android.os.SystemClock;
 import com.measuredsoftware.passvault.R;
+
+import java.util.Random;
 
 /**
  * Reads and writes user preferences.
@@ -24,6 +27,7 @@ public class UserPreferences
 {
     private static final String PREFS = "904hkjfnbkwef";
     private final SharedPreferences preferences;
+    private static final Random random = new Random(SystemClock.uptimeMillis() + 13);
 
     public void setOptionChecked(final Options option, final boolean checked)
     {
@@ -34,7 +38,7 @@ public class UserPreferences
         {
             case OBSCURE_PASSWORDS:
             case INCLUDE_SYMBOL:
-            case CAPITALISATION_EVERY_WORD:
+            case CAPITALISE_EVERY_WORD:
                 editor.putBoolean(option.getStorageKey(), checked);
                 break;
             default:
@@ -78,12 +82,13 @@ public class UserPreferences
     {
         boolean checked = false;
 
+        final boolean defValue = option != Options.OBSCURE_PASSWORDS && random.nextBoolean();
         switch (option)
         {
             case OBSCURE_PASSWORDS:
-            case CAPITALISATION_EVERY_WORD:
+            case CAPITALISE_EVERY_WORD:
             case INCLUDE_SYMBOL:
-                checked = preferences.getBoolean(option.getStorageKey(), option.defaultSetting());
+                checked = preferences.getBoolean(option.getStorageKey(), defValue);
                 break;
         }
 
@@ -107,18 +112,16 @@ public class UserPreferences
 
     public enum Options
     {
-        OBSCURE_PASSWORDS(false, R.id.obscure_passwords, "4oikjkjw"),
-        INCLUDE_SYMBOL(true, R.id.include_symbol, "kjnk3iubj4"),
-        CAPITALISATION_EVERY_WORD(true, R.id.capitalise_every_word, "iojnkbkbl2s"),
-        PREFS_PASSWORD_LENGTH(false, 0, "09kjnkjbk2");
+        OBSCURE_PASSWORDS(R.id.obscure_passwords, "4oikjkjw"),
+        INCLUDE_SYMBOL(R.id.include_symbol, "kjnk3iubj4"),
+        CAPITALISE_EVERY_WORD(R.id.capitalise_every_word, "iojnkbkbl2s"),
+        PREFS_PASSWORD_LENGTH(0, "09kjnkjbk2");
 
-        private final boolean defaultSetting;
         private final int viewId;
         private final String storageKey;
 
-        Options(final boolean defaultSetting, final int viewId, final String storageKey)
+        Options(final int viewId, final String storageKey)
         {
-            this.defaultSetting = defaultSetting;
             this.viewId = viewId;
             this.storageKey = storageKey;
         }
@@ -139,11 +142,6 @@ public class UserPreferences
         public int getViewId()
         {
             return viewId;
-        }
-
-        public boolean defaultSetting()
-        {
-            return defaultSetting;
         }
 
         public String getStorageKey()
