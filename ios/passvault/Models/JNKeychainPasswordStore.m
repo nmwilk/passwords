@@ -27,6 +27,14 @@
     [JNKeychain saveValue:value forKey:key];
 }
 
+- (void)saveIntValue:(NSInteger)value withKey:(NSString *)key {
+    [JNKeychain saveValue:@(value) forKey:key];
+}
+
+- (NSInteger)loadIntFromKey:(NSString*)key {
+    return ((NSNumber *)[JNKeychain loadValueForKey:key]).integerValue;
+}
+
 - (void)deleteValueWithKey:(NSString *)key {
     [JNKeychain deleteValueForKey:key];
 }

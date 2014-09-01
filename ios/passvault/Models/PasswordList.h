@@ -20,6 +20,7 @@
 @interface PasswordList : NSObject
 
 @property(nonatomic, strong) NSMutableArray *passwordInfoData;
+@property(nonatomic, assign) NSInteger passwordLength;
 
 - (id)initWithPasswordStore:(id<PasswordStore>)passwordStore;
 

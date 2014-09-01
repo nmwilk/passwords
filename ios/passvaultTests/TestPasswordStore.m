@@ -41,4 +41,13 @@
     [passwords removeObjectForKey:key];
 }
 
+- (void)saveIntValue:(NSInteger)value withKey:(NSString *)key {
+
+}
+
+- (NSInteger)loadIntFromKey:(NSString *)key {
+    return 0;
+}
+
+
 @end

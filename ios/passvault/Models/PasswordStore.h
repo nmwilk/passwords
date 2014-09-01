@@ -21,4 +21,7 @@
 
 - (void)deleteValueWithKey:(NSString *)key;
 
+- (void)saveIntValue:(NSInteger)value withKey:(NSString *)key;
+
+- (NSInteger)loadIntFromKey:(NSString*)key;
 @end

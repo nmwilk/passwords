@@ -23,6 +23,7 @@
 @property(nonatomic, copy) NSString *labelText;
 @property(nonatomic, copy) NSString *passwordText;
 @property(nonatomic) PageType pageType;
+@property(nonatomic) NSInteger passwordLength;
 @end
 
 @implementation PasswordViewController {
@@ -31,12 +32,11 @@
 
 NSUInteger const kMinPwdLength = 8;
 NSUInteger const kMaxPwdLength = 32;
-NSUInteger const kDefaultPwdLength = 16;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.passwordLengthSlider.value = [self getSliderValueFromLength:kDefaultPwdLength];
+    self.passwordLengthSlider.value = [self getSliderValueFromLength:(NSUInteger) self.list.passwordLength];
 
     if (self.pageType == PageTypeEdit) {
         self.pageTitle.text = NSLocalizedString(@"Edit Password", @"");
@@ -103,7 +103,6 @@ NSUInteger const kDefaultPwdLength = 16;
 
 - (void)configureForNewPasswordWithPasswordList:(PasswordList *)list {
     self.pageType = PageTypeNew;
-
     self.list = list;
 }
 
@@ -125,6 +124,7 @@ NSUInteger const kDefaultPwdLength = 16;
 
 - (void)lengthChanged {
     NSUInteger length = [self getLengthFromSlider];
+    self.passwordLength = length;
     [self setPasswordLengthField:length];
 
     [self.passwordField setLength:length];
@@ -268,6 +268,7 @@ replacementString:(NSString *)string {
 }
 
 - (IBAction)done {
+    self.list.passwordLength = self.passwordLength;
     if (self.pageType == PageTypeEdit) {
         [self.list writeLabel:self.labelField.text forRow:self.editedItem];
         [self.list writePassword:self.passwordField.text forRow:self.editedItem];

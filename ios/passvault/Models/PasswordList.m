@@ -18,7 +18,9 @@
 #import "PasswordInfoItem.h"
 #import "PasswordStore.h"
 
-#define kPrefsPasswordIds @"passwords"
+static NSString* kPrefsPasswordIds = @"passwords";
+static NSString *kPrefsPasswordLength = @"passwordLength";
+static const NSUInteger kDefaultPwdLength = 16;
 
 @interface PasswordList ()
 @property(nonatomic, strong) id <PasswordStore> passwordStore;
@@ -39,8 +41,10 @@
         if (passwordInfoData == nil) {
             _passwordInfoData = [[NSMutableArray alloc] init];
             [_passwordInfoData addObject:[[PasswordInfoItem alloc] initWithUid:1 label:@"iTunes"]];
+            _passwordLength = kDefaultPwdLength;
         } else {
             _passwordInfoData = [NSKeyedUnarchiver unarchiveObjectWithData:passwordInfoData];
+            _passwordLength = [self.passwordStore loadIntFromKey:kPrefsPasswordLength];
         }
     }
 
@@ -61,6 +65,11 @@
 - (NSString *)password:(NSUInteger)index {
     NSString *const string = [self.passwordStore loadFromKey:[self getKeyForItem:(self.passwordInfoData)[index]]];
     return string == nil ? @"" : string;
+}
+
+- (void)setPasswordLength:(NSInteger)passwordLength {
+    _passwordLength = passwordLength;
+    [self.passwordStore saveIntValue:_passwordLength withKey:kPrefsPasswordLength];
 }
 
 - (NSString *)getKeyForItem:(PasswordInfoItem *)item {
