@@ -30,7 +30,7 @@
     BOOL animating;
 }
 
-NSUInteger const kMinPwdLength = 8;
+NSUInteger const kMinPwdLength = 12;
 NSUInteger const kMaxPwdLength = 32;
 
 - (void)viewDidLoad {

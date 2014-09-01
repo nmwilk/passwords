@@ -24,7 +24,7 @@
 - (id)init {
     self = [super init];
 
-    wordLengths = @[@"3", @"4", @"5", @"6", @"7", @"8", @"9"];
+    wordLengths = @[@"3", @"4", @"5", @"6", @"7"];
     dictionary = [[NSMutableDictionary alloc] init];
 
     for (NSString *wordLength in wordLengths) {
