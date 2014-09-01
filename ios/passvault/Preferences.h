@@ -17,9 +17,9 @@
 
 
 @interface Preferences : NSObject
+
+@property (nonatomic, assign) BOOL obscurePasswords;
+@property (nonatomic, assign) BOOL capitaliseEveryWord;
+@property (nonatomic, assign) BOOL includeSymbol;
 + (Preferences *)sharedPrefs;
-
-- (BOOL)obscurePasswords;
-
-- (void)setObscurePasswords:(BOOL)obscurePasswords;
 @end

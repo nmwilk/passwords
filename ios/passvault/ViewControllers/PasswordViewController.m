@@ -69,6 +69,8 @@ NSUInteger const kMaxPwdLength = 32;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
+    [self.passwordField refreshOptionsFromPreferences];
+
     if (self.pageType == PageTypeNew) {
         [self.labelField becomeFirstResponder];
     }

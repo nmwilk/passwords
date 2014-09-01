@@ -15,29 +15,52 @@
 #import "Preferences.h"
 
 NSString *const OptionKeyObscurePasswords = @"OptionObscurePasswords";
+NSString *const OptionKeyCapitaliseEveryWord = @"OptionKeyCapitaliseEveryWord";
+NSString *const OptionKeyIncludeSymbol = @"OptionKeyIncludeSymbol";
 
 @implementation Preferences {
 
 }
 
-+(Preferences*)sharedPrefs {
++ (Preferences *)sharedPrefs {
     static Preferences *sharedPrefs;
     @synchronized (self) {
         if (!sharedPrefs) {
             sharedPrefs = [[Preferences alloc] init];
+            NSDictionary *defaultValues = @{OptionKeyObscurePasswords : @NO, OptionKeyCapitaliseEveryWord : @YES, OptionKeyIncludeSymbol : @YES};
+            [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
         }
     }
 
     return sharedPrefs;
 }
 
--(BOOL)obscurePasswords {
+- (BOOL)obscurePasswords {
     return [[NSUserDefaults standardUserDefaults] boolForKey:OptionKeyObscurePasswords];
 }
 
--(void)setObscurePasswords:(BOOL)obscurePasswords {
+- (void)setObscurePasswords:(BOOL)obscurePasswords {
     [[NSUserDefaults standardUserDefaults] setBool:obscurePasswords forKey:OptionKeyObscurePasswords];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+- (BOOL)capitaliseEveryWord {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:OptionKeyCapitaliseEveryWord];
+}
+
+- (void)setCapitaliseEveryWord:(BOOL)capitaliseEveryWord {
+    [[NSUserDefaults standardUserDefaults] setBool:capitaliseEveryWord forKey:OptionKeyCapitaliseEveryWord];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)includeSymbol {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:OptionKeyIncludeSymbol];
+}
+
+- (void)setIncludeSymbol:(BOOL)includeSymbol {
+    [[NSUserDefaults standardUserDefaults] setBool:includeSymbol forKey:OptionKeyIncludeSymbol];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 
 @end

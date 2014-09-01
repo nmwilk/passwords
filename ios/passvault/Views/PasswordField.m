@@ -16,6 +16,7 @@
 #import "PasswordField.h"
 #import "PasswordGeneratorModel.h"
 #import "Arc4Randomizer.h"
+#import "Preferences.h"
 
 @implementation PasswordField {
     PasswordGeneratorModel *passwordModel;
@@ -31,11 +32,15 @@
     return self;
 }
 
+- (void)refreshOptionsFromPreferences {
+    passwordModel.capitalisationType = [Preferences sharedPrefs].capitaliseEveryWord ? PVCapitalisationTypeEveryWord : PVCapitalisationTypeRandom;
+    passwordModel.includeSymbol = [Preferences sharedPrefs].includeSymbol;
+}
+
 - (void)addRandom:(CGFloat)random {
     [passwordModel addRandom:random];
 
     self.text = [passwordModel formPassword];
-
 }
 
 - (void)setLength:(NSUInteger)length {

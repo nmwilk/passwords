@@ -33,11 +33,17 @@
     }
 
     [self.obscurePasswords setOn:[Preferences sharedPrefs].obscurePasswords];
+    [self.capitaliseEveryWord setOn:[Preferences sharedPrefs].capitaliseEveryWord];
+    [self.includeSymbol setOn:[Preferences sharedPrefs].includeSymbol];
 }
 
 - (void)switchToggled:(UISwitch *)switchToggled {
     if (switchToggled == self.obscurePasswords) {
         [Preferences sharedPrefs].obscurePasswords = self.obscurePasswords.on;
+    } else if (switchToggled == self.capitaliseEveryWord) {
+        [Preferences sharedPrefs].capitaliseEveryWord = self.capitaliseEveryWord.on;
+    } else if (switchToggled == self.includeSymbol) {
+        [Preferences sharedPrefs].includeSymbol = self.includeSymbol.on;
     }
 }
 

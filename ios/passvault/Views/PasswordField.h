@@ -17,6 +17,8 @@
 
 @interface PasswordField : UITextField
 
+- (void)refreshOptionsFromPreferences;
+
 -(void)addRandom:(CGFloat)random;
 -(void)setLength:(NSUInteger)length;
 @end

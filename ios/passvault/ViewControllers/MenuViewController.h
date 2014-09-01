@@ -18,4 +18,6 @@
 @interface MenuViewController : UIViewController
 
 @property (nonatomic,strong) IBOutlet UISwitch *obscurePasswords;
+@property (nonatomic,strong) IBOutlet UISwitch *capitaliseEveryWord;
+@property (nonatomic,strong) IBOutlet UISwitch *includeSymbol;
 @end
