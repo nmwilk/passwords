@@ -27,7 +27,9 @@ NSString *const OptionKeyIncludeSymbol = @"OptionKeyIncludeSymbol";
     @synchronized (self) {
         if (!sharedPrefs) {
             sharedPrefs = [[Preferences alloc] init];
-            NSDictionary *defaultValues = @{OptionKeyObscurePasswords : @NO, OptionKeyCapitaliseEveryWord : @(arc4random() % 2 == 1), OptionKeyIncludeSymbol : @(arc4random() % 2 == 1)};
+            NSDictionary *defaultValues = @{OptionKeyObscurePasswords : @NO,
+                    OptionKeyCapitaliseEveryWord : @(arc4random() % 2 == 1),
+                    OptionKeyIncludeSymbol : @(arc4random() % 2 == 1)};
             [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
         }
     }
@@ -39,26 +41,28 @@ NSString *const OptionKeyIncludeSymbol = @"OptionKeyIncludeSymbol";
     return [[NSUserDefaults standardUserDefaults] boolForKey:OptionKeyObscurePasswords];
 }
 
-- (void)setObscurePasswords:(BOOL)obscurePasswords {
-    [[NSUserDefaults standardUserDefaults] setBool:obscurePasswords forKey:OptionKeyObscurePasswords];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 - (BOOL)capitaliseEveryWord {
     return [[NSUserDefaults standardUserDefaults] boolForKey:OptionKeyCapitaliseEveryWord];
-}
-
-- (void)setCapitaliseEveryWord:(BOOL)capitaliseEveryWord {
-    [[NSUserDefaults standardUserDefaults] setBool:capitaliseEveryWord forKey:OptionKeyCapitaliseEveryWord];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (BOOL)includeSymbol {
     return [[NSUserDefaults standardUserDefaults] boolForKey:OptionKeyIncludeSymbol];
 }
 
+- (void)setObscurePasswords:(BOOL)obscurePasswords {
+    [self saveBool:obscurePasswords key:OptionKeyObscurePasswords];
+}
+
 - (void)setIncludeSymbol:(BOOL)includeSymbol {
-    [[NSUserDefaults standardUserDefaults] setBool:includeSymbol forKey:OptionKeyIncludeSymbol];
+    [self saveBool:includeSymbol key:OptionKeyIncludeSymbol];
+}
+
+- (void)setCapitaliseEveryWord:(BOOL)capitaliseEveryWord {
+    [self saveBool:capitaliseEveryWord key:OptionKeyCapitaliseEveryWord];
+}
+
+- (void)saveBool:(BOOL)value key:(NSString *)key {
+    [[NSUserDefaults standardUserDefaults] setBool:value forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
