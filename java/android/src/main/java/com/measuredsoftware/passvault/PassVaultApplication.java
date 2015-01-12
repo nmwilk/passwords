@@ -85,6 +85,6 @@ public class PassVaultApplication extends Application
 
     private String constructFilename(final Integer wordLength)
     {
-        return String.format("enable1_%d.txt", wordLength);
+        return String.format(Locale.UK, "enable1_%d.txt", wordLength);
     }
 }

@@ -1,5 +1,13 @@
 apply plugin: 'java'
+apply plugin: 'war'
+
+
+sourceCompatibility = 1.7
+
+sourceSets.main.java.srcDirs = ["src/main/java"]
+sourceSets.test.java.srcDirs = ["src/test/java"]
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.11'
 }
