@@ -16,16 +16,18 @@ package com.measuredsoftware.passvault;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 
 import com.google.gson.Gson;
+import com.measuredsoftware.passvault.model.NavigationClickHandler;
 import com.measuredsoftware.passvault.model.PasswordListAdapter;
 import com.measuredsoftware.passvault.model.PasswordModel;
 import com.measuredsoftware.passvault.model.UserPreferences;
@@ -34,7 +36,7 @@ import com.measuredsoftware.passvault.view.PasswordList;
 import com.measuredsoftware.passvault.view.PasswordListItem;
 import com.measuredsoftware.passvault.view.PasswordPopup;
 
-public class MainActivity extends AppCompatActivity implements MenuScreen.ChangedListener, PasswordListItem.EditItemListener
+public class MainActivity extends AppCompatActivity implements MenuScreen.ChangedListener, PasswordListItem.EditItemListener, AbsListView.OnScrollListener
 {
     public static final String RESULT_EXTRA = "krkesjfkejfe";
 
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements MenuScreen.Change
     private MenuItem editButton;
     private Toolbar toolbar;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    private boolean scrolling;
+    private NavigationClickHandler navigationClickHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements MenuScreen.Change
         setSupportActionBar(toolbar);
 
         passwordList = (PasswordList) findViewById(R.id.password_list);
+        passwordList.setOnScrollListener(this);
         final PasswordListAdapter adapter = new PasswordListAdapter(this, passwordList);
         passwordList.setAdapter(adapter);
         passwordList.getAdapter().registerDataSetObserver(new DataSetObserver()
@@ -107,28 +112,25 @@ public class MainActivity extends AppCompatActivity implements MenuScreen.Change
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer);
 
         // Set the actionbarToggle to drawer layout
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
+        navigationClickHandler = new NavigationClickHandler(dataModel, drawerLayout);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(final View v)
             {
-                if (dataModel.getMode() == PasswordListAdapter.Mode.EDIT)
+                if (navigationClickHandler.toggleEditModeOnClick(scrolling))
                 {
                     toggleEditMode();
-                }
-                else if (drawerLayout.isDrawerOpen(GravityCompat.START))
-                {
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                }
-                else
-                {
-                    drawerLayout.openDrawer(GravityCompat.START);
+                    if (!scrolling)
+                    {
+                        actionBarDrawerToggle.syncState();
+                    }
                 }
 
-                actionBarDrawerToggle.syncState();
             }
         });
 
@@ -157,7 +159,10 @@ public class MainActivity extends AppCompatActivity implements MenuScreen.Change
         switch (id)
         {
             case R.id.edit_button:
-                toggleEditMode();
+                if (!scrolling)
+                {
+                    toggleEditMode();
+                }
                 break;
             default:
                 handled = super.onOptionsItemSelected(item);
@@ -182,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements MenuScreen.Change
 
         editButton.setVisible(newMode == PasswordListAdapter.Mode.NORMAL);
         addButton.setVisibility(newMode == PasswordListAdapter.Mode.NORMAL ? View.VISIBLE : View.INVISIBLE);
-        getSupportActionBar().setDisplayShowTitleEnabled(newMode != PasswordListAdapter.Mode.EDIT);
         getSupportActionBar().setDisplayHomeAsUpEnabled(newMode == PasswordListAdapter.Mode.EDIT);
     }
 
@@ -275,5 +279,17 @@ public class MainActivity extends AppCompatActivity implements MenuScreen.Change
     public void onOpenPopup(final PasswordModel item, final int x, final int y)
     {
         passwordList.openPopup(x, y, item.getPassword(), getUserPrefs().isOptionChecked(UserPreferences.Options.OBSCURE_PASSWORDS));
+    }
+
+    @Override
+    public void onScrollStateChanged(final AbsListView view, final int scrollState)
+    {
+        scrolling = scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
+    }
+
+    @Override
+    public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount, final int totalItemCount)
+    {
+        // not used
     }
 }
