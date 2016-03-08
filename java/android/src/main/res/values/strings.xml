@@ -20,5 +20,7 @@
     <string name="include_symbols">Include Symbol</string>
     <string name="capitalise_every_word">Capitalise Every Word</string>
     <string name="copied">COPIED</string>
+    <string name="openDrawer">Open Options Menu</string>
+    <string name="closeDrawer">Close Options Menu</string>
 
 </resources>

@@ -13,20 +13,28 @@
 // limitations under the License.
 package com.measuredsoftware.passvault;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Gravity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+
 import com.google.gson.Gson;
 import com.measuredsoftware.passvault.model.PasswordListAdapter;
 import com.measuredsoftware.passvault.model.PasswordModel;
 import com.measuredsoftware.passvault.model.UserPreferences;
-import com.measuredsoftware.passvault.view.*;
+import com.measuredsoftware.passvault.view.MenuScreen;
+import com.measuredsoftware.passvault.view.PasswordList;
+import com.measuredsoftware.passvault.view.PasswordListItem;
+import com.measuredsoftware.passvault.view.PasswordPopup;
 
-public class MainActivity extends Activity implements View.OnClickListener, MenuScreen.ChangedListener, PasswordListItem.EditItemListener
+public class MainActivity extends AppCompatActivity implements MenuScreen.ChangedListener, PasswordListItem.EditItemListener
 {
     public static final String RESULT_EXTRA = "krkesjfkejfe";
 
@@ -36,10 +44,9 @@ public class MainActivity extends Activity implements View.OnClickListener, Menu
     private PasswordList passwordList;
     private View addButton;
     private PasswordListAdapter dataModel;
-    private View editButton;
-    private View menuButton;
-    private DrawerLayout slidingDrawer;
-    private AddArrow addArrow;
+    private MenuItem editButton;
+    private Toolbar toolbar;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,6 +54,9 @@ public class MainActivity extends Activity implements View.OnClickListener, Menu
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         passwordList = (PasswordList) findViewById(R.id.password_list);
         final PasswordListAdapter adapter = new PasswordListAdapter(this, passwordList);
@@ -62,7 +72,6 @@ public class MainActivity extends Activity implements View.OnClickListener, Menu
                     {
                         toggleEditMode();
                     }
-                    showEmptyArrowIfNeeded();
                 }
 
                 dataModel.storePasswords();
@@ -72,22 +81,21 @@ public class MainActivity extends Activity implements View.OnClickListener, Menu
         });
         adapter.setEditItemListener(this);
 
+        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.sliding_drawer);
+
         dataModel = passwordList.getPasswordListAdapter();
 
         addButton = findViewById(R.id.add_button);
-        addButton.setOnClickListener(this);
-
-        editButton = findViewById(R.id.edit_button);
-        editButton.setOnClickListener(this);
-
-        menuButton = findViewById(R.id.menu_button);
-        menuButton.setOnClickListener(this);
+        addButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(final View v)
+            {
+                goToPasswordEditor(NewPasswordActivity.class, REQUEST_CODE_ADD, null);
+            }
+        });
 
         passwordList.setPasswordPopup((PasswordPopup) findViewById(R.id.password_popup));
-
-        addArrow = (AddArrow) findViewById(R.id.add_arrow);
-
-        slidingDrawer = (DrawerLayout) findViewById(R.id.sliding_drawer);
 
         final MenuScreen menuScreen = (MenuScreen) findViewById(R.id.menu_screen);
         menuScreen.setListener(this);
@@ -96,7 +104,67 @@ public class MainActivity extends Activity implements View.OnClickListener, Menu
             menuScreen.setOption(option.getViewId(), getUserPrefs().isOptionChecked(option));
         }
 
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer);
+
+        // Set the actionbarToggle to drawer layout
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(final View v)
+            {
+                if (dataModel.getMode() == PasswordListAdapter.Mode.EDIT)
+                {
+                    toggleEditMode();
+                }
+                else if (drawerLayout.isDrawerOpen(GravityCompat.START))
+                {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+                else
+                {
+                    drawerLayout.openDrawer(GravityCompat.START);
+                }
+
+                actionBarDrawerToggle.syncState();
+            }
+        });
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    // Menu icons are inflated just as they were with actionbar
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        editButton = toolbar.getMenu().findItem(R.id.edit_button);
         updateEditButtonState();
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item)
+    {
+        boolean handled = true;
+
+        final int id = item.getItemId();
+        switch (id)
+        {
+            case R.id.edit_button:
+                toggleEditMode();
+                break;
+            default:
+                handled = super.onOptionsItemSelected(item);
+                break;
+        }
+
+        return handled;
     }
 
     private UserPreferences getUserPrefs()
@@ -104,44 +172,23 @@ public class MainActivity extends Activity implements View.OnClickListener, Menu
         return ((PassVaultApplication) getApplication()).getUserPrefs();
     }
 
-    @Override
-    public void onClick(final View v)
-    {
-        switch (v.getId())
-        {
-            case R.id.add_button:
-                goToPasswordEditor(NewPasswordActivity.class, REQUEST_CODE_ADD, null);
-                break;
-            case R.id.edit_button:
-                toggleEditMode();
-                break;
-            case R.id.menu_button:
-                if (slidingDrawer.isDrawerOpen(Gravity.LEFT))
-                {
-                    slidingDrawer.closeDrawer(Gravity.LEFT);
-                }
-                else
-                {
-                    slidingDrawer.openDrawer(Gravity.LEFT);
-                }
-                break;
-        }
-    }
-
     private void toggleEditMode()
     {
         final PasswordListAdapter.Mode newMode = dataModel.getMode() == PasswordListAdapter.Mode.EDIT
-                                                 ? PasswordListAdapter.Mode.NORMAL
-                                                 : PasswordListAdapter.Mode.EDIT;
+                ? PasswordListAdapter.Mode.NORMAL
+                : PasswordListAdapter.Mode.EDIT;
         dataModel.setMode(newMode);
         passwordList.setMode(newMode);
-        addButton.setEnabled(newMode == PasswordListAdapter.Mode.NORMAL);
-        menuButton.setEnabled(newMode == PasswordListAdapter.Mode.NORMAL);
+
+        editButton.setVisible(newMode == PasswordListAdapter.Mode.NORMAL);
+        addButton.setVisibility(newMode == PasswordListAdapter.Mode.NORMAL ? View.VISIBLE : View.INVISIBLE);
+        getSupportActionBar().setDisplayShowTitleEnabled(newMode != PasswordListAdapter.Mode.EDIT);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(newMode == PasswordListAdapter.Mode.EDIT);
     }
 
     private void updateEditButtonState()
     {
-        editButton.setEnabled(passwordList.getCount() > 0);
+        editButton.setVisible(passwordList.getCount() > 0);
     }
 
     private void goToPasswordEditor(final Class clazz, final int requestCode, final PasswordModel model)
@@ -169,7 +216,6 @@ public class MainActivity extends Activity implements View.OnClickListener, Menu
             if (requestCode == REQUEST_CODE_ADD)
             {
                 dataModel.addPassword(model);
-                addArrow.hide();
             }
             else if (requestCode == REQUEST_CODE_EDIT)
             {
@@ -182,28 +228,30 @@ public class MainActivity extends Activity implements View.OnClickListener, Menu
     protected void onPause()
     {
         super.onPause();
-        addArrow.hide();
+        if (dataModel.getMode() == PasswordListAdapter.Mode.EDIT)
+        {
+            disableEditModeAndSyncDrawToggle();
+        }
         passwordList.closePopup();
     }
 
     @Override
-    protected void onResume()
+    public void onBackPressed()
     {
-        super.onResume();
-
-        showEmptyArrowIfNeeded();
-    }
-
-    private void showEmptyArrowIfNeeded()
-    {
-        if (dataModel.isEmpty())
+        if (dataModel.getMode() == PasswordListAdapter.Mode.EDIT)
         {
-            addArrow.show();
+            disableEditModeAndSyncDrawToggle();
         }
         else
         {
-            addArrow.hide();
+            super.onBackPressed();
         }
+    }
+
+    private void disableEditModeAndSyncDrawToggle()
+    {
+        toggleEditMode();
+        actionBarDrawerToggle.syncState();
     }
 
     @Override

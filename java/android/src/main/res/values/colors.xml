@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="app_tint">#86adca</color>
-    <color name="disabled_button_text">#BBB</color>
     <color name="app_tint_dark">#6290a6</color>
+
+    <color name="primary">@color/app_tint</color>
+    <color name="accent">@color/app_tint_dark</color>
+
+    <color name="disabled_button_text">#BBB</color>
     <color name="title_colour">#FFF</color>
     <color name="heading_colour">#727272</color>
     <color name="password_length_colour">#808080</color>

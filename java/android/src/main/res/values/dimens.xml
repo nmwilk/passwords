@@ -19,7 +19,6 @@
     <dimen name="edit_text_padding">4dp</dimen>
     <dimen name="slider_margin_top">4dp</dimen>
     <dimen name="slider_margin_bottom">10dp</dimen>
-    <dimen name="sliding_drawer_margin">60dp</dimen>
     <dimen name="menu_option_text_size">@dimen/small_text</dimen>
     <dimen name="delete_icon_padding">10dp</dimen>
     <dimen name="footer_height">55dp</dimen>
@@ -31,5 +30,7 @@
     <dimen name="popup_password_corner_radius">12dp</dimen>
     <dimen name="popup_password_padding_horz">16dp</dimen>
     <dimen name="popup_password_padding_vert">10dp</dimen>
+    <dimen name="fab_margin">20dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
 
 </resources>
