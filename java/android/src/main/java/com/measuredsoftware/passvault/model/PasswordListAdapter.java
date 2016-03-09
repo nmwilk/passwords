@@ -40,7 +40,7 @@ public class PasswordListAdapter extends ArrayAdapter<PasswordModel>
 
     private static final String PASSWORD_KEY = "fihrbkefjebke";
 
-    private static final String PASSWORD_STORE = "com.measuredsoftware.passvault";
+    public static final String PASSWORD_STORE = "com.measuredsoftware.passvault";
 
     private final Comparator<? super PasswordModel> sorter;
     private final PasswordList listView;
