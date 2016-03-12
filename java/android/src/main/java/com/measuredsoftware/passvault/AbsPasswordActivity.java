@@ -54,6 +54,7 @@ public abstract class AbsPasswordActivity extends AppCompatActivity implements S
     private boolean started;
     private int passwordLength;
     private Toolbar toolbar;
+    private int minPwdLengthManualEntry;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -72,6 +73,7 @@ public abstract class AbsPasswordActivity extends AppCompatActivity implements S
             application.getUserPrefs().isOptionChecked(UserPreferences.Options.CAPITALISE_EVERY_WORD) ? PasswordGenerator.Capitalisation.EVERY_WORD : PasswordGenerator.Capitalisation.RANDOM);
 
         charsText = getResources().getString(R.string.chars_suffix);
+        minPwdLengthManualEntry = getResources().getInteger(R.integer.manual_pwd_len_min);
 
         generatorSection = (GeneratorSection) findViewById(R.id.generator_section);
         passwordNameEditText = (EditText) findViewById(R.id.name);
@@ -201,7 +203,7 @@ public abstract class AbsPasswordActivity extends AppCompatActivity implements S
 
     protected boolean passwordIsValid()
     {
-        return getPasswordValue().length() >= lengthSlider.getPwdLenMin();
+        return getPasswordValue().length() >= Math.min(lengthSlider.getPwdLenMin(), minPwdLengthManualEntry);
     }
 
     protected void updateButtonStates()
