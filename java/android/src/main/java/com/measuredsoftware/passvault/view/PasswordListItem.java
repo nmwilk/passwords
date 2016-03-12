@@ -18,16 +18,16 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.drawable.TransitionDrawable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.measuredsoftware.passvault.R;
-import com.measuredsoftware.passvault.drawable.StateTransitionDrawable;
 import com.measuredsoftware.passvault.model.PasswordListAdapter;
 import com.measuredsoftware.passvault.model.PasswordModel;
 
@@ -38,15 +38,12 @@ public class PasswordListItem extends RelativeLayout implements View.OnClickList
 {
     private static final float COPIED_SCALE_FACTOR = 1.2f;
     private static final long COPIED_ANIMATION_DURATION = 500;
-    private static final int BACKGROUND_TRANSITION_DURATION_IN = 50;
-    private static final int BACKGROUND_TRANSITION_DURATION_OUT = 250;
 
     private final TextView passwordName;
     private final View copiedNotification;
     private final View editIcon;
     private final View deleteButton;
     private final LayoutTransition transition;
-    private final StateTransitionDrawable background;
     private final int paddingLeft;
     private final Paint linePaint;
     private final Point touchPosition = new Point();
@@ -65,15 +62,15 @@ public class PasswordListItem extends RelativeLayout implements View.OnClickList
 
         final Resources resources = context.getResources();
 
-        final TransitionDrawable drawable = (TransitionDrawable) resources.getDrawable(R.drawable.row_background_transition);
-        background = new StateTransitionDrawable(drawable, BACKGROUND_TRANSITION_DURATION_IN);
-        setBackground(drawable);
-
         paddingLeft = resources.getDimensionPixelSize(R.dimen.password_list_item_margin_left);
         setPadding(paddingLeft, 0, 0, 0);
 
         linePaint = new Paint();
         linePaint.setColor(resources.getColor(R.color.divider_colour));
+
+        final int[] attrs = new int[]{R.attr.selectableItemBackground};
+        final TypedArray typedArray = context.obtainStyledAttributes(attrs);
+        setBackgroundResource(typedArray.getResourceId(0, 0));
 
         inflate(context, R.layout.password_list_item_content, this);
 
@@ -143,16 +140,9 @@ public class PasswordListItem extends RelativeLayout implements View.OnClickList
     public boolean onTouchEvent(final MotionEvent event)
     {
         final int action = event.getAction();
-        if (action == MotionEvent.ACTION_CANCEL
-            || action == MotionEvent.ACTION_UP)
-        {
-            background.off(BACKGROUND_TRANSITION_DURATION_OUT);
-            background.setTouchDown(false);
-        }
-        else if (action == MotionEvent.ACTION_DOWN)
+        if (action == MotionEvent.ACTION_DOWN)
         {
             touchPosition.set((int) event.getX() + getLeft(), (int) event.getY() + getTop());
-            background.setTouchDown(true);
         }
         return super.onTouchEvent(event);
     }
@@ -211,12 +201,10 @@ public class PasswordListItem extends RelativeLayout implements View.OnClickList
     {
         if (editItemListener != null && mode != PasswordListAdapter.Mode.EDIT)
         {
-            background.off(BACKGROUND_TRANSITION_DURATION_OUT);
-            setPressed(false);
             editItemListener.onOpenPopup(((PasswordListItem) v).getItem(), touchPosition.x, touchPosition.y);
         }
 
-        return false;
+        return true;
     }
 
     @Override

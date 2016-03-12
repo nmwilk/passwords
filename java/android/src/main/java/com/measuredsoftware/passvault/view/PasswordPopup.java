@@ -34,6 +34,7 @@ public class PasswordPopup extends TextView
         super(context, attrs);
 
         setTextSize(context.getResources().getDimensionPixelSize(R.dimen.popup_password_text_size));
+        setSingleLine();
         setBackgroundResource(R.drawable.popup_password_background);
     }
 
