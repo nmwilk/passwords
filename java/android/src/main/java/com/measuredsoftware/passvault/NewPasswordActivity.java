@@ -41,7 +41,7 @@ public class NewPasswordActivity extends AbsPasswordActivity
 
         if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
         {
-            overridePendingTransition(R.anim.no_change, R.anim.no_change);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             revealStartLocation = new Point(getIntent().getIntExtra(PARAM_REVEAL_X, 0), getIntent().getIntExtra(PARAM_REVEAL_Y, 0));
             rootLayout = findViewById(R.id.container);
             rootLayout.setVisibility(View.INVISIBLE);
