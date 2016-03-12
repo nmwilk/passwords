@@ -136,7 +136,6 @@ public class MainActivity extends AppCompatActivity implements MenuScreen.Change
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
-    // Menu icons are inflated just as they were with actionbar
     @Override
     public boolean onCreateOptionsMenu(final Menu menu)
     {

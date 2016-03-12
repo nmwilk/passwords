@@ -13,16 +13,20 @@
 // limitations under the License.
 package com.measuredsoftware.passvault;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.measuredsoftware.passvault.listener.PasswordTextWatcher;
 import com.measuredsoftware.passvault.model.PasswordGenerator;
@@ -36,7 +40,7 @@ import com.measuredsoftware.passvault.view.PasswordLengthSlider;
  * The base class for the New and Edit Password screens.
  */
 @SuppressWarnings("ConstantConditions")
-public abstract class AbsPasswordActivity extends Activity implements SeekBar.OnSeekBarChangeListener, View.OnClickListener,
+public abstract class AbsPasswordActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener,
     View.OnTouchListener
 {
     private GeneratorSection generatorSection;
@@ -45,15 +49,20 @@ public abstract class AbsPasswordActivity extends Activity implements SeekBar.On
     private TextView lengthText;
     private String charsText;
     private PasswordGenerator passwordGenerator;
-    private View doneButton;
+    private MenuItem doneButton;
     private PasswordLengthSlider lengthSlider;
     private boolean started;
     private int passwordLength;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.password_activity);
+
+        setUpActionBar();
 
         final PassVaultApplication application = (PassVaultApplication) getApplication();
         passwordGenerator = new PasswordGenerator(new RandomRandomizer(application.getDictionary(), application.getWordLengths()));
@@ -63,14 +72,6 @@ public abstract class AbsPasswordActivity extends Activity implements SeekBar.On
             application.getUserPrefs().isOptionChecked(UserPreferences.Options.CAPITALISE_EVERY_WORD) ? PasswordGenerator.Capitalisation.EVERY_WORD : PasswordGenerator.Capitalisation.RANDOM);
 
         charsText = getResources().getString(R.string.chars_suffix);
-
-        setContentView(R.layout.password_activity);
-
-        setPageTitle(getTitleResId());
-
-        doneButton = findViewById(R.id.done);
-        doneButton.setOnClickListener(this);
-        findViewById(R.id.cancel).setOnClickListener(this);
 
         generatorSection = (GeneratorSection) findViewById(R.id.generator_section);
         passwordNameEditText = (EditText) findViewById(R.id.name);
@@ -131,12 +132,55 @@ public abstract class AbsPasswordActivity extends Activity implements SeekBar.On
         findViewById(R.id.password_randomizer).setOnTouchListener(this);
     }
 
+    private void setUpActionBar()
+    {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setPageTitle(getTitleResId());
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_content_clear);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_password_screen, menu);
+
+        doneButton = toolbar.getMenu().findItem(R.id.done_button);
+
+        updateButtonStates();
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item)
+    {
+        boolean handled = true;
+
+        final int id = item.getItemId();
+        switch (id)
+        {
+            case android.R.id.home:
+                close(false);
+                break;
+            case R.id.done_button:
+                close(true);
+                break;
+            default:
+                handled = super.onOptionsItemSelected(item);
+                break;
+        }
+
+        return handled;
+    }
+
     @Override
     protected void onStart()
     {
         super.onStart();
 
-        updateButtonStates();
         final int passwordLength = getStartingPasswordLength();
         lengthSlider.setLength(passwordLength);
         passwordGenerator.setLength(passwordLength);
@@ -145,7 +189,7 @@ public abstract class AbsPasswordActivity extends Activity implements SeekBar.On
 
     protected abstract int getStartingPasswordLength();
 
-    public View getDoneButton()
+    public MenuItem getDoneButton()
     {
         return doneButton;
     }
@@ -191,7 +235,7 @@ public abstract class AbsPasswordActivity extends Activity implements SeekBar.On
 
     private void setPageTitle(final int titleResId)
     {
-        ((TextView) findViewById(R.id.title)).setText(titleResId);
+        getSupportActionBar().setTitle(titleResId);
     }
 
     protected GeneratorSection getGeneratorSection()
@@ -233,20 +277,6 @@ public abstract class AbsPasswordActivity extends Activity implements SeekBar.On
     public void onStopTrackingTouch(final SeekBar seekBar)
     {
         // do nothing
-    }
-
-    @Override
-    public void onClick(final View v)
-    {
-        switch (v.getId())
-        {
-            case R.id.done:
-                close(true);
-                break;
-            case R.id.cancel:
-                close(false);
-                break;
-        }
     }
 
     private void close(final boolean submit)
