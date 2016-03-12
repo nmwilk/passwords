@@ -206,7 +206,11 @@ public abstract class AbsPasswordActivity extends AppCompatActivity implements S
 
     protected void updateButtonStates()
     {
-        getDoneButton().setEnabled(passwordNameIsValid() && passwordIsValid());
+        final MenuItem doneButton = getDoneButton();
+        if (doneButton != null)
+        {
+            doneButton.setEnabled(passwordNameIsValid() && passwordIsValid());
+        }
     }
 
     protected String getPasswordName()
