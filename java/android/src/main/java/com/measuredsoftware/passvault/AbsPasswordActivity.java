@@ -300,7 +300,6 @@ public abstract class AbsPasswordActivity extends AppCompatActivity implements S
         }
 
         finish();
-        overridePendingTransition(R.anim.no_change, R.anim.password_out);
     }
 
     protected abstract PasswordModel getPasswordModelToCommit();

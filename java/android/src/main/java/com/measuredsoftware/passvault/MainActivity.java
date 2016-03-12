@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements MenuScreen.Change
             @Override
             public void onClick(final View v)
             {
-                goToPasswordEditor(NewPasswordActivity.class, REQUEST_CODE_ADD, null);
+                goToPasswordCreator();
             }
         });
 
@@ -193,16 +193,18 @@ public class MainActivity extends AppCompatActivity implements MenuScreen.Change
         editButton.setVisible(passwordList.getCount() > 0);
     }
 
-    private void goToPasswordEditor(final Class clazz, final int requestCode, final PasswordModel model)
+    private void goToPasswordCreator()
     {
-        final Intent intent = new Intent(this, clazz);
-        if (model != null)
-        {
-            final Gson gson = new Gson();
-            intent.putExtra(EditPasswordActivity.CONFIG_EXTRA, gson.toJson(model));
-        }
-        startActivityForResult(intent, requestCode);
-        overridePendingTransition(R.anim.password_in, R.anim.no_change);
+        final int addButtonSize = Math.round(addButton.getWidth() / 2);
+        final int fabX = (int) (addButton.getX() + addButtonSize);
+        final int fabY = (int) (addButton.getY() + addButtonSize);
+        startActivityForResult(NewPasswordActivity.createLaunchIntent(this, fabX, fabY), REQUEST_CODE_ADD);
+    }
+
+    private void goToPasswordEditor(final PasswordModel model)
+    {
+        final Gson gson = new Gson();
+        startActivityForResult(EditPasswordActivity.createLaunchIntent(this, gson.toJson(model)), REQUEST_CODE_EDIT);
     }
 
     @Override
@@ -270,7 +272,7 @@ public class MainActivity extends AppCompatActivity implements MenuScreen.Change
     @Override
     public void onItemChosenForEdit(final PasswordModel item)
     {
-        goToPasswordEditor(EditPasswordActivity.class, REQUEST_CODE_EDIT, item);
+        goToPasswordEditor(item);
     }
 
     @Override
