@@ -1,6 +1,8 @@
 Pass Words
 ==========
 
+DEPRECATED - NO LONGER MAINTAINED.
+
 iOS/Android password manager and generater.
 
 Generates passwords from a Dictionary.
